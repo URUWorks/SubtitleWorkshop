@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="UWLazarus"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Version Major="1"/>
+    <Files Count="39">
+      <Item1>
+        <Filename Value="UWControls.pas"/>
+        <HasRegisterProc Value="True"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="UWControls"/>
+      </Item1>
+      <Item2>
+        <Filename Value="UWControls.WaveformDisplay.pas"/>
+        <HasRegisterProc Value="True"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="UWControls.WaveformDisplay"/>
+      </Item2>
+      <Item3>
+        <Filename Value="UWControls.Utils.pas"/>
+        <UnitName Value="UWControls.Utils"/>
+      </Item3>
+      <Item4>
+        <Filename Value="UWFiles.MRU.pas"/>
+        <UnitName Value="UWFiles.MRU"/>
+      </Item4>
+      <Item5>
+        <Filename Value="UWParser.Wave.pas"/>
+        <UnitName Value="UWParser.Wave"/>
+      </Item5>
+      <Item6>
+        <Filename Value="UWSpellCheck.Hunspell.pas"/>
+        <UnitName Value="UWSpellCheck.Hunspell"/>
+      </Item6>
+      <Item7>
+        <Filename Value="UWSystem.Encoding.pas"/>
+        <UnitName Value="UWSystem.Encoding"/>
+      </Item7>
+      <Item8>
+        <Filename Value="UWSystem.Globalization.pas"/>
+        <UnitName Value="UWSystem.Globalization"/>
+      </Item8>
+      <Item9>
+        <Filename Value="UWSystem.Graphics.pas"/>
+        <UnitName Value="UWSystem.Graphics"/>
+      </Item9>
+      <Item10>
+        <Filename Value="UWSystem.HTMLUtils.pas"/>
+        <UnitName Value="UWSystem.HTMLUtils"/>
+      </Item10>
+      <Item11>
+        <Filename Value="UWSystem.StrUtils.pas"/>
+        <UnitName Value="UWSystem.StrUtils"/>
+      </Item11>
+      <Item12>
+        <Filename Value="UWSystem.SysUtils.pas"/>
+        <UnitName Value="UWSystem.SysUtils"/>
+      </Item12>
+      <Item13>
+        <Filename Value="UWSystem.TimeUtils.pas"/>
+        <UnitName Value="UWSystem.TimeUtils"/>
+      </Item13>
+      <Item14>
+        <Filename Value="UWSystem.XmlUtils.pas"/>
+        <UnitName Value="UWSystem.XmlUtils"/>
+      </Item14>
+      <Item15>
+        <Filename Value="UWSubtitles.OCR.pas"/>
+        <UnitName Value="UWSubtitles.OCR"/>
+      </Item15>
+      <Item16>
+        <Filename Value="UWSubtitles.Utils.pas"/>
+        <UnitName Value="UWSubtitles.Utils"/>
+      </Item16>
+      <Item17>
+        <Filename Value="UWSystem.InetUtils.pas"/>
+        <UnitName Value="UWSystem.InetUtils"/>
+      </Item17>
+      <Item18>
+        <Filename Value="UWTranslateAPI.Google.pas"/>
+        <UnitName Value="UWTranslateAPI.Google"/>
+      </Item18>
+      <Item19>
+        <Filename Value="UWSubtitleAPI.ExtraInfo.pas"/>
+        <UnitName Value="UWSubtitleAPI.ExtraInfo"/>
+      </Item19>
+      <Item20>
+        <Filename Value="UWSubtitleAPI.Formats.ABCiView.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.ABCiView"/>
+      </Item20>
+      <Item21>
+        <Filename Value="UWSubtitleAPI.Formats.AdobeEncoreDVD.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.AdobeEncoreDVD"/>
+      </Item21>
+      <Item22>
+        <Filename Value="UWSubtitleAPI.Formats.AdvancedSubstationAlpha.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.AdvancedSubstationAlpha"/>
+      </Item22>
+      <Item23>
+        <Filename Value="UWSubtitleAPI.Formats.AdvancedSubtitles.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.AdvancedSubtitles"/>
+      </Item23>
+      <Item24>
+        <Filename Value="UWSubtitleAPI.Formats.AQTitle.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.AQTitle"/>
+      </Item24>
+      <Item25>
+        <Filename Value="UWSubtitleAPI.Formats.AvidCaption.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.AvidCaption"/>
+      </Item25>
+      <Item26>
+        <Filename Value="UWSubtitleAPI.Formats.Cavena890.Types.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.Cavena890.Types"/>
+      </Item26>
+      <Item27>
+        <Filename Value="UWSubtitleAPI.Formats.EBU.Types.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.EBU.Types"/>
+      </Item27>
+      <Item28>
+        <Filename Value="UWSubtitleAPI.Formats.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats"/>
+      </Item28>
+      <Item29>
+        <Filename Value="UWSubtitleAPI.Formats.SubRip.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.SubRip"/>
+      </Item29>
+      <Item30>
+        <Filename Value="UWSubtitleAPI.Formats.TimedText.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.TimedText"/>
+      </Item30>
+      <Item31>
+        <Filename Value="UWSubtitleAPI.pas"/>
+        <UnitName Value="UWSubtitleAPI"/>
+      </Item31>
+      <Item32>
+        <Filename Value="UWSubtitleAPI.Tags.pas"/>
+        <UnitName Value="UWSubtitleAPI.Tags"/>
+      </Item32>
+      <Item33>
+        <Filename Value="UWSubtitleAPI.TimeCode.pas"/>
+        <UnitName Value="UWSubtitleAPI.TimeCode"/>
+      </Item33>
+      <Item34>
+        <Filename Value="UWSystem.FontUtils.pas"/>
+        <UnitName Value="UWSystem.FontUtils"/>
+      </Item34>
+      <Item35>
+        <Filename Value="UWTranslateAPI.Microsoft.pas"/>
+        <UnitName Value="UWTranslateAPI.Microsoft"/>
+      </Item35>
+      <Item36>
+        <Filename Value="UWImport.libmpv.pas"/>
+        <UnitName Value="UWImport.libmpv"/>
+      </Item36>
+      <Item37>
+        <Filename Value="uwmediaengine.thread.pas"/>
+        <UnitName Value="UWMediaEngine.Thread"/>
+      </Item37>
+      <Item38>
+        <Filename Value="uwmediaengine.pas"/>
+        <UnitName Value="UWMediaEngine"/>
+      </Item38>
+      <Item39>
+        <Filename Value="uwmediaengine.libmpv.pas"/>
+        <UnitName Value="UWMediaEngine.libMPV"/>
+      </Item39>
+    </Files>
+    <CompatibilityMode Value="True"/>
+    <RequiredPkgs Count="3">
+      <Item1>
+        <PackageName Value="indylaz"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCLBase"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+      </Item3>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
+  </Package>
+</CONFIG>

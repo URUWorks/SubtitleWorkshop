@@ -1,0 +1,161 @@
+object frmGlossary: TfrmGlossary
+  Left = 279
+  Height = 456
+  Top = 149
+  Width = 480
+  BorderIcons = []
+  ClientHeight = 456
+  ClientWidth = 480
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poMainFormCenter
+  LCLVersion = '2.2.2.0'
+  object VST: TVirtualStringTree
+    Left = 8
+    Height = 160
+    Top = 40
+    Width = 375
+    Anchors = [akTop, akLeft, akRight]
+    DefaultText = 'Node'
+    Header.AutoSizeIndex = 0
+    Header.Columns = <    
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coFixed, coUseCaptionAlignment]
+        Position = 0
+        Width = 100
+      end    
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coFixed, coUseCaptionAlignment]
+        Position = 1
+        Width = 100
+      end    
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coFixed, coUseCaptionAlignment]
+        Position = 2
+        Width = 150
+      end>
+    Header.Options = [hoColumnResize, hoVisible]
+    TabOrder = 1
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning]
+    TreeOptions.PaintOptions = [toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect]
+    TreeOptions.StringOptions = []
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+  end
+  object lblFind: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 48
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Find:'
+    ParentColor = False
+  end
+  object edtFind: TEdit
+    Left = 64
+    Height = 23
+    Top = 8
+    Width = 319
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 0
+  end
+  object grpNew: TGroupBox
+    Left = 8
+    Height = 208
+    Top = 240
+    Width = 464
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Caption = 'New terminology'
+    ClientHeight = 188
+    ClientWidth = 460
+    TabOrder = 4
+    object lblOriginal: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 42
+      Caption = 'Original'
+      ParentColor = False
+    end
+    object edtOriginal: TEdit
+      Left = 8
+      Height = 23
+      Top = 24
+      Width = 365
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+    end
+    object lblTranslated: TLabel
+      Left = 8
+      Height = 15
+      Top = 56
+      Width = 53
+      Caption = 'Translated'
+      ParentColor = False
+    end
+    object edtTranslated: TEdit
+      Left = 8
+      Height = 23
+      Top = 72
+      Width = 365
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 1
+    end
+    object lblComments: TLabel
+      Left = 8
+      Height = 15
+      Top = 104
+      Width = 59
+      Caption = 'Comments'
+      ParentColor = False
+    end
+    object mmoComments: TMemo
+      Left = 8
+      Height = 52
+      Top = 120
+      Width = 365
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      TabOrder = 2
+    end
+    object btnAdd: TButton
+      Left = 379
+      Height = 25
+      Top = 24
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Add'
+      TabOrder = 3
+    end
+  end
+  object cboFile: TComboBox
+    Left = 64
+    Height = 23
+    Top = 208
+    Width = 319
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object lblFile: TLabel
+    Left = 8
+    Height = 15
+    Top = 212
+    Width = 48
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'File:'
+    ParentColor = False
+  end
+  object edtCopy: TButton
+    Left = 388
+    Height = 25
+    Top = 40
+    Width = 83
+    Anchors = [akTop, akRight]
+    Caption = 'Copy'
+    TabOrder = 2
+  end
+end
