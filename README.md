@@ -11,4 +11,4 @@ The best choice for the beginner, expert or the fansubber.
 Have a try, and you'll forget the rest!
 
 
-Written by URUWorks (http://uruworks.net) using Lazarus (http://www.lazarus-ide.org).
+Written by URUWorks (https://uruworks.net) using Lazarus (https://www.lazarus-ide.org).
