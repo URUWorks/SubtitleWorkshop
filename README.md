@@ -12,3 +12,13 @@ Have a try, and you'll forget the rest!
 
 
 Written by URUWorks (https://uruworks.net) using Lazarus (https://www.lazarus-ide.org).
+
+
+![alt text](https://uruworks.net/img/sw_w11.png)
+Windows
+
+![alt text](https://uruworks.net/img/sw_mac.png)
+MacOS
+
+![alt text](https://uruworks.net/img/sw_lnx.png)
+Linux Mint
