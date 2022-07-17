@@ -1,11 +1,14 @@
 {*
  *  URUWorks Subtitle API
  *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
+ *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
@@ -13,7 +16,6 @@
  *  rights and limitations under the License.
  *
  *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
- *
  *}
 
 unit UWSubtitleAPI.Formats;
@@ -28,7 +30,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..10] of String = // 35
+  TUWSubtitleFormatsName : array[1..12] of String = // 36
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -43,6 +45,7 @@ const
     'Cheetah Caption',
 //    'CPC-600',
 //    'DKS Subtitle Format',
+    'DRTIC',
 //    'DVD Junior',
 //    'DVD Subtitle System',
 //    'DVDSubtitle',
@@ -56,7 +59,7 @@ const
 //    'Karaoke Lyrics VKT',
 //    'MAC DVD Studio Pro',
 //    'MacSUB',
-//    'MicroDVD',
+    'MicroDVD',
 //    'MPlayer',
 //    'MPlayer2',
 //    'SBV',
@@ -87,6 +90,7 @@ type
     sfCheetahCaption,
 //    sfCPC600,
 //    sfDKS,
+    sfDRTIC,
 //    sfDVDJunior,
 //    sfDVDSubtitleSystem,
 //    sfDVDSubtitle,
@@ -100,7 +104,7 @@ type
 //    sfKaraokeLyricsVKT,
 //    sfMACDVDStudioPro,
 //    sfMacSUB,
-//    sfMicroDVD,
+    sfMicroDVD,
 //    sfMPlayer,
 //    sfMPlayer2,
 //    sfSBV,

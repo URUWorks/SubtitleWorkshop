@@ -1,11 +1,14 @@
 {*
  *  URUWorks Subtitle API
  *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
+ *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
@@ -13,7 +16,6 @@
  *  rights and limitations under the License.
  *
  *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
- *
  *}
 
 unit UWSubtitleAPI;
@@ -171,7 +173,6 @@ type
     function FindFirstPointer(const MSecs: TUWTimeCode; const Skip: Integer = 0): PUWSubtitleItem;
     function FindNext: Integer;
     function FindNextPointer: PUWSubtitleItem;
-    function FindIndex(const MSecs: TUWTimeCode): Integer;
     procedure Sort;
     function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
     function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
@@ -235,7 +236,8 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.AdobeEncoreDVD, UWSubtitleAPI.Formats.AdvancedSubstationAlpha,
   UWSubtitleAPI.Formats.AdvancedSubtitles, UWSubtitleAPI.Formats.AQTitle,
   UWSubtitleAPI.Formats.AvidCaption, UWSubtitleAPI.Formats.WebVTT,
-  UWSubtitleAPI.Formats.CheetahCaption;
+  UWSubtitleAPI.Formats.CheetahCaption, UWSubtitleAPI.Formats.MicroDVD,
+  UWSubtitleAPI.Formats.DRTIC;
 
 // -----------------------------------------------------------------------------
 
@@ -608,6 +610,8 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWAQTitle.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWAvidCaption.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) );  // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );
@@ -1232,43 +1236,6 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
-
-function TUWSubtitles.FindIndex(const MSecs: TUWTimeCode): Integer;
-var
-  First: Integer;
-  Last : Integer;
-  Pivot: Integer;
-  Found: Boolean;
-begin
-  First  := 0; //Sets the first item of the range
-  Last   := FList.Count-1; //Sets the last item of the range
-  Found  := False; //Initializes the Found flag (Not found yet)
-  Result := -1; //Initializes the Result
-
-  //If First > Last then the searched item doesn't exist
-  //If the item is found the loop will stop
-  while (First <= Last) and (not Found) do
-  begin
-    //Gets the middle of the selected range
-    Pivot := (First + Last) div 2;
-    //Compares the String in the middle with the searched one
-    if (MSecs >= FList.Items[Pivot]^.InitialTime) and (MSecs <= FList.Items[Pivot]^.FinalTime) then
-    begin
-      Found  := True;
-      Result := Pivot;
-    end
-    //If the Item in the middle has a bigger value than
-    //the searched item, then select the first half
-    else if (FList.Items[Pivot]^.FinalTime > MSecs) then
-    //Strings[Pivot] > SubStr then
-      Last := Pivot - 1
-    //else select the second half
-    else
-      First := Pivot + 1;
-  end;
-end;
-
-//------------------------------------------------------------------------------
 
 procedure TUWSubtitles.Sort;
 begin
