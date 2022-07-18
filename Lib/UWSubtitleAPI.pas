@@ -243,7 +243,13 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.Cavena890, UWSubtitleAPI.Formats.CPC600, UWSubtitleAPI.Formats.DKS,
   UWSubtitleAPI.Formats.DVDJunior, UWSubtitleAPI.Formats.DVDSubtitleSystem,
   UWSubtitleAPI.Formats.DVDSubtitle, UWSubtitleAPI.Formats.FABSubtitler,
-  UWSubtitleAPI.Formats.GPACTTXT, UWSubtitleAPI.Formats.NetflixTimedText;
+  UWSubtitleAPI.Formats.GPACTTXT, UWSubtitleAPI.Formats.NetflixTimedText,
+  UWSubtitleAPI.Formats.IAuthor, UWSubtitleAPI.Formats.InscriberCG,
+  UWSubtitleAPI.Formats.JACOSub, UWSubtitleAPI.Formats.KaraokeLyricsLRC,
+  UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MACDVDStudioPro,
+  UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
+  UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SBV,
+  UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.STL;
 
 // -----------------------------------------------------------------------------
 
@@ -629,8 +635,20 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWEBU.Create) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWFABSubtitler.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWIAuthor.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWInscriberCG.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWJACOSub.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsLRC.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsVKT.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMacDVDStudioPro.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMacSUB.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMPlayer.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSBV.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSTL.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );

@@ -55,7 +55,7 @@ procedure Constrain(var Value: Cardinal; const MinValue, MaxValue: Cardinal); ov
 function MulDiv(nNumber, nNumerator, nDenominator: Single): Integer;
 function RoundValue(const Value: Single; const Digits: Integer): Single;
 function Rnd(r: Double): LongInt;
-
+function LimitDecimals(Num: Real; Limit: Integer) : String;
 procedure ZeroMemory(Destination: Pointer; Length: NativeUInt);
 procedure ArrayToTBytes(var DestArray: TBytes; const SourceArray: array of Byte; const StartIndex: Integer);
 procedure TBytesToArray(var DestArray: array of Byte; const SourceArray: TBytes; const StartIndex: Integer);
@@ -352,6 +352,13 @@ begin
       Result := Result + 1
     else
       Result := Result - 1;
+end;
+
+// -----------------------------------------------------------------------------
+
+function LimitDecimals(Num: Real; Limit: Integer): String;
+begin
+  Result := FloatToStr(Round(Num * Power(10, Limit)) / Power(10, Limit));
 end;
 
 // -----------------------------------------------------------------------------

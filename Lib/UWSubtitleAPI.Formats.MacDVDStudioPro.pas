@@ -1,14 +1,11 @@
 {*
  *  URUWorks Subtitle API
  *
- *  Author  : URUWorks
- *  Website : uruworks.net
- *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 2.0 (the "License"); you may
- *  not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  http://www.mozilla.org/MPL/2.0.html
+ *  the Mozilla Public License Version 1.1 (the "License"); you may
+ *  not use this file except in compliance with the License. You may
+ *  obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/MPL-1.1.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
@@ -16,9 +13,10 @@
  *  rights and limitations under the License.
  *
  *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
+ *
  *}
 
-unit UWSubtitleAPI.Formats.Captions32;
+unit UWSubtitleAPI.Formats.MACDVDStudioPro;
 
 // -----------------------------------------------------------------------------
 
@@ -30,13 +28,14 @@ uses
 
 type
 
-  { TUWCaptions32 }
+  { TUWMacDVDStudioPro }
 
-  TUWCaptions32 = class(TUWSubtitleCustomFormat)
+  TUWMacDVDStudioPro = class(TUWSubtitleCustomFormat)
   public
     function Name: String; override;
     function Format: TUWSubtitleFormats; override;
     function Extension: String; override;
+    function IsTimeBased: Boolean; override;
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
@@ -52,42 +51,48 @@ uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.Name: String;
+function TUWMacDVDStudioPro.Name: String;
 begin
   Result := IndexToName(Integer(Format));
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.Format: TUWSubtitleFormats;
+function TUWMacDVDStudioPro.Format: TUWSubtitleFormats;
 begin
-  Result := TUWSubtitleFormats.sfCaptions32;
+  Result := TUWSubtitleFormats.sfMACDVDStudioPro;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.Extension: String;
+function TUWMacDVDStudioPro.Extension: String;
 begin
   Result := '*.txt';
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.HasStyleSupport: Boolean;
+function TUWMacDVDStudioPro.IsTimeBased: Boolean;
 begin
-  Result := True;
+  Result := False;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+function TUWMacDVDStudioPro.HasStyleSupport: Boolean;
 begin
+  Result := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWMacDVDStudioPro.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+begin
+  //00:00:03:00 00:00:08:00 Text<P>Text
   if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'hh:mm:ss:zz')) and
-     (TimeInFormat(Copy(SubtitleFile[Row], 15, 11), 'hh:mm:ss:zz')) and
-     (Pos(',', SubtitleFile[Row]) = 13) and
-     (Pos(',', SubtitleFile[Row], 14) = 27) and
-     (Copy(SubtitleFile[Row], 62, 1) = '|') then
-     //(Pos('|', SubtitleFile[Row], 15) = 62) then
+     (TimeInFormat(Copy(SubtitleFile[Row], 13, 11), 'hh:mm:ss:zz')) and
+     (Pos(',', SubtitleFile[Row]) = 12) and
+     (StringCount(',', SubtitleFile[Row]) = 2) then
     Result := True
   else
     Result := False;
@@ -95,84 +100,60 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+function TUWMacDVDStudioPro.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
   i           : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
-  Text, Txt   : String;
+  Text        : String;
 begin
   Result := False;
   try
     for i := 0 to SubtitleFile.Count-1 do
     begin
-      InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
-      FinalTime   := StringToTime(Copy(SubtitleFile[i], 15, 11));
+      if not TimeInFormat(Copy(SubtitleFile[i], 1, 8), 'hh:mm:ss') then Continue;
+      InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 8));
+      FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 8));
+
+      if IsInteger(Copy(SubtitleFile[i], 10, 2)) then
+        InitialTime := InitialTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 10, 2)), FPS);
+      if IsInteger(Copy(SubtitleFile[i], 22, 2)) then
+        FinalTime := FinalTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 22, 2)), FPS);
+
+      Text := ReplaceString(Copy(SubtitleFile[i], 25, Length(SubtitleFile[i])), '<P>', LineEnding);
 
       if (InitialTime > -1) and (FinalTime > -1) then
-      begin
-        Text := Trim(Copy(SubtitleFile[i], 29, 33));
-        Txt  := Trim(Copy(SubtitleFile[i], 63, Length(SubtitleFile[i])-62));
-        if Txt <> '' then
-          Text := Text + LineEnding + Txt;
-
-        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
-      end;
+        Subtitles.Add(InitialTime, FinalTime, Text, '');
     end;
   finally
-    if Subtitles.Count > 0 then Result := True;
+    Result := Subtitles.Count > 0;
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWMacDVDStudioPro.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   SubFile : TUWStringList;
-  i, c    : Integer;
-  Text, s : String;
+  InitialTime : String;
+  FinalTime   : String;
+  i           : Integer;
 begin
   Result  := False;
   SubFile := TUWStringList.Create;
   try
     for i := FromItem to ToItem do
     begin
-      Text := ReplaceEnters(RemoveSWTags(Subtitles.Text[i]));
-      s    := Text;
-      c    := StringCount('|', s);
-      if c = 0 then
-      begin
-        if Length(s) > 33 then
-          Text := Copy(s, 1, 33)
-        else
-          Text := AddCharR(' ', s, 33);
+      Subtitles.Text[i] := RemoveSWTags(Subtitles.Text[i]);
 
-        Text := AddCharR(' ', Text + '|', 67);
-      end
-      else
-      begin
-        if c > 1 then
-        begin
-          c := Pos('|', s);
-          s := Copy(s, 1, Pos('|', s, c+1)-1);
-        end;
+      // Time format is hh:mm:ss:ff
+      InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:') +
+                     AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].InitialTime, FPS)), 2);
 
-        c    := Pos('|', s);
-        Text := Copy(s, 1, c-1);
-        if Length(Text) > 33 then
-          Text := Copy(Text, 1, 33)
-        else
-          Text := AddCharR(' ', Text, 33);
+      FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
+                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
 
-        Text := Text + '|' + Copy(s, c+1, Length(s)-c);
-
-        if Length(Text) > 67 then
-          Text := Copy(Text, 1, 67)
-        else
-          Text := AddCharR(' ', Text, 67);
-      end;
-
-      SubFile.Add(TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + ' , ' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + ' , ' + Text, False);
+      SubFile.Add(InitialTime + #9 + FinalTime + #9 + ReplaceString(Subtitles[i].Text, LineEnding, '<P>'));
     end;
 
     try
@@ -187,7 +168,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.ToText(const Subtitles: TUWSubtitles): String;
+function TUWMacDVDStudioPro.ToText(const Subtitles: TUWSubtitles): String;
 begin
   Result := '';
 end;
