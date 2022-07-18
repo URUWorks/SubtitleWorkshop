@@ -26,6 +26,8 @@ uses
   laz2_XMLRead, laz2_DOM;
 
 function XMLFindNodeByName(const XmlDoc: TXMLDocument; const NodeName: String): TDOMNode;
+function XMLGetAttrValue(const ANode: TDOMNode; const AAttrName: String): String;
+function XMLHasAttribute(const ANode: TDOMNode; const AAttrName: String): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -65,6 +67,36 @@ begin
       if Assigned(Result) then Break;
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function XMLGetAttrValue(const ANode: TDOMNode; const AAttrName: String): String;
+var
+  i: LongWord;
+  Found: Boolean;
+begin
+  Result := '';
+  if (ANode = NIL) or (ANode.Attributes = NIL) then Exit;
+
+  Found := False;
+  i := 0;
+  while not Found and (i < ANode.Attributes.Length) do
+  begin
+    if ANode.Attributes.Item[i].NodeName = AAttrName then
+    begin
+      Found := True;
+      Result := ANode.Attributes.Item[i].NodeValue;
+    end;
+    Inc(i);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function XMLHasAttribute(const ANode: TDOMNode; const AAttrName: String): Boolean;
+begin
+  Result := XMLGetAttrValue(ANode, AAttrName) <> '';
 end;
 
 // -----------------------------------------------------------------------------

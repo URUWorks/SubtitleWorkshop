@@ -240,7 +240,10 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.CheetahCaption, UWSubtitleAPI.Formats.MicroDVD,
   UWSubtitleAPI.Formats.DRTIC, UWSubtitleAPI.Formats.EBU, UWSubtitleAPI.Formats.Captions32,
   UWSubtitleAPI.Formats.CaptionsInc, UWSubtitleAPI.Formats.Cheetah,
-  UWSubtitleAPI.Formats.Cavena890;
+  UWSubtitleAPI.Formats.Cavena890, UWSubtitleAPI.Formats.CPC600, UWSubtitleAPI.Formats.DKS,
+  UWSubtitleAPI.Formats.DVDJunior, UWSubtitleAPI.Formats.DVDSubtitleSystem,
+  UWSubtitleAPI.Formats.DVDSubtitle, UWSubtitleAPI.Formats.FABSubtitler,
+  UWSubtitleAPI.Formats.GPACTTXT;
 
 // -----------------------------------------------------------------------------
 
@@ -617,8 +620,15 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWCavena890.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWCheetah.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) ); // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWCPC600.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDKS.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDVDJunior.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitleSystem.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitle.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWEBU.Create) ); // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWFABSubtitler.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
