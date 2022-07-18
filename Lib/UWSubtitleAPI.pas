@@ -243,7 +243,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.Cavena890, UWSubtitleAPI.Formats.CPC600, UWSubtitleAPI.Formats.DKS,
   UWSubtitleAPI.Formats.DVDJunior, UWSubtitleAPI.Formats.DVDSubtitleSystem,
   UWSubtitleAPI.Formats.DVDSubtitle, UWSubtitleAPI.Formats.FABSubtitler,
-  UWSubtitleAPI.Formats.GPACTTXT;
+  UWSubtitleAPI.Formats.GPACTTXT, UWSubtitleAPI.Formats.NetflixTimedText;
 
 // -----------------------------------------------------------------------------
 
@@ -630,6 +630,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWFABSubtitler.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );

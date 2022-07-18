@@ -30,7 +30,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..24] of String =
+  TUWSubtitleFormatsName : array[1..25] of String =
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -62,6 +62,7 @@ const
     'MicroDVD',
 //    'MPlayer',
 //    'MPlayer2',
+    'Netflix Timed Text',
 //    'SBV',
 //    'Sofni',
 //    'STL',
@@ -107,6 +108,7 @@ type
     sfMicroDVD,
 //    sfMPlayer,
 //    sfMPlayer2,
+    sfNetflixTimedText,
 //    sfSBV,
 //    sfSofni,
 //    sfSTL,
