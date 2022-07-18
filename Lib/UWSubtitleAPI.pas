@@ -238,7 +238,9 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.AdvancedSubtitles, UWSubtitleAPI.Formats.AQTitle,
   UWSubtitleAPI.Formats.AvidCaption, UWSubtitleAPI.Formats.WebVTT,
   UWSubtitleAPI.Formats.CheetahCaption, UWSubtitleAPI.Formats.MicroDVD,
-  UWSubtitleAPI.Formats.DRTIC, UWSubtitleAPI.Formats.EBU;
+  UWSubtitleAPI.Formats.DRTIC, UWSubtitleAPI.Formats.EBU, UWSubtitleAPI.Formats.Captions32,
+  UWSubtitleAPI.Formats.CaptionsInc, UWSubtitleAPI.Formats.Cheetah,
+  UWSubtitleAPI.Formats.Cavena890;
 
 // -----------------------------------------------------------------------------
 
@@ -610,6 +612,10 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWAdvancedSubtitles.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWAQTitle.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWAvidCaption.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCaptions32.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCaptionsInc.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCavena890.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCheetah.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWEBU.Create) ); // binary
@@ -1259,7 +1265,7 @@ begin
   try
     SubFile := TUWStringList.Create(FileName, Encoding);
     try
-      if (SubFile.Count = 0) then Exit;
+      //if (SubFile.Count = 0) then Exit;
       if ClearAll then
       begin
         ClearExtraInfoList(FExtraInfo, FEIType);

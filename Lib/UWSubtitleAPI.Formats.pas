@@ -30,7 +30,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..13] of String = // 36
+  TUWSubtitleFormatsName : array[1..17] of String =
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -38,10 +38,10 @@ const
     'Advanced Subtitles',
     'AQTitle',
     'Avid Caption',
-//    'Captions 32',
-//    'Captions Inc.',
-//    'Cavena 890',
-//    'Cheetah',
+    'Captions 32',
+    'Captions Inc.',
+    'Cavena 890',
+    'Cheetah',
     'Cheetah Caption',
 //    'CPC-600',
 //    'DKS Subtitle Format',
@@ -83,10 +83,10 @@ type
     sfAdvancedSubtitles,
     sfAQTitle,
     sfAvidCaption,
-//    sfCaptions32,
-//    sfCaptionsInc,
-//    sfCavena890,
-//    sfCheetah,
+    sfCaptions32,
+    sfCaptionsInc,
+    sfCavena890,
+    sfCheetah,
     sfCheetahCaption,
 //    sfCPC600,
 //    sfDKS,

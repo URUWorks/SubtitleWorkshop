@@ -119,19 +119,16 @@ end;
 
 function TUWCheetahCaption.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 var
-  sf  : TUWStringList;
   sub : TUWSubtitles;
 begin
   Result := False;
   if LowerCase(ExtractFileExt(SubtitleFile.FileName)) <> '.cap' then Exit;
 
-  sf  := TUWStringList.Create(SubtitleFile.FileName);
   sub := TUWSubtitles.Create;
   try
     Result := LoadSubtitle(SubtitleFile, 0, sub);
   finally
     sub.Free;
-    sf.Free;
   end;
 end;
 
