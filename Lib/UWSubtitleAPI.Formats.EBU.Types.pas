@@ -174,11 +174,7 @@ uses SysUtils, UWSystem.Encoding;
 function CharCodeTableToEncoding(const CCT: AnsiString): Integer;
 begin
   if CCT = '00' then
-    {$IFNDEF MSWINDOWS}
-    Result := GetEncodingInteger('iso-8859-1')
-    {$ELSE}
     Result := GetEncodingInteger('x-cp20261')
-    {$ENDIF}
   else if CCT = '01' then // Latin/Cyrillic 8859/5-1988
     Result := GetEncodingInteger('iso-8859-5')
   else if CCT = '02' then // Latin/Arabic 8859/6-1987
@@ -206,20 +202,22 @@ begin
   // Teletext Control Codes, TO DO!
   for i := 0 to 31 do Result := ReplaceStr(Result, Chr(i), '');
 
-  Result := ReplaceStr(Result, Chr(TF_CRLF), #13#10);
+  Result := ReplaceStr(Result, Chr(TF_CRLF), LineEnding);
   Result := ReplaceStr(Result, Chr(TF_ItalicsOn), '<i>');
   Result := ReplaceStr(Result, Chr(TF_ItalicsOff), '</i>');
   Result := ReplaceStr(Result, Chr(TF_UnderlineOn), '<u>');
   Result := ReplaceStr(Result, Chr(TF_UnderlineOff), '</u>');
   Result := ReplaceStr(Result, Chr(TF_BoxingOn), '<b>');
   Result := ReplaceStr(Result, Chr(TF_BoxingOff), '</b>');
+
+  Result := Trim(Result);
 end;
 
 //------------------------------------------------------------------------------
 
 function ReplaceTagsSW2EBU(const Text: String): String;
 begin
-  Result := ReplaceStr(Text, sLineBreak, Chr(TF_CRLF));
+  Result := ReplaceStr(Text, LineEnding, Chr(TF_CRLF));
   Result := ReplaceStr(Result, '<i>', Chr(TF_ItalicsOn));
   Result := ReplaceStr(Result, '</i>', Chr(TF_ItalicsOff));
   Result := ReplaceStr(Result, '<u>', Chr(TF_UnderlineOn));

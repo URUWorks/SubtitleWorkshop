@@ -210,6 +210,7 @@ type
     function Extension: String; virtual;
     function IsTimeBased: Boolean; virtual;
     function IsFrameBased: Boolean; virtual;
+    function IsTextBased: Boolean; virtual;
     function HasStyleSupport: Boolean; virtual;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; virtual;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; virtual;
@@ -237,7 +238,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.AdvancedSubtitles, UWSubtitleAPI.Formats.AQTitle,
   UWSubtitleAPI.Formats.AvidCaption, UWSubtitleAPI.Formats.WebVTT,
   UWSubtitleAPI.Formats.CheetahCaption, UWSubtitleAPI.Formats.MicroDVD,
-  UWSubtitleAPI.Formats.DRTIC;
+  UWSubtitleAPI.Formats.DRTIC, UWSubtitleAPI.Formats.EBU;
 
 // -----------------------------------------------------------------------------
 
@@ -609,8 +610,9 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWAdvancedSubtitles.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWAQTitle.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWAvidCaption.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) );  // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWEBU.Create) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
@@ -1268,11 +1270,12 @@ begin
       AFPS := FPS;
       if AFPS <= 0 then AFPS := 25;
 
+      // First try Text formats
       if SubFile.Count > 0 then
         for i := 0 to SubFile.Count-1 do
           try
             for f := 0 to AList.Count-1 do
-              if ((Format = sfInvalid) and AList[f].IsMine(SubFile, i)) or (AList[f].Format = Format) then
+              if AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, i)) or (AList[f].Format = Format)) then
               begin
                 Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
                 Self.FCodePage := SubFile.CodePage;
@@ -1281,6 +1284,20 @@ begin
               end;
           except
           end;
+
+      // If not, try binary formats
+      try
+        for f := 0 to AList.Count-1 do
+          if not AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, 0)) or (AList[f].Format = Format)) then
+          begin
+            Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
+            Self.FCodePage := SubFile.CodePage;
+            Self.Format := AList[f].Format;
+            Exit;
+          end;
+      except
+      end;
+
     finally
       SubFile.Free;
     end;
@@ -1380,6 +1397,13 @@ end;
 function TUWSubtitleCustomFormat.IsFrameBased: Boolean;
 begin
   Result := not IsTimeBased;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitleCustomFormat.IsTextBased: Boolean;
+begin
+  Result := True;
 end;
 
 // -----------------------------------------------------------------------------

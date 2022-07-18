@@ -30,7 +30,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..12] of String = // 36
+  TUWSubtitleFormatsName : array[1..13] of String = // 36
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -49,7 +49,7 @@ const
 //    'DVD Junior',
 //    'DVD Subtitle System',
 //    'DVDSubtitle',
-//    'EBU Subtitling Format',
+    'EBU Subtitling Format',
 //    'FAB Subtitler',
 //    'GPAC TTXT',
 //    'I-Author Script',
@@ -94,7 +94,7 @@ type
 //    sfDVDJunior,
 //    sfDVDSubtitleSystem,
 //    sfDVDSubtitle,
-//    sfEBU,
+    sfEBU,
 //    sfFABSubtitler,
 //    sfGPAC,
 //    sfIAuthorScript,
