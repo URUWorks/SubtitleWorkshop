@@ -25,7 +25,7 @@ unit UWSubtitleAPI.Formats.EBU;
 interface
 
 uses
-  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils,
   UWSystem.SysUtils, UWSubtitleAPI.Formats, StrUtils;
 
 type

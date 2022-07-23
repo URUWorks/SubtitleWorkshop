@@ -154,7 +154,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ReplaceEnters(const S: String; const OldPattern: String = sLineBreak; const NewPattern: String = '|'): String;
+function ReplaceEnters(const S: String; const OldPattern: String = LineEnding; const NewPattern: String = '|'): String;
 begin
   Result := ReplaceString(S, OldPattern, NewPattern);
 end;

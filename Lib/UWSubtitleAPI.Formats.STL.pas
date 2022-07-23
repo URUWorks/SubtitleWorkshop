@@ -24,7 +24,7 @@ interface
 
 uses
   SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  UWSubtitleAPI.Formats;
 
 type
 

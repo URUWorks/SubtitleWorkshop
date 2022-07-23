@@ -249,7 +249,8 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MACDVDStudioPro,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SBV,
-  UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.STL;
+  UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.STL,
+  UWSubtitleAPI.Formats.ITunesTimedText;
 
 // -----------------------------------------------------------------------------
 
@@ -637,6 +638,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWIAuthor.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWInscriberCG.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWITunesTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWJACOSub.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsLRC.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsVKT.Create) );

@@ -30,7 +30,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..37] of String =
+  TUWSubtitleFormatsName : array[1..38] of String =
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -54,6 +54,7 @@ const
     'GPAC TTXT',
     'I-Author Script',
     'Inscriber CG',
+    'iTunes Timed Text',
     'JACOSub 2.7+',
     'Karaoke Lyrics LRC',
     'Karaoke Lyrics VKT',
@@ -100,6 +101,7 @@ type
     sfGPAC,
     sfIAuthorScript,
     sfInscriberCG,
+    sfITunesTimedText,
     sfJACOSub,
     sfKaraokeLyricsLRC,
     sfKaraokeLyricsVKT,

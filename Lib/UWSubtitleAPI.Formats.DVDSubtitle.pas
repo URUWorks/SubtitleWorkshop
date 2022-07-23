@@ -25,8 +25,7 @@ unit UWSubtitleAPI.Formats.DVDSubtitle;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats;
 
 type
 

@@ -195,7 +195,7 @@ uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, UWSubtitles.Utils, RegExpr, Clipbrd,
   UMain, UUndo, UErrors, strUtils, Dialogs, UTexts, UFindAndReplace, USpellCheck,
   UTimings, UInfoAndErrors, UWSystem.Globalization, UStylesAndActors,
-  UAudioExtraction, UGlossary, UWMediaEngine, UTM;
+  UAudioExtraction, UGlossary, UWMediaEngine, UTM, jsonscanner;
 
 // -----------------------------------------------------------------------------
 
@@ -435,7 +435,7 @@ begin
 
   FileStream := TFileStream.Create(FileName, fmOpenRead);
   try
-    Parser := TJSONParser.Create(FileStream);
+    Parser := TJSONParser.Create(FileStream, [joUTF8]);
     ZeroArray := TJSONArray.Create;
     try
       try

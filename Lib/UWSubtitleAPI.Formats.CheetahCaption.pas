@@ -25,8 +25,7 @@ unit UWSubtitleAPI.Formats.CheetahCaption;
 interface
 
 uses
-  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats;
 
 type
 

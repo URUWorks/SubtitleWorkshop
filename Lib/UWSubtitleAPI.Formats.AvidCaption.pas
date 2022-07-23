@@ -23,8 +23,8 @@ unit UWSubtitleAPI.Formats.AvidCaption;
 interface
 
 uses
-  SysUtils, StrUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
+  UWSubtitleAPI.Formats;
 
 type
 

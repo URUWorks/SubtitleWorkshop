@@ -23,7 +23,7 @@ unit UWSubtitleAPI.Formats.ABCiView;
 interface
 
 uses
-  SysUtils, StrUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
   UWSubtitleAPI.Formats, Classes, laz2_XMLRead, laz2_DOM, laz2_XMLWrite;
 
 type

@@ -1,11 +1,14 @@
 {*
  *  URUWorks Subtitle API
  *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
+ *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
@@ -13,10 +16,9 @@
  *  rights and limitations under the License.
  *
  *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
- *
  *}
 
-unit UWSubtitleAPI.Formats.TimedText;
+unit UWSubtitleAPI.Formats.ITunesTimedText;
 
 // -----------------------------------------------------------------------------
 
@@ -28,9 +30,9 @@ uses
 
 type
 
-  { TUWTimedText }
+  { TUWITunesTimedText }
 
-  TUWTimedText = class(TUWSubtitleCustomFormat)
+  TUWITunesTimedText = class(TUWSubtitleCustomFormat)
   public
     function Name: String; override;
     function Format: TUWSubtitleFormats; override;
@@ -51,48 +53,45 @@ uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.XmlUtils;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.Name: String;
+function TUWITunesTimedText.Name: String;
 begin
   Result := IndexToName(Integer(Format));
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.Format: TUWSubtitleFormats;
+function TUWITunesTimedText.Format: TUWSubtitleFormats;
 begin
-  Result := TUWSubtitleFormats.sfTimedText;
+  Result := TUWSubtitleFormats.sfITunesTimedText;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.Extension: String;
+function TUWITunesTimedText.Extension: String;
 begin
-  Result := '*.xml';
+  Result := '*.itt';
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.IsTimeBased: Boolean;
+function TUWITunesTimedText.IsTimeBased: Boolean;
 begin
   Result := True;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.HasStyleSupport: Boolean;
+function TUWITunesTimedText.HasStyleSupport: Boolean;
 begin
-  Result := True; // Has tags
+  Result := True;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
-var
-  sExt: String;
+function TUWITunesTimedText.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
-  sExt := LowerCase(ExtractFileExt(SubtitleFile.FileName));
-  if ((sExt = '.xml') or (sExt = '.tt')) and
-    (Contains('<tt xml:', SubtitleFile[Row]) or Contains('</tt>', SubtitleFile[Row])) then
+  if (LowerCase(ExtractFileExt(SubtitleFile.FileName)) = '.itt') and
+    Contains('<tt xmlns', SubtitleFile[Row]) then
     Result := True
   else
     Result := False;
@@ -100,7 +99,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+function TUWITunesTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 
   function GetTime(const S: String): Integer;
   begin
@@ -140,7 +139,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWITunesTimedText.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   XmlDoc : TXMLDocument;
   Root, Element, Node, SubNode : TDOMNode;
@@ -207,7 +206,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.ToText(const Subtitles: TUWSubtitles): String;
+function TUWITunesTimedText.ToText(const Subtitles: TUWSubtitles): String;
 begin
   Result := '';
 end;

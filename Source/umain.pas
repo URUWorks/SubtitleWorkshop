@@ -795,7 +795,6 @@ begin
   lyoEditor.Height := lyoEditorTopPanel.Height + (cboStyle.Height*4)+(mTed*2);
   {$ENDIF}
 
-
   cboStyle.Top := 0;
   cboStyle.Width := TextSize.cx*9;
   spdStyle.Top := cboStyle.Top;
@@ -2975,7 +2974,7 @@ end;
 
 procedure TfrmMain.actCloseVideoExecute(Sender: TObject);
 begin
-  MPV.Engine.Play(''); //VLC.Play('');
+  MPV.Engine.Play('');
 //  MPV.Engine.UnInitialize;
   WAVE.Close;
   actCloseVideo.Enabled := False;
@@ -3073,8 +3072,7 @@ end;
 
 procedure TfrmMain.actMediaStopExecute(Sender: TObject);
 begin
-  MPV.Engine.Stop; //VLC.SetVideoPosInMs(0);
-  //VLC.Pause(); //VLC.Stop();
+  MPV.Engine.Stop;
 end;
 
 // -----------------------------------------------------------------------------
@@ -3123,7 +3121,7 @@ end;
 
 procedure TfrmMain.actMediaNextFrameExecute(Sender: TObject);
 begin
-  MPV.Engine.NextFrame; //VLC.NextFrame();
+  MPV.Engine.NextFrame;
 end;
 
 // -----------------------------------------------------------------------------
@@ -3152,7 +3150,7 @@ end;
 procedure TfrmMain.actMediaSetInitialTimeExecute(Sender: TObject);
 begin
   if not (MPV.Engine.Duration > 0) or (VSTFocusedNode < 0) then Exit;
-  VSTDoLoop(@ApplySetTimeInitialFromVLC); //SetSubtitleTime(VSTFocusedNode, VLC.GetVideoPosInMs(), 0);
+  VSTDoLoop(@ApplySetTimeInitialFromVLC);
 end;
 
 // -----------------------------------------------------------------------------
@@ -3160,7 +3158,7 @@ end;
 procedure TfrmMain.actMediaSetFinalTimeExecute(Sender: TObject);
 begin
   if not (MPV.Engine.Duration > 0) or (VSTFocusedNode < 0) then Exit;
-  VSTDoLoop(@ApplySetTimeFinalFromVLC); //SetSubtitleTime(VSTFocusedNode, VLC.GetVideoPosInMs(), 1);
+  VSTDoLoop(@ApplySetTimeFinalFromVLC);
 end;
 
 // -----------------------------------------------------------------------------

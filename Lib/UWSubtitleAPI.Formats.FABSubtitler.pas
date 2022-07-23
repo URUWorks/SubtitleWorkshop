@@ -25,8 +25,8 @@ unit UWSubtitleAPI.Formats.FABSubtitler;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats, StrUtils;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.Formats, StrUtils;
 
 type
 

@@ -23,8 +23,7 @@ unit UWSubtitleAPI.Formats.MPlayer2;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSystem.StrUtils, UWSystem.SysUtils, UWSubtitleAPI.Formats;
 
 type
 

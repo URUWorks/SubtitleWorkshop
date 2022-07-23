@@ -23,8 +23,8 @@ unit UWSubtitleAPI.Formats.MacSUB;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats, StrUtils;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.Formats;
 
 type
 
