@@ -10,17 +10,17 @@ It includes spell check function and an advanced video and audio waveform previe
 The best choice for the beginner, expert or the fansubber. 
 Have a try, and you'll forget the rest!
 
-
 Written by URUWorks (https://uruworks.net) using Lazarus (https://www.lazarus-ide.org).
  
+### Windows
 ![alt text](https://uruworks.net/img/sw_w11.png)
-Windows
 
+### MacOS
 ![alt text](https://uruworks.net/img/sw_mac.png)
-MacOS
 
+### Linux Mint
 ![alt text](https://uruworks.net/img/sw_lnx.png)
-Linux Mint
 
+### You can help us 
  
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Subtitle+Workshop&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
