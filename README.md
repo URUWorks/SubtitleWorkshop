@@ -13,13 +13,13 @@ Have a try, and you'll forget the rest!
 Written by URUWorks (https://uruworks.net) using Lazarus (https://www.lazarus-ide.org).
  
 ### Windows
-![alt text](https://uruworks.net/img/sw_w11.png)
+![win](https://uruworks.net/img/sw_win11.png)
 
 ### MacOS
-![alt text](https://uruworks.net/img/sw_mac.png)
+![mac](https://uruworks.net/img/sw_macos.png)
 
 ### Linux Mint
-![alt text](https://uruworks.net/img/sw_lnx.png)
+![lnx](https://uruworks.net/img/sw_lnx.png)
 
 ### You can help us 
  
