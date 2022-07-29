@@ -22,7 +22,24 @@ uses
   UWSubtitleAPI.Formats.SubRip, UWSubtitleAPI.Formats.TimedText, 
   UWSubtitleAPI, UWSubtitleAPI.Tags, UWSubtitleAPI.TimeCode, 
   UWSystem.FontUtils, UWTranslateAPI.Microsoft, UWImport.libmpv, 
-  UWMediaEngine.Thread, UWMediaEngine, UWMediaEngine.libMPV, LazarusPackageIntf;
+  UWMediaEngine.Thread, UWMediaEngine, UWMediaEngine.libMPV, 
+  UWSubtitleAPI.Formats.Captions32, UWSubtitleAPI.Formats.CaptionsInc, 
+  UWSubtitleAPI.Formats.Cavena890, UWSubtitleAPI.Formats.Cheetah, 
+  UWSubtitleAPI.Formats.CheetahCaption, 
+  UWSubtitleAPI.Formats.CheetahCaption.Types, UWSubtitleAPI.Formats.CPC600, 
+  UWSubtitleAPI.Formats.DKS, UWSubtitleAPI.Formats.DRTIC, 
+  UWSubtitleAPI.Formats.DVDJunior, UWSubtitleAPI.Formats.DVDSubtitle, 
+  UWSubtitleAPI.Formats.DVDSubtitleSystem, UWSubtitleAPI.Formats.EBU, 
+  UWSubtitleAPI.Formats.FABSubtitler, UWSubtitleAPI.Formats.GPACTTXT, 
+  UWSubtitleAPI.Formats.IAuthor, UWSubtitleAPI.Formats.InscriberCG, 
+  UWSubtitleAPI.Formats.ItunesTimedText, UWSubtitleAPI.Formats.JACOSub, 
+  UWSubtitleAPI.Formats.KaraokeLyricsLRC, 
+  UWSubtitleAPI.Formats.KaraokeLyricsVKT, 
+  UWSubtitleAPI.Formats.MacDVDStudioPro, UWSubtitleAPI.Formats.MacSUB, 
+  UWSubtitleAPI.Formats.MicroDVD, UWSubtitleAPI.Formats.MPlayer, 
+  UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.NetflixTimedText, 
+  UWSubtitleAPI.Formats.SBV, UWSubtitleAPI.Formats.Sofni, 
+  UWSubtitleAPI.Formats.STL, UWSubtitleAPI.Formats.WebVTT, LazarusPackageIntf;
 
 implementation
 

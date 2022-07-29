@@ -2,10 +2,9 @@
 	"Strings" :[
 		{"Name" : "LineSelected", "Text" : "%d lines selected / %d"},
 		{"Name" : "Text", "Text" : "Text"},
-		{"Name" : "TextChars", "Text" : "Text (%s characters):"},
+		{"Name" : "TextChars", "Text" : "Text (%s characters) @ %.2f cps:"},
 		{"Name" : "Translation", "Text" : "Translation"},
-		{"Name" : "TranslationChars", "Text" : "Translation (%s characters):"},
-		{"Name" : "CPS", "Text" : "cps: %.2f"},
+		{"Name" : "TranslationChars", "Text" : "Translation (%s characters) @ %.2f cps:"},
 		{"Name" : "AllSupportedFiles", "Text" : "All supported files"},
 		{"Name" : "Selection", "Text" : "Selection: %s-%s"},
 		{"Name" : "SaveDialog", "Text" : "File '%s' has changed.%sDo you want to save the changes?."},

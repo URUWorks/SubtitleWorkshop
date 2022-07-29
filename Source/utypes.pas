@@ -116,7 +116,6 @@ type
     TextChars,
     TranslationChars,
     Translation,
-    CPS,
     LineSelected,
     AllSupportedFiles,
     Selection,

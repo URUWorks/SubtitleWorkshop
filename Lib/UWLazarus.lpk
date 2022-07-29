@@ -12,7 +12,7 @@
       </SearchPaths>
     </CompilerOptions>
     <Version Major="1"/>
-    <Files Count="39">
+    <Files Count="70">
       <Item1>
         <Filename Value="UWControls.pas"/>
         <HasRegisterProc Value="True"/>
@@ -173,6 +173,130 @@
         <Filename Value="uwmediaengine.libmpv.pas"/>
         <UnitName Value="UWMediaEngine.libMPV"/>
       </Item39>
+      <Item40>
+        <Filename Value="UWSubtitleAPI.Formats.Captions32.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.Captions32"/>
+      </Item40>
+      <Item41>
+        <Filename Value="UWSubtitleAPI.Formats.CaptionsInc.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.CaptionsInc"/>
+      </Item41>
+      <Item42>
+        <Filename Value="UWSubtitleAPI.Formats.Cavena890.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.Cavena890"/>
+      </Item42>
+      <Item43>
+        <Filename Value="UWSubtitleAPI.Formats.Cheetah.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.Cheetah"/>
+      </Item43>
+      <Item44>
+        <Filename Value="UWSubtitleAPI.Formats.CheetahCaption.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.CheetahCaption"/>
+      </Item44>
+      <Item45>
+        <Filename Value="UWSubtitleAPI.Formats.CheetahCaption.Types.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.CheetahCaption.Types"/>
+      </Item45>
+      <Item46>
+        <Filename Value="UWSubtitleAPI.Formats.CPC600.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.CPC600"/>
+      </Item46>
+      <Item47>
+        <Filename Value="UWSubtitleAPI.Formats.DKS.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.DKS"/>
+      </Item47>
+      <Item48>
+        <Filename Value="UWSubtitleAPI.Formats.DRTIC.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.DRTIC"/>
+      </Item48>
+      <Item49>
+        <Filename Value="UWSubtitleAPI.Formats.DVDJunior.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.DVDJunior"/>
+      </Item49>
+      <Item50>
+        <Filename Value="UWSubtitleAPI.Formats.DVDSubtitle.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.DVDSubtitle"/>
+      </Item50>
+      <Item51>
+        <Filename Value="UWSubtitleAPI.Formats.DVDSubtitleSystem.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.DVDSubtitleSystem"/>
+      </Item51>
+      <Item52>
+        <Filename Value="UWSubtitleAPI.Formats.EBU.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.EBU"/>
+      </Item52>
+      <Item53>
+        <Filename Value="UWSubtitleAPI.Formats.FABSubtitler.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.FABSubtitler"/>
+      </Item53>
+      <Item54>
+        <Filename Value="UWSubtitleAPI.Formats.GPACTTXT.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.GPACTTXT"/>
+      </Item54>
+      <Item55>
+        <Filename Value="UWSubtitleAPI.Formats.IAuthor.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.IAuthor"/>
+      </Item55>
+      <Item56>
+        <Filename Value="UWSubtitleAPI.Formats.InscriberCG.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.InscriberCG"/>
+      </Item56>
+      <Item57>
+        <Filename Value="UWSubtitleAPI.Formats.ItunesTimedText.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.ITunesTimedText"/>
+      </Item57>
+      <Item58>
+        <Filename Value="UWSubtitleAPI.Formats.JACOSub.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.JACOSub"/>
+      </Item58>
+      <Item59>
+        <Filename Value="UWSubtitleAPI.Formats.KaraokeLyricsLRC.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.KaraokeLyricsLRC"/>
+      </Item59>
+      <Item60>
+        <Filename Value="UWSubtitleAPI.Formats.KaraokeLyricsVKT.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.KaraokeLyricsVKT"/>
+      </Item60>
+      <Item61>
+        <Filename Value="UWSubtitleAPI.Formats.MacDVDStudioPro.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.MACDVDStudioPro"/>
+      </Item61>
+      <Item62>
+        <Filename Value="UWSubtitleAPI.Formats.MacSUB.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.MacSUB"/>
+      </Item62>
+      <Item63>
+        <Filename Value="UWSubtitleAPI.Formats.MicroDVD.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.MicroDVD"/>
+      </Item63>
+      <Item64>
+        <Filename Value="UWSubtitleAPI.Formats.MPlayer.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.MPlayer"/>
+      </Item64>
+      <Item65>
+        <Filename Value="UWSubtitleAPI.Formats.MPlayer2.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.MPlayer2"/>
+      </Item65>
+      <Item66>
+        <Filename Value="UWSubtitleAPI.Formats.NetflixTimedText.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.NetflixTimedText"/>
+      </Item66>
+      <Item67>
+        <Filename Value="UWSubtitleAPI.Formats.SBV.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.SBV"/>
+      </Item67>
+      <Item68>
+        <Filename Value="UWSubtitleAPI.Formats.Sofni.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.Sofni"/>
+      </Item68>
+      <Item69>
+        <Filename Value="UWSubtitleAPI.Formats.STL.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.STL"/>
+      </Item69>
+      <Item70>
+        <Filename Value="UWSubtitleAPI.Formats.WebVTT.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.WebVTT"/>
+      </Item70>
     </Files>
     <CompatibilityMode Value="True"/>
     <RequiredPkgs Count="3">

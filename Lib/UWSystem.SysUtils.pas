@@ -56,7 +56,6 @@ function MulDiv(nNumber, nNumerator, nDenominator: Single): Integer;
 function RoundValue(const Value: Single; const Digits: Integer): Single;
 function Rnd(r: Double): LongInt;
 function LimitDecimals(Num: Real; Limit: Integer) : String;
-procedure ZeroMemory(Destination: Pointer; Length: NativeUInt);
 procedure ArrayToTBytes(var DestArray: TBytes; const SourceArray: array of Byte; const StartIndex: Integer);
 procedure TBytesToArray(var DestArray: array of Byte; const SourceArray: TBytes; const StartIndex: Integer);
 
@@ -359,13 +358,6 @@ end;
 function LimitDecimals(Num: Real; Limit: Integer): String;
 begin
   Result := FloatToStr(Round(Num * Power(10, Limit)) / Power(10, Limit));
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure ZeroMemory(Destination: Pointer; Length: NativeUInt);
-begin
-  FillChar(Destination^, Length, 0);
 end;
 
 // -----------------------------------------------------------------------------

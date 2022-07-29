@@ -459,7 +459,6 @@ begin
           if s = 'TextChars' then Strings.TextChars := desc;
           if s = 'Translation' then Strings.Translation := desc;
           if s = 'TranslationChars' then Strings.TranslationChars := desc;
-          if s = 'CPS' then Strings.CPS := desc;
           if s = 'AllSupportedFiles' then Strings.AllSupportedFiles := desc;
           if s = 'Selection' then Strings.Selection := desc;
           if s = 'SaveDialog' then Strings.SaveDialog := desc;
@@ -1638,7 +1637,6 @@ begin
   frmMain.mmoTranslation.Visible := Value;
   frmMain.cpsTranslation.Visible := Value;
   frmMain.lblTranslation.Visible := Value;
-  frmMain.lblTranslationCPS.Visible := Value;
   frmMain.tlbTM.Visible := Value;
   frmMain.FormResize(frmMain);
   frmMain.VSTResize(frmMain.VST);

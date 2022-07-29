@@ -246,7 +246,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Formats.GPACTTXT, UWSubtitleAPI.Formats.NetflixTimedText,
   UWSubtitleAPI.Formats.IAuthor, UWSubtitleAPI.Formats.InscriberCG,
   UWSubtitleAPI.Formats.JACOSub, UWSubtitleAPI.Formats.KaraokeLyricsLRC,
-  UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MACDVDStudioPro,
+  UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MacDVDStudioPro,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SBV,
   UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.STL,

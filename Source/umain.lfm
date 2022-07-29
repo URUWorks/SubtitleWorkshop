@@ -1196,24 +1196,6 @@ object frmMain: TfrmMain
         ScrollBars = ssAutoVertical
         TabOrder = 0
       end
-      object lblTextCPS: TLabel
-        Left = 270
-        Height = 15
-        Top = 6
-        Width = 6
-        Alignment = taRightJustify
-        Caption = '0'
-        ParentColor = False
-      end
-      object lblTranslationCPS: TLabel
-        Left = 550
-        Height = 15
-        Top = 6
-        Width = 6
-        Alignment = taRightJustify
-        Caption = '0'
-        ParentColor = False
-      end
     end
   end
   object lyoSubtitles: TUWLayout

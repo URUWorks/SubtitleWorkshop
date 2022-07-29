@@ -167,8 +167,6 @@ type
     Label2: TLabel;
     lblMediaTime: TLabel;
     lblText: TLabel;
-    lblTextCPS: TLabel;
-    lblTranslationCPS: TLabel;
     lblTranslation: TLabel;
     MenuItem1: TMenuItem;
     MenuItem100: TMenuItem;
@@ -859,13 +857,11 @@ begin
   mmoText.Height := (tedInitial.Height*3)-(cpsText.Height-mTed);
   mmoText.Top := (lyoEditorClient.Height-mmoText.Height)-(cpsText.Height+(mTed*2));
   lblText.Top := (mmoText.Top - lblText.Height)-(mTed*2)+1;
-  lblTextCPS.Top := lblText.Top;
   cpsTranslation.Top := cpsText.Top;
   cpsTranslation.Height := cpsText.Height;
   mmoTranslation.Top := mmoText.Top;
   mmoTranslation.Height := mmoText.Height;
   lblTranslation.Top := lblText.Top;
-  lblTranslationCPS.Top := lblTranslation.Top;
 end;
 
 // -----------------------------------------------------------------------------
@@ -944,7 +940,6 @@ begin
     mmoTranslation.Width := mmoText.Width;
     mmoTranslation.Left := mmoText.Width+(Border*3)-1;
     lblTranslation.Left := mmoTranslation.Left;
-    lblTranslationCPS.Left := (mmoTranslation.Left+mmoTranslation.Width) - lblTranslationCPS.Width;
     cpsTranslation.Left := mmoTranslation.Left;
     cpsTranslation.Width := mmoTranslation.Width;
   end
@@ -953,7 +948,6 @@ begin
     mmoText.Width := w + (Border*2);
     cpsText.Width := mmoText.Width;
   end;
-  lblTextCPS.Left := (mmoText.Left+mmoText.Width) - lblTextCPS.Width;
 
   stbStatus.Panels[1].Width := ClientWidth - stbStatus.Panels[0].Width - stbStatus.Panels[2].Width;
 end;
@@ -1576,19 +1570,15 @@ procedure TfrmMain.UpdateCPSAndTexts;
 begin
   if (VSTFocusedNode > -1) and (VST.SelectedCount = 1) then
   begin
-    lblText.Caption := Format(Strings.TextChars, [GetLengthForEachLine(Subtitles[VSTFocusedNode].Text, '/', '=')], FormatSettings);
-    lblTextCPS.Caption := Format(Strings.CPS, [Subtitles.TextCPS[VSTFocusedNode]], FormatSettings);
-    lblTranslation.Caption := Format(Strings.TranslationChars, [GetLengthForEachLine(Subtitles[VSTFocusedNode].Translation, '/', '=')], FormatSettings);
-    lblTranslationCPS.Caption := Format(Strings.CPS, [Subtitles.TranslationCPS[VSTFocusedNode]], FormatSettings);
+    lblText.Caption := Format(Strings.TextChars, [GetLengthForEachLine(Subtitles[VSTFocusedNode].Text, '/', '='), Subtitles.TextCPS[VSTFocusedNode]], FormatSettings);
+    lblTranslation.Caption := Format(Strings.TranslationChars, [GetLengthForEachLine(Subtitles[VSTFocusedNode].Translation, '/', '='), Subtitles.TranslationCPS[VSTFocusedNode]], FormatSettings);
     cpsText.SetCPS(Subtitles.TextCPS[VSTFocusedNode]);
     cpsTranslation.SetCPS(Subtitles.TranslationCPS[VSTFocusedNode]);
   end
   else
   begin
     lblText.Caption := Strings.Text;
-    lblTextCPS.Caption := '';
     lblTranslation.Caption := Strings.Translation;
-    lblTranslationCPS.Caption := '';
     cpsText.SetCPS(0);
     cpsTranslation.SetCPS(0);
   end;
