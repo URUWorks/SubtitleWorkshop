@@ -1,0 +1,11 @@
+object frmVideo: TfrmVideo
+  Left = 683
+  Height = 480
+  Top = 129
+  Width = 640
+  Constraints.MinHeight = 250
+  Constraints.MinWidth = 450
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  LCLVersion = '2.2.2.0'
+end

@@ -1,0 +1,80 @@
+object frmTM: TfrmTM
+  Left = 278
+  Height = 176
+  Top = 127
+  Width = 480
+  BorderIcons = []
+  ClientHeight = 176
+  ClientWidth = 480
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poMainFormCenter
+  LCLVersion = '2.2.2.0'
+  object VST: TVirtualStringTree
+    Left = 8
+    Height = 160
+    Top = 8
+    Width = 375
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    DefaultText = 'Node'
+    Header.AutoSizeIndex = 0
+    Header.Columns = <    
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coFixed, coUseCaptionAlignment]
+        Position = 0
+        Width = 150
+      end    
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coFixed, coUseCaptionAlignment]
+        Position = 1
+        Width = 150
+      end    
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coFixed, coUseCaptionAlignment]
+        Position = 2
+        Width = 40
+      end>
+    Header.Options = [hoColumnResize, hoVisible]
+    TabOrder = 0
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning]
+    TreeOptions.PaintOptions = [toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect]
+    TreeOptions.StringOptions = []
+    OnBeforeCellPaint = VSTBeforeCellPaint
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnResize = VSTResize
+  end
+  object btnCopy: TButton
+    Left = 388
+    Height = 25
+    Top = 8
+    Width = 83
+    Anchors = [akTop, akRight]
+    Caption = 'Copy'
+    OnClick = btnCopyClick
+    TabOrder = 1
+  end
+  object btnUse: TButton
+    Left = 388
+    Height = 25
+    Top = 40
+    Width = 83
+    Anchors = [akTop, akRight]
+    Caption = 'Use'
+    OnClick = btnUseClick
+    TabOrder = 2
+  end
+  object btnClose: TButton
+    Left = 388
+    Height = 25
+    Top = 144
+    Width = 83
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 3
+  end
+end
