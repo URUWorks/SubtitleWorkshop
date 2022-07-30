@@ -16,7 +16,7 @@ Written by URUWorks (https://uruworks.net) using Lazarus (https://www.lazarus-id
 ![win](https://uruworks.net/img/sw_win11.png)
 
 ### MacOS
-![mac](https://uruworks.net/img/sw_macos.png)
+![mac](https://uruworks.net/img/sw_macos1.png)
 
 ### Linux Mint
 ![lnx](https://uruworks.net/img/sw_lnx.png)
