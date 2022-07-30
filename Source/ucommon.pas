@@ -201,14 +201,14 @@ uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, UWSystem.Encoding
 
 function GetCustomFolderPath(const SubFolder: String): String;
 begin
-  Result := IncludeTrailingPathDelimiter(ConcatPaths([ExtractFilePath(ParamStr(0)), SubFolder]));
+  Result := IncludeTrailingPathDelimiter(ConcatPaths([ExtractFilePath(ParamStr(0)){$IFDEF DARWIN}+ '/../'{$ENDIF}, SubFolder]));
 end;
 
 // -----------------------------------------------------------------------------
 
 function GetCustomFilePath(const FileName: String): String;
 begin
-  Result := ConcatPaths([ExtractFilePath(ParamStr(0)), FileName]);
+  Result := ConcatPaths([ExtractFilePath(ParamStr(0)){$IFDEF DARWIN}+ '/../'{$ENDIF}, FileName]);
 end;
 
 // -----------------------------------------------------------------------------
@@ -216,7 +216,7 @@ end;
 function SettingsFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := ConcatPaths(['/Library/Preferences/', 'sw.cfg']);
+  Result := GetUserDir + 'sw.cfg';
   {$ELSE}
   Result := GetCustomFilePath('sw.cfg');
   {$ENDIF}
@@ -278,7 +278,7 @@ end;
 function WaveformsFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/Waveforms/';
+  Result := GetUserDir + 'SW/Waveforms/';
   {$ELSE}
   Result := GetCustomFolderPath('Waveforms');
   {$ENDIF}
@@ -289,7 +289,7 @@ end;
 function MRUFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/sw.mru';
+  Result := GetUserDir + 'SW/sw.mru';
   {$ELSE}
   Result := GetCustomFilePath('sw.mru');
   {$ENDIF}
@@ -300,7 +300,7 @@ end;
 function StylesFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/sw.sts';
+  Result := GetUserDir + 'SW/sw.sts';
   {$ELSE}
   Result := GetCustomFilePath('sw.sts');
   {$ENDIF}
@@ -311,7 +311,7 @@ end;
 function ActorsFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/sw.act';
+  Result := GetUserDir + 'SW/sw.act';
   {$ELSE}
   Result := GetCustomFilePath('sw.act');
   {$ENDIF}
@@ -333,7 +333,7 @@ end;
 function ProjectsFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/Projects/';
+  Result := GetUserDir + 'SW/Projects/';
   {$ELSE}
   Result := GetCustomFolderPath('Projects');
   {$ENDIF}
@@ -344,7 +344,7 @@ end;
 function TMFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/TM/';
+  Result := GetUserDir + 'SW/TM/';
   {$ELSE}
   Result := GetCustomFolderPath('TM');
   {$ENDIF}
@@ -355,7 +355,7 @@ end;
 function TerminologyFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := '/Library/Preferences/SW/Terminology/';
+  Result := GetUserDir + 'SW/Terminology/';
   {$ELSE}
   Result := GetCustomFolderPath('Terminology');
   {$ENDIF}

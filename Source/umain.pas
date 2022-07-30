@@ -772,6 +772,9 @@ begin
 
   //
   {$IFDEF DARWIN}
+  VST.PopupMenu := popVST;
+  VST.OnMouseUp := NIL;
+
   ForceDirectories(WaveformsFolder);
   ForceDirectories(TMFolder);
   ForceDirectories(TerminologyFolder);

@@ -16,7 +16,7 @@
  *
  *}
 
-unit UWSubtitleAPI.Formats.MACDVDStudioPro;
+unit UWSubtitleAPI.Formats.MacDVDStudioPro;
 
 // -----------------------------------------------------------------------------
 

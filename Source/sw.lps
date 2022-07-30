@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UMain"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="784"/>
-        <CursorPos Y="785"/>
+        <TopLine Value="1331"/>
+        <CursorPos X="18" Y="1339"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -31,8 +31,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTypes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="107"/>
-        <CursorPos Y="119"/>
+        <TopLine Value="199"/>
+        <CursorPos Y="199"/>
         <UsageCount Value="200"/>
       </Unit2>
       <Unit3>
@@ -40,8 +40,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCommon"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1632"/>
-        <CursorPos Y="1640"/>
+        <TopLine Value="861"/>
+        <CursorPos X="41" Y="872"/>
         <UsageCount Value="200"/>
       </Unit3>
       <Unit4>
@@ -184,7 +184,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UGlossary"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="168"/>
+        <UsageCount Value="170"/>
       </Unit17>
       <Unit18>
         <Filename Value="utm.pas"/>
@@ -196,7 +196,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos Y="20"/>
-        <UsageCount Value="158"/>
+        <UsageCount Value="160"/>
       </Unit18>
       <Unit19>
         <Filename Value="uproject.pas"/>
@@ -206,7 +206,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UProject"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="157"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\..\..\Lib\UWSystem.Graphics.pas"/>
@@ -1251,15 +1251,15 @@
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MacDVDStudioPro.pas"/>
         <UnitName Value="UWSubtitleAPI.Formats.MACDVDStudioPro"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="108"/>
-        <CursorPos X="57" Y="114"/>
+        <TopLine Value="10"/>
+        <CursorPos X="31" Y="19"/>
         <UsageCount Value="10"/>
       </Unit174>
       <Unit175>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MacSUB.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
-        <CursorPos X="3" Y="27"/>
+        <CursorPos X="26" Y="25"/>
         <UsageCount Value="10"/>
       </Unit175>
       <Unit176>
@@ -1298,11 +1298,10 @@
         <UsageCount Value="11"/>
       </Unit180>
       <Unit181>
-        <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.ItunesTimedText.pas"/>
-        <UnitName Value="UWSubtitleAPI.Formats.ITunesTimedText"/>
+        <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.ITunesTimedText.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="43"/>
-        <CursorPos X="6" Y="52"/>
+        <TopLine Value="10"/>
+        <CursorPos Y="20"/>
         <UsageCount Value="10"/>
       </Unit181>
       <Unit182>
@@ -1328,59 +1327,63 @@
         <UsageCount Value="10"/>
       </Unit184>
     </Units>
-    <JumpHistory Count="13" HistoryIndex="12">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="umain.pas"/>
-        <Caret Line="3199" TopLine="3192"/>
+        <Caret Line="191" Column="11" TopLine="177"/>
       </Position1>
       <Position2>
         <Filename Value="umain.pas"/>
-        <Caret Line="170" Column="15" TopLine="162"/>
+        <Caret Line="270" Column="11" TopLine="256"/>
       </Position2>
       <Position3>
         <Filename Value="umain.pas"/>
-        <Caret Line="862" Column="13" TopLine="848"/>
+        <Caret Line="282" Column="11" TopLine="268"/>
       </Position3>
       <Position4>
         <Filename Value="umain.pas"/>
-        <Caret Line="956" Column="63" TopLine="942"/>
+        <Caret Line="342" Column="11" TopLine="328"/>
       </Position4>
       <Position5>
         <Filename Value="umain.pas"/>
-        <Caret Line="1582" Column="38" TopLine="1567"/>
+        <Caret Line="446" Column="8" TopLine="432"/>
       </Position5>
       <Position6>
         <Filename Value="umain.pas"/>
-        <Caret Line="1582" Column="38" TopLine="1567"/>
+        <Caret Line="578" Column="21" TopLine="564"/>
       </Position6>
       <Position7>
         <Filename Value="umain.pas"/>
-        <Caret Line="1581" Column="38" TopLine="1566"/>
+        <Caret Line="579" Column="21" TopLine="565"/>
       </Position7>
       <Position8>
         <Filename Value="umain.pas"/>
-        <Caret Line="1580" Column="38" TopLine="1565"/>
+        <Caret Line="592" Column="18" TopLine="578"/>
       </Position8>
       <Position9>
         <Filename Value="umain.pas"/>
-        <Caret Line="860" TopLine="852"/>
+        <Caret Line="595" Column="18" TopLine="581"/>
       </Position9>
       <Position10>
         <Filename Value="umain.pas"/>
-        <Caret Line="865" TopLine="857"/>
+        <Caret Line="596" Column="18" TopLine="582"/>
       </Position10>
       <Position11>
         <Filename Value="umain.pas"/>
-        <Caret Line="943" TopLine="935"/>
+        <Caret Line="597" Column="18" TopLine="583"/>
       </Position11>
       <Position12>
         <Filename Value="umain.pas"/>
-        <Caret Line="951" TopLine="943"/>
+        <Caret Line="600" Column="18" TopLine="586"/>
       </Position12>
       <Position13>
         <Filename Value="umain.pas"/>
-        <Caret Line="1574" Column="76" TopLine="1539"/>
+        <Caret Line="603" Column="18" TopLine="589"/>
       </Position13>
+      <Position14>
+        <Filename Value="umain.pas"/>
+        <Caret Line="605" Column="25" TopLine="591"/>
+      </Position14>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
