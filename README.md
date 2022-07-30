@@ -10,8 +10,6 @@ It includes spell check function and an advanced video and audio waveform previe
 The best choice for the beginner, expert or the fansubber. 
 Have a try, and you'll forget the rest!
 
-Written by URUWorks (https://uruworks.net) using Lazarus (https://www.lazarus-ide.org).
- 
 ### Windows
 ![win](https://uruworks.net/img/sw_win11.png)
 
