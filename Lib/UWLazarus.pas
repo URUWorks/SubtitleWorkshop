@@ -32,7 +32,7 @@ uses
   UWSubtitleAPI.Formats.DVDSubtitleSystem, UWSubtitleAPI.Formats.EBU, 
   UWSubtitleAPI.Formats.FABSubtitler, UWSubtitleAPI.Formats.GPACTTXT, 
   UWSubtitleAPI.Formats.IAuthor, UWSubtitleAPI.Formats.InscriberCG, 
-  UWSubtitleAPI.Formats.ItunesTimedText, UWSubtitleAPI.Formats.JACOSub, 
+  UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.JACOSub, 
   UWSubtitleAPI.Formats.KaraokeLyricsLRC, 
   UWSubtitleAPI.Formats.KaraokeLyricsVKT, 
   UWSubtitleAPI.Formats.MacDVDStudioPro, UWSubtitleAPI.Formats.MacSUB, 

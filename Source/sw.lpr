@@ -8,9 +8,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, virtualtreeview_package, UMain, utypes, ucommon,
-  UUndo, UErrors, pascalscript, ufindandreplace, uspellcheck,
-  uabout, uwelcome, UTexts, UTimings, UInfoAndErrors, UVideo,
+  Forms, virtualtreeview_package, UMain, UTypes, UCommon,
+  UUndo, UErrors, pascalscript, UFindAndReplace, USpellCheck,
+  UAbout, UWelcome, UTexts, UTimings, UInfoAndErrors, UVideo,
   UInfoAndErrorsTypes, UAudioExtraction, UStylesAndActors, UGlossary, UTM, 
 UProject
   { you can add units after this };

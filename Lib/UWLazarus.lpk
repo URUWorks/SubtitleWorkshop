@@ -162,15 +162,15 @@
         <UnitName Value="UWImport.libmpv"/>
       </Item36>
       <Item37>
-        <Filename Value="uwmediaengine.thread.pas"/>
+        <Filename Value="UWMediaEngine.Thread.pas"/>
         <UnitName Value="UWMediaEngine.Thread"/>
       </Item37>
       <Item38>
-        <Filename Value="uwmediaengine.pas"/>
+        <Filename Value="UWMediaEngine.pas"/>
         <UnitName Value="UWMediaEngine"/>
       </Item38>
       <Item39>
-        <Filename Value="uwmediaengine.libmpv.pas"/>
+        <Filename Value="UWMediaEngine.libMPV.pas"/>
         <UnitName Value="UWMediaEngine.libMPV"/>
       </Item39>
       <Item40>
@@ -242,7 +242,7 @@
         <UnitName Value="UWSubtitleAPI.Formats.InscriberCG"/>
       </Item56>
       <Item57>
-        <Filename Value="UWSubtitleAPI.Formats.ItunesTimedText.pas"/>
+        <Filename Value="UWSubtitleAPI.Formats.ITunesTimedText.pas"/>
         <UnitName Value="UWSubtitleAPI.Formats.ITunesTimedText"/>
       </Item57>
       <Item58>
@@ -259,7 +259,7 @@
       </Item60>
       <Item61>
         <Filename Value="UWSubtitleAPI.Formats.MacDVDStudioPro.pas"/>
-        <UnitName Value="UWSubtitleAPI.Formats.MACDVDStudioPro"/>
+        <UnitName Value="UWSubtitleAPI.Formats.MacDVDStudioPro"/>
       </Item61>
       <Item62>
         <Filename Value="UWSubtitleAPI.Formats.MacSUB.pas"/>
