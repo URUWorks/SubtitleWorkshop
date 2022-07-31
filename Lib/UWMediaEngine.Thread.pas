@@ -1,19 +1,21 @@
 {*
- *  URUWorks Media Engine Thread
+ *  URUWorks Subtitle Workshop
+ *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
  *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
- *
+ *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWMediaEngine.Thread;
@@ -38,9 +40,9 @@ type
   private
     procedure DoEvent;
   public
-    Owner: TUWMediaEngineThread;
-    Event: PRtlEvent;
-    constructor Create;
+    FOwner : TUWMediaEngineThread;
+    Event  : PRtlEvent;
+    constructor Create(AOwner: TUWMediaEngineThread);
     procedure Execute; override;
     destructor Destroy; override;
   end;
@@ -56,7 +58,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure SendCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer);
+    procedure PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer);
     property OnCommand: TUWMediaEngineOnCommand read FOnCommand write FOnCommand;
   end;
 
@@ -70,10 +72,11 @@ implementation
 
 // -----------------------------------------------------------------------------
 
-constructor TUWCustomMediaEngineThread.Create;
+constructor TUWCustomMediaEngineThread.Create(AOwner: TUWMediaEngineThread);
 begin
   inherited Create(True);
-  Event := RTLEventCreate;
+  FOwner := AOwner;
+  Event  := RTLEventCreate;
 end;
 
 // -----------------------------------------------------------------------------
@@ -83,7 +86,7 @@ begin
   while not Terminated do
   begin
     RtlEventWaitFor(Event);
-    if Assigned(Owner.FOnCommand) and not Terminated then Synchronize(@DoEvent);
+    if Assigned(FOwner.FOnCommand) and not Terminated then Synchronize(@DoEvent);
     RTLEventResetEvent(Event);
   end;
 end;
@@ -92,7 +95,7 @@ end;
 
 procedure TUWCustomMediaEngineThread.DoEvent;
 begin
-  if Assigned(Owner.FOnCommand) then Owner.FOnCommand(Owner, Owner.FCommand, Owner.FParam);
+  if Assigned(FOwner.FOnCommand) then FOwner.FOnCommand(FOwner, FOwner.FCommand, FOwner.FParam);
 end;
 
 // -----------------------------------------------------------------------------
@@ -100,6 +103,7 @@ end;
 destructor TUWCustomMediaEngineThread.Destroy;
 begin
   RTLEventDestroy(Event);
+  FOwner := NIL;
   inherited Destroy;
 end;
 
@@ -111,8 +115,7 @@ end;
 
 constructor TUWMediaEngineThread.Create;
 begin
-  FThread := TUWCustomMediaEngineThread.Create;
-  FThread.Owner := Self;
+  FThread := TUWCustomMediaEngineThread.Create(Self);
   FThread.Start;
 end;
 
@@ -129,11 +132,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWMediaEngineThread.SendCommand(const ACommand: TUWMediaEngineCommand; const AParam: integer);
+procedure TUWMediaEngineThread.PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: integer);
 begin
   FCommand := ACommand;
   FParam   := AParam;
-
   RTLEventSetEvent(FThread.Event);
 end;
 

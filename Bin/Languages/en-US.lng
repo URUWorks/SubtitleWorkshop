@@ -11,7 +11,7 @@
 		{"Name" : "WriteDenieded", "Text" : "Write denied. Please check folder permissions."},
 		{"Name" : "ExtractAudio", "Text" : "Audio waveform was not found, do you want to extract it?"},
 		{"Name" : "ExtractLibError", "Text" : "Unable to find %s."},
-		{"Name" : "libMPVError", "Text" : "Unable to find required libraries to run embedded mpv player. Please go and download them."},
+		{"Name" : "libMPVError", "Text" : "Unable to find the required libraries to run the embedded mpv player. Please go and download them."},
 		{"Name" : "LoadingVideo", "Text" : "Loading video..."}
 	],
 	"ErrorStrings" :[

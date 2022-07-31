@@ -18,7 +18,7 @@
 
 {$packrecords C}
 
-unit UWImport.libmpv;
+unit UWlibMPV.Client;
 
 // -----------------------------------------------------------------------------
 

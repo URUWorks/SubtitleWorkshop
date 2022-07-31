@@ -104,140 +104,122 @@
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="umain.pas"/>
+        <Filename Value="UMain.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="utypes.pas"/>
+        <Filename Value="UTypes.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UTypes"/>
       </Unit2>
       <Unit3>
-        <Filename Value="ucommon.pas"/>
+        <Filename Value="UCommon.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UCommon"/>
       </Unit3>
       <Unit4>
-        <Filename Value="uundo.pas"/>
+        <Filename Value="UUndo.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UUndo"/>
       </Unit4>
       <Unit5>
-        <Filename Value="uerrors.pas"/>
+        <Filename Value="UErrors.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UErrors"/>
       </Unit5>
       <Unit6>
-        <Filename Value="ufindandreplace.pas"/>
+        <Filename Value="UFindAndReplace.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmFindAndReplace"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UFindAndReplace"/>
       </Unit6>
       <Unit7>
-        <Filename Value="uspellcheck.pas"/>
+        <Filename Value="USpellCheck.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmSpellCheck"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="USpellCheck"/>
       </Unit7>
       <Unit8>
-        <Filename Value="uabout.pas"/>
+        <Filename Value="UAbout.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmAbout"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UAbout"/>
       </Unit8>
       <Unit9>
-        <Filename Value="uwelcome.pas"/>
+        <Filename Value="UWelcome.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmWelcome"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UWelcome"/>
       </Unit9>
       <Unit10>
-        <Filename Value="utexts.pas"/>
+        <Filename Value="UTexts.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTexts"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UTexts"/>
       </Unit10>
       <Unit11>
-        <Filename Value="utimings.pas"/>
+        <Filename Value="UTimings.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTimings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UTimings"/>
       </Unit11>
       <Unit12>
-        <Filename Value="uinfoanderrors.pas"/>
+        <Filename Value="UInfoAndErrors.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmInfoAndErrors"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UInfoAndErrors"/>
       </Unit12>
       <Unit13>
-        <Filename Value="uvideo.pas"/>
+        <Filename Value="UVideo.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmVideo"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UVideo"/>
       </Unit13>
       <Unit14>
         <Filename Value="UInfoAndErrorsTypes.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit14>
       <Unit15>
-        <Filename Value="uaudioextraction.pas"/>
+        <Filename Value="UAudioExtraction.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmAudioExtraction"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UAudioExtraction"/>
       </Unit15>
       <Unit16>
-        <Filename Value="ustylesandactors.pas"/>
+        <Filename Value="UStylesAndActors.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmStylesAndActors"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UStylesAndActors"/>
       </Unit16>
       <Unit17>
-        <Filename Value="uglossary.pas"/>
+        <Filename Value="UGlossary.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmGlossary"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UGlossary"/>
       </Unit17>
       <Unit18>
-        <Filename Value="utm.pas"/>
+        <Filename Value="UTM.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTM"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UTM"/>
       </Unit18>
       <Unit19>
-        <Filename Value="uproject.pas"/>
+        <Filename Value="UProject.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmProject"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UProject"/>
       </Unit19>
     </Units>
   </ProjectOptions>

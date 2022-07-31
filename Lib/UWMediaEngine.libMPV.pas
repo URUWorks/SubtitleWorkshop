@@ -1,19 +1,21 @@
 {*
- *  URUWorks Media Engine libMPV
+ *  URUWorks Subtitle Workshop
+ *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
  *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
- *
+ *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWMediaEngine.libMPV;
@@ -27,7 +29,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, UWMediaEngine, UWMediaEngine.Thread,
-  UWImport.libmpv, UWSystem.TimeUtils, fpjson, jsonparser
+  UWlibMPV.Client, UWSystem.TimeUtils, fpjson, jsonparser
   {$IFDEF LINUX}
   , gtk2, gdk2x
   {$ENDIF};
@@ -35,7 +37,9 @@ uses
 // -----------------------------------------------------------------------------
 
 type
+
   { TUWMediaEngineLibMPV }
+
   TUWLibMPV = class(TUWMediaEngine)
   private
     FHandle: Pmpv_handle;
@@ -98,7 +102,7 @@ constructor TUWLibMPV.Create(const AParent: TWinControl; AOnCommand: TUWMediaEng
 begin
   inherited Create(AParent, AOnCommand);
 
-  ErrorCode := Load_libMPV; //(UWImport.libmpv.External_library);
+  ErrorCode := Load_libMPV;
 end;
 
 // -----------------------------------------------------------------------------
@@ -315,7 +319,7 @@ end;
 
 procedure TUWLibMPV.PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer = 0);
 begin
-  FThread.SendCommand(ACommand, AParam);
+  FThread.PostCommand(ACommand, AParam);
 end;
 
 // -----------------------------------------------------------------------------
