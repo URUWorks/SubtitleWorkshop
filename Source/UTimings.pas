@@ -162,6 +162,8 @@ begin
   numExpand.Value      := 1500;
   numTimeChars.Value   := 40;
   numTimeMS.Value      := 1000;
+
+  tedDelay.Width := frmMain.tedInitial.Width;
 end;
 
 // -----------------------------------------------------------------------------
