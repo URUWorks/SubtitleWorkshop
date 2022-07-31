@@ -17,7 +17,7 @@ Have a try, and you'll forget the rest!
 ![mac](https://uruworks.net/img/sw_macos1.png)
 
 ### Linux Mint
-![lnx](https://uruworks.net/img/sw_lnx.png)
+![lnx](https://uruworks.net/img/sw_linux.png)
 
 ### You can help us 
  
