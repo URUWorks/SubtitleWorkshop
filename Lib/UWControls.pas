@@ -114,6 +114,7 @@ type
   protected
     procedure CreateParams(var Params: TCreateParams); override;
     function ChildClassAllowed(ChildClass: TClass): Boolean; override;
+    procedure AdjustClientRect(var ARect: TRect); override;
     procedure DoContextPopup(MousePos: TPoint; var Handled: Boolean); override;
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
@@ -867,9 +868,9 @@ begin
   FButton := TUWSpinButton.Create(Self);
   with FButton do
   begin
-    Parent       := Self;
-    Align        := alRight;
-    Anchors      := [akTop, akBottom];
+//    Parent       := Self;
+//    Align        := alRight;
+//    Anchors      := [akTop, akBottom];
     Width        := 16;
     Height       := 20;
     FocusControl := Self;
@@ -892,6 +893,19 @@ end;
 function TUWTimeEdit.ChildClassAllowed(ChildClass: TClass): Boolean;
 begin
   Result := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.AdjustClientRect(var ARect: TRect);
+begin
+  inherited;
+  FButton.Align   := alNone;
+  FButton.Anchors := [akLeft, akTop];
+  FButton.Parent  := Parent;
+  FButton.Left    := Left + Width - FButton.Width;
+  FButton.Top     := Top;
+  FButton.Height  := Height;
 end;
 
 // -----------------------------------------------------------------------------
