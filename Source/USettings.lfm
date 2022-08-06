@@ -1,0 +1,44 @@
+object frmSettings: TfrmSettings
+  Left = 327
+  Height = 430
+  Top = 188
+  Width = 615
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Settings'
+  ClientHeight = 430
+  ClientWidth = 615
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poMainFormCenter
+  ShowHint = True
+  ShowInTaskBar = stNever
+  LCLVersion = '2.2.2.0'
+  object pagSettings: TPageControl
+    Left = 8
+    Height = 416
+    Top = 8
+    Width = 601
+    TabStop = False
+    ActivePage = tabGeneral
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
+    TabOrder = 0
+    object tabGeneral: TTabSheet
+      Caption = 'General'
+      ClientHeight = 388
+      ClientWidth = 593
+      object btnClose: TButton
+        Left = 505
+        Height = 25
+        Top = 351
+        Width = 75
+        Anchors = [akRight, akBottom]
+        Cancel = True
+        Caption = 'Close'
+        OnClick = btnCloseClick
+        TabOrder = 0
+      end
+    end
+  end
+end

@@ -98,7 +98,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="20">
+    <Units Count="21">
       <Unit0>
         <Filename Value="sw.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -221,6 +221,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit19>
+      <Unit20>
+        <Filename Value="USettings.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmSettings"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit20>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

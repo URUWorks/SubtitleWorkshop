@@ -12,7 +12,7 @@ uses
   UUndo, UErrors, pascalscript, UFindAndReplace, USpellCheck,
   UAbout, UWelcome, UTexts, UTimings, UInfoAndErrors, UVideo,
   UInfoAndErrorsTypes, UAudioExtraction, UStylesAndActors, UGlossary, UTM, 
-UProject
+  UProject, USettings
   { you can add units after this };
 
 {$R *.res}

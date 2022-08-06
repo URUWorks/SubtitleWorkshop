@@ -80,6 +80,7 @@ type
     actCustomSearch: TAction;
     actGlossary: TAction;
     actChangeWorkspace: TAction;
+    actSettings: TAction;
     actViewWPM: TAction;
     actTMValidate: TAction;
     actTM3: TAction;
@@ -187,6 +188,7 @@ type
     MenuItem116: TMenuItem;
     MenuItem117: TMenuItem;
     MenuItem118: TMenuItem;
+    MenuItem47: TMenuItem;
     MenuItem7: TMenuItem;
     mnuVST_Validate: TMenuItem;
     mnuWorkspace: TMenuItem;
@@ -280,6 +282,7 @@ type
     Separator15: TMenuItem;
     Separator16: TMenuItem;
     mnuVST_SepValidate: TMenuItem;
+    Separator17: TMenuItem;
     Separator9: TMenuItem;
     Separator8: TMenuItem;
     mnuVideoPlayback: TMenuItem;
@@ -525,6 +528,7 @@ type
     procedure actSelectAllExecute(Sender: TObject);
     procedure actSetDelayExecute(Sender: TObject);
     procedure actSetMaximumLineLengthExecute(Sender: TObject);
+    procedure actSettingsExecute(Sender: TObject);
     procedure actShiftTimeLessExecute(Sender: TObject);
     procedure actShiftTimeMoreExecute(Sender: TObject);
     procedure actShiftToNextExecute(Sender: TObject);
@@ -649,7 +653,8 @@ uses UWSystem.TimeUtils, UWSystem.StrUtils, UWSystem.SysUtils, UWFiles.MRU,
   UWSubtitleAPI.Tags, UTypes, UCommon, UExtensions, UFindAndReplace,
   UWControls.Utils, USpellCheck, UAbout, UWelcome, UTexts, UTimings,
   UWSubtitles.Utils, UInfoAndErrors, UVideo, UStylesAndActors,
-  UWCustom.SWStyles, UAudioExtraction, UGlossary, UTM, UProject, UWTMX;
+  UWCustom.SWStyles, UAudioExtraction, UGlossary, UTM, UProject, UWTMX,
+  USettings;
 
 {$R *.lfm}
 
@@ -2487,6 +2492,17 @@ end;
 procedure TfrmMain.actSetMaximumLineLengthExecute(Sender: TObject);
 begin
   VSTDoLoop(@ApplySetMaximumLineLength, dlSelected, True, True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSettingsExecute(Sender: TObject);
+begin
+  if frmSettings = NIL then
+  begin
+    frmSettings := TfrmSettings.Create(Application);
+    frmSettings.ShowModal;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

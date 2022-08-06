@@ -182,7 +182,8 @@
 		{"Name" : "actViewCPS", "Text" : "Characters per second", "Desc" : ""},
 		{"Name" : "actViewWPM", "Text" : "Words per minute", "Desc" : ""},
 		{"Name" : "actViewCPL", "Text" : "Characters per line", "Desc" : ""},
-		{"Name" : "actViewToolbarAdditional", "Text" : "Additional", "Desc" : ""}
+		{"Name" : "actViewToolbarAdditional", "Text" : "Additional", "Desc" : ""},
+		{"Name" : "actSettings", "Text" : "Settings...", "Desc" : ""}
 	],
 	"frmTexts" :[
 		{"Name" : "frmTexts", "Text" : "Texts", "Desc" : ""},
