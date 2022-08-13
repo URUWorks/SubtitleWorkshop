@@ -12,11 +12,11 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
  *
  *}
 
-{$packrecords C}
+{$PACKRECORDS C}
 
 unit UWlibMPV.Client;
 
@@ -2150,50 +2150,50 @@ end;
 
 procedure Free_libMPV;
 begin
-    FreeLibrary(hLib);
-    mpv_client_api_version := NIL;
-    mpv_error_string := NIL;
-    mpv_free := NIL;
-    mpv_client_name := NIL;
-    mpv_client_id := NIL;
-    mpv_create := NIL;
-    mpv_initialize := NIL;
-    mpv_destroy := NIL;
-    mpv_terminate_destroy := NIL;
-    mpv_create_client := NIL;
-    mpv_create_weak_client := NIL;
-    mpv_load_config_file := NIL;
-    mpv_get_time_us := NIL;
-    mpv_free_node_contents := NIL;
-    mpv_set_option := NIL;
-    mpv_set_option_string := NIL;
-    mpv_command := NIL;
-    mpv_command_node := NIL;
-    mpv_command_ret := NIL;
-    mpv_command_string := NIL;
-    mpv_command_async := NIL;
-    mpv_command_node_async := NIL;
-    mpv_abort_async_command := NIL;
-    mpv_set_property := NIL;
-    mpv_set_property_string := NIL;
-    mpv_set_property_async := NIL;
-    mpv_get_property := NIL;
-    mpv_get_property_string := NIL;
-    mpv_get_property_osd_string := NIL;
-    mpv_get_property_async := NIL;
-    mpv_observe_property := NIL;
-    mpv_unobserve_property := NIL;
-    mpv_event_name := NIL;
-    mpv_event_to_node := NIL;
-    mpv_request_event := NIL;
-    mpv_request_log_messages := NIL;
-    mpv_wait_event := NIL;
-    mpv_wakeup := NIL;
-    mpv_set_wakeup_callback := NIL;
-    mpv_wait_async_requests := NIL;
-    mpv_hook_add := NIL;
-    mpv_hook_continue := NIL;
-    mpv_get_wakeup_pipe := NIL;
+  FreeLibrary(hLib);
+  mpv_client_api_version := NIL;
+  mpv_error_string := NIL;
+  mpv_free := NIL;
+  mpv_client_name := NIL;
+  mpv_client_id := NIL;
+  mpv_create := NIL;
+  mpv_initialize := NIL;
+  mpv_destroy := NIL;
+  mpv_terminate_destroy := NIL;
+  mpv_create_client := NIL;
+  mpv_create_weak_client := NIL;
+  mpv_load_config_file := NIL;
+  mpv_get_time_us := NIL;
+  mpv_free_node_contents := NIL;
+  mpv_set_option := NIL;
+  mpv_set_option_string := NIL;
+  mpv_command := NIL;
+  mpv_command_node := NIL;
+  mpv_command_ret := NIL;
+  mpv_command_string := NIL;
+  mpv_command_async := NIL;
+  mpv_command_node_async := NIL;
+  mpv_abort_async_command := NIL;
+  mpv_set_property := NIL;
+  mpv_set_property_string := NIL;
+  mpv_set_property_async := NIL;
+  mpv_get_property := NIL;
+  mpv_get_property_string := NIL;
+  mpv_get_property_osd_string := NIL;
+  mpv_get_property_async := NIL;
+  mpv_observe_property := NIL;
+  mpv_unobserve_property := NIL;
+  mpv_event_name := NIL;
+  mpv_event_to_node := NIL;
+  mpv_request_event := NIL;
+  mpv_request_log_messages := NIL;
+  mpv_wait_event := NIL;
+  mpv_wakeup := NIL;
+  mpv_set_wakeup_callback := NIL;
+  mpv_wait_async_requests := NIL;
+  mpv_hook_add := NIL;
+  mpv_hook_continue := NIL;
+  mpv_get_wakeup_pipe := NIL;
 end;
 
 // -----------------------------------------------------------------------------

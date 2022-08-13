@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="188">
+    <Units Count="190">
       <Unit0>
         <Filename Value="sw.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -159,7 +159,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="177"/>
+        <UsageCount Value="181"/>
       </Unit17>
       <Unit18>
         <Filename Value="UTM.pas"/>
@@ -168,7 +168,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="167"/>
+        <UsageCount Value="171"/>
       </Unit18>
       <Unit19>
         <Filename Value="UProject.pas"/>
@@ -177,7 +177,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="164"/>
+        <UsageCount Value="168"/>
       </Unit19>
       <Unit20>
         <Filename Value="USettings.pas"/>
@@ -185,10 +185,9 @@
         <ComponentName Value="frmSettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="73" Y="10"/>
-        <UsageCount Value="22"/>
+        <CursorPos X="73" Y="11"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit20>
@@ -197,7 +196,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="199"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\..\Lib\uwcustom.swstyles.pas"/>
@@ -205,14 +204,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="7"/>
         <CursorPos X="37" Y="17"/>
-        <UsageCount Value="203"/>
+        <UsageCount Value="202"/>
       </Unit22>
       <Unit23>
         <Filename Value="..\..\..\Lib\uwtmx.pas"/>
         <UnitName Value="UWTMX"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="132"/>
+        <UsageCount Value="131"/>
       </Unit23>
       <Unit24>
         <Filename Value="ulangs.pas"/>
@@ -220,14 +219,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <CursorPos X="22" Y="28"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="154"/>
       </Unit24>
       <Unit25>
         <Filename Value="..\..\..\Lib\UWControls.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="859"/>
         <CursorPos Y="859"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit25>
       <Unit26>
         <Filename Value="C:\lazarus\lcl\stdctrls.pp"/>
@@ -235,7 +234,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1376"/>
         <CursorPos X="14" Y="1383"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit26>
       <Unit27>
         <Filename Value="C:\lazarus\lcl\graphics.pp"/>
@@ -243,79 +242,79 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="251"/>
         <CursorPos X="11" Y="261"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit27>
       <Unit28>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\types.pp"/>
         <UnitName Value="Types"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit28>
       <Unit29>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="243"/>
         <CursorPos X="58" Y="258"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="81"/>
       </Unit29>
       <Unit30>
         <Filename Value="..\..\..\External\VirtualTreeview4.8.7_LCL-R2\VirtualTrees.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="666"/>
         <CursorPos X="5" Y="681"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit30>
       <Unit31>
         <Filename Value="..\..\..\Lib\UWSystem.TimeUtils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="165"/>
         <CursorPos X="22" Y="181"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit31>
       <Unit32>
         <Filename Value="..\..\..\Lib\UWControls.WaveformDisplay.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="3"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit32>
       <Unit33>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="161"/>
         <CursorPos X="10" Y="172"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit33>
       <Unit34>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysinth.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="26"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit34>
       <Unit35>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Tags.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="78"/>
         <CursorPos X="10" Y="87"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit35>
       <Unit36>
         <Filename Value="..\..\..\Lib\UWSystem.StrUtils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="149"/>
         <CursorPos Y="157"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.TimeCode.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\..\..\Lib\UWSystem.SysUtils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="59"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit38>
       <Unit39>
         <Filename Value="C:\lazarus\lcl\lcltype.pp"/>
@@ -323,50 +322,50 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="921"/>
         <CursorPos Y="921"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit39>
       <Unit40>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\win64\classes.pp"/>
         <UnitName Value="Classes"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit40>
       <Unit41>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\win\sysutils.pp"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit41>
       <Unit42>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\math.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="105"/>
         <CursorPos X="13" Y="125"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit42>
       <Unit43>
         <Filename Value="..\..\..\Lib\UWSystem.Encoding.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit43>
       <Unit44>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="664"/>
         <CursorPos X="35" Y="669"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit44>
       <Unit45>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.ABCiView.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="13" Y="26"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit45>
       <Unit46>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="23"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="18"/>
         <Bookmarks Count="1">
           <Item0 X="42" Y="187" ID="9"/>
         </Bookmarks>
@@ -375,14 +374,14 @@
         <Filename Value="..\..\..\Lib\UWSubtitles.Utils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="47"/>
+        <UsageCount Value="46"/>
       </Unit47>
       <Unit48>
         <Filename Value="C:\lazarus\lcl\include\winapih.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="336"/>
         <CursorPos X="10" Y="344"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit48>
       <Unit49>
         <Filename Value="C:\lazarus\lcl\menus.pp"/>
@@ -390,7 +389,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="368"/>
         <CursorPos X="3" Y="381"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit49>
       <Unit50>
         <Filename Value="C:\lazarus\lcl\lclproc.pas"/>
@@ -398,24 +397,24 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="886"/>
         <CursorPos Y="902"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit50>
       <Unit51>
         <Filename Value="..\..\..\Lib\UWSystem.XmlUtils.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit51>
       <Unit52>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\stringl.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="851"/>
         <CursorPos X="3" Y="852"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit52>
       <Unit53>
         <Filename Value="umain.lfm"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit53>
       <Unit54>
@@ -423,7 +422,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="440"/>
         <CursorPos X="15" Y="454"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit54>
       <Unit55>
@@ -431,7 +430,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3624"/>
         <CursorPos X="3" Y="3610"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit55>
       <Unit56>
@@ -440,7 +439,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1734"/>
         <CursorPos X="23" Y="1743"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit56>
       <Unit57>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\regexpr\src\regexpr.pas"/>
@@ -448,30 +447,30 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2587"/>
         <CursorPos X="42" Y="2608"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit57>
       <Unit58>
         <Filename Value="..\..\..\Lib\UWSystem.HTMLUtils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\..\..\Lib\UWParser.Wave.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit59>
       <Unit60>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.AdobeEncoreDVD.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit60>
       <Unit61>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.SubRip.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit61>
       <Unit62>
         <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
@@ -479,67 +478,67 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="881"/>
         <CursorPos X="12" Y="873"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit62>
       <Unit63>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.ExtraInfo.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="61"/>
         <CursorPos X="20" Y="68"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit63>
       <Unit64>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.Cavena890.Types.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit64>
       <Unit65>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.EBU.Types.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="180"/>
         <CursorPos Y="202"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit65>
       <Unit66>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.TimedText.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="41"/>
         <CursorPos X="36" Y="55"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit66>
       <Unit67>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.AdvancedSubstationAlpha.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit67>
       <Unit68>
         <Filename Value="..\..\..\Lib\UWFiles.MRU.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="149"/>
         <CursorPos X="30" Y="166"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit68>
       <Unit69>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.AQTitle.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit69>
       <Unit70>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.AvidCaption.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="13" Y="26"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit70>
       <Unit71>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\objpas.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="246"/>
         <CursorPos X="3" Y="249"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit71>
       <Unit72>
         <Filename Value="uextensions.pas"/>
@@ -547,64 +546,64 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="76" Y="44"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit72>
       <Unit73>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSComponent.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit73>
       <Unit74>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSCompiler.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit74>
       <Unit75>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSComponent_StdCtrls.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="25"/>
         <CursorPos X="16" Y="50"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit75>
       <Unit76>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_stdctrls.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
         <CursorPos X="6" Y="2"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit76>
       <Unit77>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_forms.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="2"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit77>
       <Unit78>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_graphics.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="221"/>
         <CursorPos X="29" Y="247"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit78>
       <Unit79>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_buttons.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="52"/>
         <CursorPos X="51" Y="4"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit79>
       <Unit80>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_comobj.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="18"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit80>
       <Unit81>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_dll.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="31" Y="38"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit81>
       <Unit82>
         <Filename Value="C:\lazarus\lcl\dialogs.pp"/>
@@ -612,61 +611,61 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="331"/>
         <CursorPos X="14" Y="336"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit82>
       <Unit83>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSC_controls.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit83>
       <Unit84>
         <Filename Value="C:\lazarus\lcl\lresources.pp"/>
         <UnitName Value="LResources"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit84>
       <Unit85>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\typinfo.pp"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit85>
       <Unit86>
         <Filename Value="C:\lazarus\lcl\lmessages.pp"/>
         <UnitName Value="LMessages"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit86>
       <Unit87>
         <Filename Value="C:\lazarus\lcl\lclintf.pas"/>
         <UnitName Value="LCLIntf"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit87>
       <Unit88>
         <Filename Value="C:\lazarus\lcl\lclclasses.pp"/>
         <UnitName Value="LCLClasses"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit88>
       <Unit89>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="779"/>
         <CursorPos X="11" Y="792"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit89>
       <Unit90>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSRuntime.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="9385"/>
         <CursorPos X="61" Y="9392"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit90>
       <Unit91>
         <Filename Value="C:\lazarus\components\lazutils\lazutf8.pas"/>
         <UnitName Value="LazUTF8"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit91>
       <Unit92>
         <Filename Value="C:\lazarus\lcl\interfacebase.pp"/>
@@ -674,53 +673,53 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos X="3" Y="108"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit92>
       <Unit93>
         <Filename Value="..\..\..\Lib\UWSpellCheck.Hunspell.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="15"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit93>
       <Unit94>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\objpash.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="191"/>
         <CursorPos X="21" Y="202"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit94>
       <Unit95>
         <Filename Value="..\..\..\Lib\UWControls.Utils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="8"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit95>
       <Unit96>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\character.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="748"/>
         <CursorPos X="3" Y="750"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit96>
       <Unit97>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\unicodedata.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="199"/>
         <CursorPos X="14" Y="233"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit97>
       <Unit98>
         <Filename Value="..\..\..\Lib\UWSystem.Globalization.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit98>
       <Unit99>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\fgl.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="280"/>
         <CursorPos Y="290"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit99>
       <Unit100>
         <Filename Value="C:\lazarus\lcl\graphtype.pp"/>
@@ -728,7 +727,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="3" Y="33"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit100>
       <Unit101>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\packages\regexpr\src\regexpr.pas"/>
@@ -736,40 +735,40 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="637"/>
         <CursorPos X="10" Y="649"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit101>
       <Unit102>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="772"/>
         <CursorPos X="11" Y="781"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit102>
       <Unit103>
         <Filename Value="..\..\..\Lib\UWSystem.InetUtils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit103>
       <Unit104>
         <Filename Value="..\..\..\Lib\UWTranslateAPI.Google.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit104>
       <Unit105>
         <Filename Value="C:\Users\Aldo\AppData\Local\lazarus\onlinepackagemanager\packages\VirtualTreeView V5\Source\VirtualTrees.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3127"/>
         <CursorPos X="64" Y="3122"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit105>
       <Unit106>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\win\syswinh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="9"/>
         <CursorPos X="2" Y="17"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit106>
       <Unit107>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\rtl-objpas\src\inc\strutils.pp"/>
@@ -777,63 +776,63 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="24"/>
         <CursorPos X="20" Y="36"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit107>
       <Unit108>
         <Filename Value="..\..\..\Lib\UWSystem.FontUtils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit108>
       <Unit109>
         <Filename Value="..\..\..\External\PasLibVlc\source.vcl\PasLibVlcPlayerUnit.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2637"/>
         <CursorPos X="42" Y="2647"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit109>
       <Unit110>
         <Filename Value="C:\usr\share\lazarus\2.2.0\components\PascalScript\Source\uPSComponent.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit110>
       <Unit111>
         <Filename Value="C:\usr\share\lazarus\2.2.0\components\PascalScript\Source\uPSCompiler.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="76"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit111>
       <Unit112>
         <Filename Value="C:\usr\share\lazarus\2.2.0\components\PascalScript\Source\uPSRuntime.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="51" Y="9"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit112>
       <Unit113>
         <Filename Value="C:\usr\share\lazarus\2.2.0\components\PascalScript\Source\uPSUtils.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit113>
       <Unit114>
         <Filename Value="C:\usr\share\lazarus\2.2.0\components\PascalScript\Source\uPSC_dll.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="58"/>
         <CursorPos Y="158"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit114>
       <Unit115>
         <Filename Value="C:\usr\share\fpcsrc\3.2.2\rtl\inc\dynlibs.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="10" Y="31"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit115>
       <Unit116>
         <Filename Value="E:\URUWorks\Code\Lib\UWControls.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="-1"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit116>
       <Unit117>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\character.pas"/>
@@ -841,59 +840,61 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="792"/>
         <CursorPos X="39" Y="793"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit117>
       <Unit118>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysutils\sysencodingh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="15"/>
         <CursorPos X="3" Y="21"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit118>
       <Unit119>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="56" Y="91"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit119>
       <Unit120>
         <Filename Value="..\..\..\Lib\UWLazarus.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit120>
       <Unit121>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="50" Y="26"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit121>
       <Unit122>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\inc\systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="432"/>
         <CursorPos X="3" Y="439"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit122>
       <Unit123>
         <Filename Value="C:\lazarus\components\lazutils\fileutil.pas"/>
         <UnitName Value="FileUtil"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit123>
       <Unit124>
         <Filename Value="..\..\..\Lib\uwmediaengine.pas"/>
         <UnitName Value="UWMediaEngine"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit124>
       <Unit125>
         <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="607"/>
-        <CursorPos Y="624"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="26"/>
+        <CursorPos X="55" Y="32"/>
         <UsageCount Value="24"/>
+        <Loaded Value="True"/>
       </Unit125>
       <Unit126>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\fcl-xml\src\xmlconf.pp"/>
@@ -901,21 +902,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="81"/>
         <CursorPos X="47" Y="86"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit126>
       <Unit127>
         <Filename Value="..\..\..\Lib\UWImport.libmpv.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2"/>
         <CursorPos X="4" Y="8"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit127>
       <Unit128>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\fgl.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="116"/>
         <CursorPos X="7" Y="125"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit128>
       <Unit129>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\rtl-generics\src\generics.collections.pas"/>
@@ -923,7 +924,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <CursorPos X="3" Y="225"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit129>
       <Unit130>
         <Filename Value="C:\lazarus\components\lazutils\graphtype.pp"/>
@@ -931,14 +932,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="40"/>
         <CursorPos X="3" Y="42"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit130>
       <Unit131>
         <Filename Value="C:\lazarus\lcl\interfaces\win32\win32listsl.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="145"/>
         <CursorPos X="13" Y="154"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit131>
       <Unit132>
         <Filename Value="C:\lazarus\lcl\buttons.pp"/>
@@ -946,7 +947,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="390"/>
         <CursorPos X="14" Y="396"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit132>
       <Unit133>
         <Filename Value="..\..\..\Lib\UWMediaEngine.Thread.pas"/>
@@ -958,34 +959,34 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <CursorPos X="3" Y="31"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit134>
       <Unit135>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysutils\diskh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="16"/>
         <CursorPos X="14" Y="23"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit135>
       <Unit136>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\win\syswinh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
         <CursorPos X="2" Y="17"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit136>
       <Unit137>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.AdvancedSubtitles.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit137>
       <Unit138>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.WebVTT.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit138>
       <Unit139>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\win64\classes.pp"/>
@@ -993,14 +994,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="40"/>
         <CursorPos Y="40"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit139>
       <Unit140>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\classes\classes.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="54"/>
         <CursorPos X="27" Y="64"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit140>
       <Unit141>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\classes\stringl.inc"/>
@@ -1008,33 +1009,33 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="1592"/>
         <CursorPos X="14" Y="1605"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit141>
       <Unit142>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.CheetahCaption.Types.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit142>
       <Unit143>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.CheetahCaption.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="57" Y="28"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit143>
       <Unit144>
         <Filename Value="..\..\..\Lib\UWGlossary.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit144>
       <Unit145>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\sysutils\sysinth.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="59"/>
         <CursorPos X="3" Y="68"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit145>
       <Unit146>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\rtl\objpas\math.pp"/>
@@ -1042,265 +1043,265 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="184"/>
         <CursorPos X="10" Y="196"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit146>
       <Unit147>
         <Filename Value="..\..\..\Lib\uwsystem.darktheme.pas"/>
         <UnitName Value="UWSystem.DarkTheme"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="3"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit147>
       <Unit148>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\finah.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="27"/>
         <CursorPos X="10" Y="43"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit148>
       <Unit149>
         <Filename Value="..\..\..\Lib\UWSubtitles.OCR.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="16"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit149>
       <Unit150>
         <Filename Value="..\..\..\Lib\UWTranslateAPI.Microsoft.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit150>
       <Unit151>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\threadh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="167"/>
         <CursorPos X="11" Y="182"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit151>
       <Unit152>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MicroDVD.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="66"/>
         <CursorPos Y="83"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit152>
       <Unit153>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\fgl.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="921"/>
         <CursorPos Y="930"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit153>
       <Unit154>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.DRTIC.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit154>
       <Unit155>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.EBU.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="57" Y="28"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit155>
       <Unit156>
         <Filename Value="..\..\..\Lib\UWSystem.Files.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="32" Y="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit156>
       <Unit157>
         <Filename Value="..\..\..\Lib\UWSystem.FileUtils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="47"/>
         <CursorPos Y="52"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit157>
       <Unit158>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.Captions32.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit158>
       <Unit159>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.CaptionsInc.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit159>
       <Unit160>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.Cheetah.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="57" Y="28"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit160>
       <Unit161>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.Cavena890.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="55" Y="28"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit161>
       <Unit162>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.CPC600.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit162>
       <Unit163>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.DKS.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit163>
       <Unit164>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.DVDJunior.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="21"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit164>
       <Unit165>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.DVDSubtitleSystem.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit165>
       <Unit166>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.DVDSubtitle.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="48" Y="28"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit166>
       <Unit167>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.FABSubtitler.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="3" Y="29"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit167>
       <Unit168>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.GPACTTXT.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="13" Y="26"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit168>
       <Unit169>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.NetflixTimedText.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit169>
       <Unit170>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.IAuthor.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit170>
       <Unit171>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.InscriberCG.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit171>
       <Unit172>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.JACOSub.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit172>
       <Unit173>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.KaraokeLyricsLRC.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit173>
       <Unit174>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.KaraokeLyricsVKT.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit174>
       <Unit175>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MacDVDStudioPro.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="94"/>
         <CursorPos X="7" Y="124"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit175>
       <Unit176>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MacSUB.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="26" Y="25"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit176>
       <Unit177>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MPlayer.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="146"/>
         <CursorPos X="21" Y="156"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit177>
       <Unit178>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.MPlayer2.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="46" Y="26"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit178>
       <Unit179>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.SBV.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="48" Y="26"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit179>
       <Unit180>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.Sofni.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="48" Y="26"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit180>
       <Unit181>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.STL.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="27"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit181>
       <Unit182>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.Formats.ITunesTimedText.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
         <CursorPos Y="20"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit182>
       <Unit183>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\fcl-json\src\jsonreader.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="58"/>
         <CursorPos X="45" Y="62"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit183>
       <Unit184>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\fcl-json\src\jsonscanner.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2"/>
         <CursorPos X="6" Y="19"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit184>
       <Unit185>
         <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
@@ -1308,22 +1309,38 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="225"/>
         <CursorPos X="14" Y="296"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit185>
       <Unit186>
         <Filename Value="..\..\..\Lib\UWlibMPV.Client.pas"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit186>
       <Unit187>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\ctypes.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="83"/>
         <CursorPos X="3" Y="92"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit187>
+      <Unit188>
+        <Filename Value="..\..\..\Lib\UWlibMPV.Render.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="12"/>
+      </Unit188>
+      <Unit189>
+        <Filename Value="..\..\..\Lib\UWlibMPV.Render_gl.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit189>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="1">
+      <Position1>
+        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
+        <Caret Line="87" TopLine="76"/>
+      </Position1>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>

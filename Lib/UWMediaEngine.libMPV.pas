@@ -29,7 +29,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, UWMediaEngine, UWMediaEngine.Thread,
-  UWlibMPV.Client, fpjson, jsonparser
+  UWlibMPV.Client, UWlibMPV.Render, UWlibMPV.Render_gl
   {$IFDEF LINUX}
   , gtk2, gdk2x
   {$ENDIF};
@@ -82,6 +82,8 @@ type
 // -----------------------------------------------------------------------------
 
 implementation
+
+uses fpjson, jsonparser;
 
 const
    MPVMAXVOLUME = 100;
