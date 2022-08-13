@@ -1929,7 +1929,7 @@ begin
   FMin := Min;
   FMax := Max;
   DrawBuffer;
-  Paint;
+  Invalidate;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1938,7 +1938,7 @@ procedure TUWCPSBar.SetCPS(const CPS: Double);
 begin
   FValue := CPS;
   DrawBuffer;
-  Paint;
+  Invalidate;
 end;
 
 // -----------------------------------------------------------------------------

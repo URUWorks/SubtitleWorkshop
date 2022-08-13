@@ -20,12 +20,13 @@ unit UWMediaEngine;
 // -----------------------------------------------------------------------------
 
 {$mode ObjFPC}{$H+}
-{$DEFINE USETIMER}
+{$I UWMediaEngine.inc}
 
 interface
 
 uses
-  Classes, Controls, SysUtils, LazFileUtils, ExtCtrls;
+  Classes, Controls, SysUtils, LazFileUtils, ExtCtrls
+  {$IFDEF USEOPENGL}, OpenGLContext{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -58,6 +59,9 @@ type
     FErrorCode   : Integer; // Latest error code
     {$IFDEF USETIMER}
     FTimer       : TTimer;
+    {$ENDIF}
+    {$IFDEF USEOPENGL}
+    FOpenGlControl : TOpenGlControl;
     {$ENDIF}
     FOnCommand   : TUWMediaEngineOnCommand;
     FFileName    : String;
@@ -142,6 +146,11 @@ begin
   FErrorCode := 0;
   FFileName := '';
 
+  {$IFDEF USEOPENGL}
+  FOpenGlControl := TOpenGlControl.Create(FParent);
+  FOpenGlControl.DoubleBuffered := True;
+  {$ENDIF}
+
   SetLength(TrackList, 0);
   FInitialized := False;
 end;
@@ -152,6 +161,9 @@ destructor TUWMediaEngine.Destroy;
 begin
   {$IFDEF USETIMER}
   FTimer.Free;
+  {$ENDIF}
+  {$IFDEF USEOPENGL}
+  FOpenGlControl.Free;
   {$ENDIF}
   FParent := NIL;
   FInitialized := False;

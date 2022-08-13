@@ -23,13 +23,14 @@ unit UWMediaEngine.libMPV;
 // -----------------------------------------------------------------------------
 
 {$mode ObjFPC}{$H+}
-{$DEFINE USETIMER}
+{$I UWMediaEngine.inc}
 
 interface
 
 uses
   Classes, Controls, SysUtils, UWMediaEngine, UWMediaEngine.Thread,
-  UWlibMPV.Client, UWlibMPV.Render, UWlibMPV.Render_gl
+  UWlibMPV.Client {$IFDEF USEOPENGL}, UWlibMPV.Render, UWlibMPV.Render_gl,
+  gl, glext{$ENDIF}
   {$IFDEF LINUX}
   , gtk2, gdk2x
   {$ENDIF};
@@ -90,7 +91,17 @@ const
 
 // -----------------------------------------------------------------------------
 
-procedure LibMPVEvent(Data: Pointer); cdecl;
+{$IFDEF USEOPENGL}
+function Get_Proc_Address(ctx: Pointer; Name: PChar): Pointer; cdecl;
+begin
+  Result := GetProcAddress(LibGL, Name);
+  if Result = NIL then Result := wglGetProcAddress(Name);
+end;
+{$ENDIF}
+
+// -----------------------------------------------------------------------------
+
+procedure LibMPV_Event(Data: Pointer); cdecl;
 begin
   if (Data = NIL) then
     Exit
@@ -182,7 +193,7 @@ begin
 
   FThread := TUWMediaEngineThread.Create;
   FThread.OnCommand := @ReceivedCommand;
-  mpv_set_wakeup_callback(FHandle^, @LibMPVEvent, Self);
+  mpv_set_wakeup_callback(FHandle^, @LibMPV_Event, Self);
 
   Initialized := True;
   Result := Initialized;

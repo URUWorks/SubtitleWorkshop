@@ -2138,7 +2138,7 @@ begin
     FindClose(sr);
     if (re = 0) then
     begin
-      Result := sr.Name;
+      Result := pathStr + PathDelim + sr.Name;
       Exit;
     end;
   end;
