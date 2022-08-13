@@ -26,6 +26,8 @@ Have a try, and you'll forget the rest!
 
 During around twenty years of the development of URUWorks programs we haven't received any economic help. Nowadays, the development of these programs takes us time, Internet and software costs. We firmly believe in the free software, and think that all the software for personal use must be free. It is for this reason that ViPlay and Subtitle Workshop will never be shareware programs and always will be able to be used by every person who likes them or finds them useful. 
 
-We ask you to download our software and test it. If you like it and think we deserve your help to keep improving these programs, we would really appreciate if you donated. We remember you that donations are completely voluntary. You will not receive less support or less consideration if you can't afford to donate. 
+We ask you to download our software and test it. If you like it and think we deserve your help to keep improving these programs, we would really appreciate if you donated. 
+
+We remember you that donations are completely voluntary, you will not receive less support or less consideration if you can't afford to donate. 
  
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Subtitle+Workshop&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
