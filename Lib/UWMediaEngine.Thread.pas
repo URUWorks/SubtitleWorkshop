@@ -86,7 +86,7 @@ begin
   while not Terminated do
   begin
     RtlEventWaitFor(Event);
-    if Assigned(FOwner.FOnCommand) and not Terminated then Synchronize(@DoEvent);
+    if Assigned(FOwner.FOnCommand) and not Terminated then Queue(@DoEvent); //Synchronize(@DoEvent);
     RTLEventResetEvent(Event);
   end;
 end;

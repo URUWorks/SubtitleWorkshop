@@ -29,9 +29,9 @@ uses ctypes;
 // -----------------------------------------------------------------------------
 
 const
-  {$IFDEF WINDOWS}External_Library = 'mpv-2.dll';{$ENDIF}
-  {$IFDEF LINUX}External_Library = 'libmpv.so';{$ENDIF}
-  {$IFDEF DARWIN}External_Library = 'libmpv.dylib';{$ENDIF}
+  {$IFDEF WINDOWS}LIBMPV_DLL_NAME = 'mpv-2.dll';{$ENDIF}
+  {$IFDEF LINUX}LIBMPV_DLL_NAME = 'libmpv.so';{$ENDIF}
+  {$IFDEF DARWIN}LIBMPV_DLL_NAME = 'libmpv.dylib';{$ENDIF}
 
 type
   Pmpv_handle = ^mpv_handle;
@@ -287,7 +287,8 @@ type
 
   type
     mpv_error = clong;
-    const
+
+  const
   {*
    * List of error codes than can be returned by API functions. 0 and positive
    * return values always mean success, negative values are always errors.
@@ -455,7 +456,7 @@ type
    * @param data A valid pointer returned by the API, or NULL.
     }
 
-  mpv_free : procedure(data:pointer);cdecl;
+  mpv_free : procedure(var data:pointer);cdecl;
 
   {*
    * Return the name of this client handle. Every client has its own unique
@@ -1042,7 +1043,7 @@ type
    * @return error code (the result parameter is not set on error)
     }
 
-  mpv_command_node : function(var ctx:mpv_handle; var args:mpv_node; result:mpv_node):cint;cdecl;
+  mpv_command_node : function(var ctx:mpv_handle; var args:mpv_node; var result:mpv_node):cint;cdecl;
 
   {*
    * This is essentially identical to mpv_command() but it also returns a result.
@@ -1109,7 +1110,7 @@ type
    * @return error code (if parsing or queuing the command fails)
     }
 
-  mpv_command_node_async : function(var ctx:mpv_handle; reply_userdata:uint64; args:mpv_node):cint;cdecl;
+  mpv_command_node_async : function(var ctx:mpv_handle; reply_userdata:uint64; var args:mpv_node):cint;cdecl;
 
   {*
    * Signal to all async requests with the matching ID to abort. This affects
@@ -1184,7 +1185,7 @@ type
    * This is like calling mpv_set_property() with MPV_FORMAT_STRING.
     }
 
-  mpv_set_property_string : function(var ctx:mpv_handle; name:Pchar; data:Pchar):longint;cdecl;
+  mpv_set_property_string : function(var ctx:mpv_handle; const name:Pchar; const data:Pchar):longint;cdecl;
 
   {*
    * Set a property asynchronously. You will receive the result of the operation
@@ -1202,7 +1203,7 @@ type
    * @return error code if sending the request failed
     }
 
-  mpv_set_property_async : function(var ctx:mpv_handle; reply_userdata:cuint64; name:Pchar; format:mpv_format; data:pointer):longint;cdecl;
+  mpv_set_property_async : function(var ctx:mpv_handle; reply_userdata:cuint64; name:Pchar; format:mpv_format; var data:pointer):longint;cdecl;
 
   {*
    * Read the value of the given property.
@@ -1339,7 +1340,8 @@ type
 
   type
     mpv_event_id =  Longint;
-    const
+
+  const
   {*
        * Nothing happened. Happens on timeouts or sporadic wakeups.
         }
@@ -1974,7 +1976,7 @@ var
    * @return error code (usually fails only on OOM)
     }
 
-  mpv_hook_add : function(var ctx:mpv_handle; reply_userdata:uint64; name:Pchar; priority:integer):integer;cdecl;
+  mpv_hook_add : function(var ctx:mpv_handle; reply_userdata:uint64; const name:Pchar; priority:integer):integer;cdecl;
 
   {*
    * Respond to a MPV_EVENT_HOOK event. You must call this after you have handled
@@ -2091,12 +2093,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{$IFDEF LINUX}
+{$IFDEF UNIX}
 function libmpv_GetInstallPath: String;
-// Linux searches a library in the paths of the environment variable
-// LD_LIBRARY_PATH, then in /lib, then /usr/lib and finally the paths of
-// /etc/ld.so.conf.
 const
+  {$IFDEF LINUX}
   pathLst : array[0..5] of string = (
     '/usr/lib',
     '/lib',
@@ -2105,44 +2105,13 @@ const
     '/usr/lib64',
     '/usr/lib/x86_64-linux-gnu'
   );
-var
-  pathIdx : Integer;
-  pathStr : string;
-  sr      : TSearchRec;
-  re      : Integer;
-begin
-  for pathIdx := Low(pathLst) to High(pathLst) do
-  begin
-    pathStr := pathLst[pathIdx];
-    if not DirectoryExists(pathStr) then continue;
-    // look for .so
-    if FileExists(pathStr + PathDelim + External_Library) then
-    begin
-      Result := pathStr + PathDelim + External_Library;
-      Exit;
-    end;
-    // look for .so.x
-    re := SysUtils.FindFirst(pathStr + PathDelim + External_Library + '.*', faAnyFile, sr);
-    FindClose(sr);
-    if (re = 0) then
-    begin
-      Result := sr.Name;
-      Exit;
-    end;
-  end;
-  Result := '';
-end;
-{$ENDIF}
-
-{$IFDEF DARWIN}
-function libmpv_GetInstallPath: String;
-const
+  {$ELSE}
   pathLst : array[0..2] of string = (
     '/usr/local/lib',
     '/Desktop/mpv.app/Contents/MacOS',
     '/Applications/mpv.app/Contents/MacOS'
-
-  );
+    );
+  {$ENDIF}
 var
   pathIdx : Integer;
   pathStr : string;
@@ -2153,14 +2122,19 @@ begin
   begin
     pathStr := pathLst[pathIdx];
     if not DirectoryExists(pathStr) then continue;
-    // look for .dylib
-    if FileExists(pathStr + PathDelim + External_Library) then
+    // look for lib
+    if FileExists(pathStr + PathDelim + LIBMPV_DLL_NAME) then
     begin
-      Result := pathStr + PathDelim + External_Library;
+      Result := pathStr + PathDelim + LIBMPV_DLL_NAME;
       Exit;
     end;
+    {$IFDEF LINUX}
+    // look for .so.x
+    re := SysUtils.FindFirst(pathStr + PathDelim + LIBMPV_DLL_NAME + '.*', faAnyFile, sr);
+    {$ELSE}
     // look for x.dylib
-    re := SysUtils.FindFirst(pathStr + PathDelim + ChangeFileExt(External_Library, '') + '.*.dylib', faAnyFile, sr);
+    re := SysUtils.FindFirst(pathStr + PathDelim + ChangeFileExt(LIBMPV_DLL_NAME, '') + '.*.dylib', faAnyFile, sr);
+    {$ENDIF}
     FindClose(sr);
     if (re = 0) then
     begin
@@ -2226,7 +2200,7 @@ end;
 
 function Load_libMPV: Integer;
 
-  function LoadDLL(const ALib: PChar): Boolean;
+  function LoadDLL(const ALib: String): Boolean;
   begin
     hLib   := LoadLibrary(ALib);
     Result := (hLib <> 0);
@@ -2238,7 +2212,7 @@ begin
   setlocale(1, 'C');
   {$ENDIF}
 
-  if not LoadDLL({$IFDEF WINDOWS}External_library{$ELSE}PChar(libmpv_GetInstallPath){$ENDIF}) then
+  if not LoadDLL({$IFDEF WINDOWS}LIBMPV_DLL_NAME{$ELSE}libmpv_GetInstallPath{$ENDIF}) then
   begin
     {$IFDEF WINDOWS}
     if not LoadDLL('mpv-1.dll') then Exit;

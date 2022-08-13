@@ -430,7 +430,6 @@ var
 begin
   if not FileExists(FileName) or not Assigned(Form) then Exit;
 
-  Randomize;
   rndTip := Random(3)+1;
 
   FileStream := TFileStream.Create(FileName, fmOpenRead);

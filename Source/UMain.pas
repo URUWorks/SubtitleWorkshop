@@ -671,6 +671,7 @@ const
 var
   s: String;
 begin
+  Randomize; // used for tips
   DoubleBuffered := True;
 
   // Initialize SubtitleAPI

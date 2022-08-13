@@ -29,7 +29,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, UWMediaEngine, UWMediaEngine.Thread,
-  UWlibMPV.Client, UWSystem.TimeUtils, fpjson, jsonparser
+  UWlibMPV.Client, fpjson, jsonparser
   {$IFDEF LINUX}
   , gtk2, gdk2x
   {$ENDIF};

@@ -121,6 +121,7 @@ begin
         FinalTime := FinalTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 22, 2)), FPS);
 
       Text := ReplaceString(Copy(SubtitleFile[i], 25, Length(SubtitleFile[i])), '<P>', LineEnding);
+      Text := ReplaceString(Text, '|', LineEnding);
 
       if (InitialTime > -1) and (FinalTime > -1) then
         Subtitles.Add(InitialTime, FinalTime, Text, '');
