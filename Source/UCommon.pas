@@ -29,7 +29,7 @@ interface
 uses
   SysUtils, Classes, Types, VirtualTrees, Graphics, StdCtrls, Forms, ActnList,
   Menus, LCLProc, fpjson, jsonparser, LCLIntf, XMLConf, UTypes, UWControls,
-  UWSubtitleAPI, LazUTF8, FileUtil, Controls
+  UWSubtitleAPI, LazUTF8, FileUtil, Controls, ComCtrls
   {$IFDEF WINDOWS}, registry{$ENDIF};
 
 function GetCustomFolderPath(const SubFolder: String): String;
@@ -573,6 +573,39 @@ begin
           else if (Comp is TCheckBox) then
           begin
             with (Comp as TCheckBox) do
+            begin
+              Caption := s;
+              if desc <> '' then
+                Hint := s + sLineBreak + sLineBreak + desc
+              //else
+                //Hint := s;
+            end;
+          end
+          else if (Comp is TRadioButton) then
+          begin
+            with (Comp as TRadioButton) do
+            begin
+              Caption := s;
+              if desc <> '' then
+                Hint := s + sLineBreak + sLineBreak + desc
+              //else
+                //Hint := s;
+            end;
+          end
+          else if (Comp is TTabSheet) then
+          begin
+            with (Comp as TTabSheet) do
+            begin
+              Caption := s;
+              if desc <> '' then
+                Hint := s + sLineBreak + sLineBreak + desc
+              //else
+                //Hint := s;
+            end;
+          end
+          else if (Comp is TGroupBox) then
+          begin
+            with (Comp as TGroupBox) do
             begin
               Caption := s;
               if desc <> '' then
@@ -1738,7 +1771,7 @@ begin
   else
     s2 := Copy(Memo.Text, Memo.SelStart+1, Length(Memo.Text)-Memo.SelStart);
   Memo.Text := Format('%s{\%s1}%s{\%s0}%s', [s1, Tag, Memo.SelText, Tag, s2]);
-  Memo.SelStart := i+3;
+  Memo.SelStart := i+5;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1759,7 +1792,7 @@ begin
   else
     s2 := Copy(Memo.Text, Memo.SelStart+1, Length(Memo.Text)-Memo.SelStart);
   Memo.Text := Format('%s{\%s&%s&}%s{\%s}%s', [s1, swt_Color, HexColor, Memo.SelText, swt_Color, s2]);
-  Memo.SelStart := i+11;
+  Memo.SelStart := i+12;
 end;
 
 // -----------------------------------------------------------------------------

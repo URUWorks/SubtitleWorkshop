@@ -164,6 +164,7 @@ begin
   numTimeMS.Value      := 1000;
 
   tedDelay.Width := frmMain.tedInitial.Width;
+  btnMoreLess.Caption := strMore;
 end;
 
 // -----------------------------------------------------------------------------

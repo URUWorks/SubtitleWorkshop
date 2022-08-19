@@ -848,18 +848,22 @@ begin
   numBottom.Left := numRight.Left+numRight.Width + mTed;
 
   lyoEditorLeftPanel.Width := cboStyle.Width+spdInitial.Width+(mTed*3);
+  tedInitial.Left  := 25;
   tedInitial.Width := cboStyle.Width;
-  tedInitial.Top  := 0;
-  spdInitial.Top  := tedInitial.Top;
+  tedInitial.Top   := 0;
+  spdInitial.Top   := tedInitial.Top;
+  tedFinal.Left  := tedInitial.Left;
   tedFinal.Width := cboStyle.Width;
-  tedFinal.Top    := tedInitial.Top + tedInitial.Height + mTed;
-  spdFinal.Top    := tedFinal.Top;
+  tedFinal.Top   := tedInitial.Top + tedInitial.Height + mTed;
+  spdFinal.Top   := tedFinal.Top;
+  tedDuration.Left  := tedInitial.Left;
   tedDuration.Width := cboStyle.Width;
-  tedDuration.Top := tedFinal.Top + tedInitial.Height + mTed;
-  spdDuration.Top := tedDuration.Top;
+  tedDuration.Top   := tedFinal.Top + tedInitial.Height + mTed;
+  spdDuration.Top   := tedDuration.Top;
+  tedPause.Left  := tedInitial.Left;
   tedPause.Width := cboStyle.Width;
-  tedPause.Top    := tedDuration.Top + tedInitial.Height + mTed;
-  spdPause.Top    := tedPause.Top;
+  tedPause.Top   := tedDuration.Top + tedInitial.Height + mTed;
+  spdPause.Top   := tedPause.Top;
 
   cpsText.Height := 6;
   cpsText.Top := mmoText.Top+mmoText.Height;
