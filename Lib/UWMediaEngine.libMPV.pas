@@ -43,13 +43,13 @@ type
 
   TUWLibMPV = class(TUWMediaEngine)
   private
-    FHandle: Pmpv_handle;
+    FMPV_HANDLE: Pmpv_handle;
     FText: String;
     function GetBoolProperty(const APropertyName: String): Boolean;
     procedure SetBoolProperty(const APropertyName:string; const AValue: Boolean);
     procedure SetStringProperty(const APropertyName, AValue: String);
   protected
-    FThread: TUWMediaEngineThread;
+    FEvent: TUWMediaEngineEvent;
     function GetVolume: Integer; override;
     procedure SetVolume(const AValue: Integer); override;
     function GetMediaPos: Integer; override;
@@ -58,9 +58,9 @@ type
     function DoPlay(const AFileName: String; const APos: Integer = 0): Boolean; override;
   public
     class function GetMediaEngineName: String; override;
-    procedure PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer = 0); override;
-    procedure ReceivedCommand(Sender: TObject; ACommand: TUWMediaEngineCommand; AParam: Integer = 0); override;
-    constructor Create(const AParent: TWinControl; AOnCommand: TUWMediaEngineOnCommand); override;
+    procedure PushEvent(Sender: TObject); override;
+    procedure ReceivedEvent(Sender: TObject); override;
+    constructor Create(const AParent: TWinControl); override;
     destructor Destroy; override;
     procedure UnInitialize; override;
     function Initialize: Boolean; override;
@@ -87,12 +87,12 @@ implementation
 uses fpjson, jsonparser;
 
 const
-   MPVMAXVOLUME = 100;
+   LIBMPV_MAX_VOLUME = 100;
 
 // -----------------------------------------------------------------------------
 
 {$IFDEF USEOPENGL}
-function Get_Proc_Address(ctx: Pointer; Name: PChar): Pointer; cdecl;
+function GetProcAddress_OPENGL(ctx: Pointer; Name: PChar): Pointer; cdecl;
 begin
   Result := GetProcAddress(LibGL, Name);
   if Result = NIL then Result := wglGetProcAddress(Name);
@@ -101,19 +101,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LibMPV_Event(Data: Pointer); cdecl;
+procedure LIBMPV_EVENT(Data: Pointer); cdecl;
 begin
   if (Data = NIL) then
     Exit
   else
-    TUWLibMPV(Data).PostCommand(mecUser, 1);
+    TUWLibMPV(Data).PushEvent(TUWLibMPV(Data));
 end;
 
 // -----------------------------------------------------------------------------
 
-constructor TUWLibMPV.Create(const AParent: TWinControl; AOnCommand: TUWMediaEngineOnCommand);
+constructor TUWLibMPV.Create(const AParent: TWinControl);
 begin
-  inherited Create(AParent, AOnCommand);
+  inherited Create(AParent);
 
   ErrorCode := Load_libMPV;
 end;
@@ -147,9 +147,9 @@ end;
 procedure TUWLibMPV.UnInitialize;
 begin
   FText := '';
-  if Assigned(mpv_set_wakeup_callback) and Assigned(FHandle) then mpv_set_wakeup_callback(FHandle^, NIL, Self);
-  if Assigned(FThread) then FThread.Free;
-  if Assigned(mpv_terminate_destroy) and Assigned(FHandle) then mpv_terminate_destroy(FHandle^);
+  if Assigned(mpv_set_wakeup_callback) and Assigned(FMPV_HANDLE) then mpv_set_wakeup_callback(FMPV_HANDLE^, NIL, Self);
+  if Assigned(FEvent) then FEvent.Free;
+  if Assigned(mpv_terminate_destroy) and Assigned(FMPV_HANDLE) then mpv_terminate_destroy(FMPV_HANDLE^);
 end;
 
 // -----------------------------------------------------------------------------
@@ -162,38 +162,38 @@ begin
   FText  := '';
 
   if not Assigned(mpv_create) then Exit;
-  FHandle := mpv_create();
-  if not Assigned(FHandle) then Exit;
+  FMPV_HANDLE := mpv_create();
+  if not Assigned(FMPV_HANDLE) then Exit;
 
-  //mpv_set_option_string(FHandle^, 'hwdec', 'auto'); // enable best hw decoder
-  mpv_set_option_string(FHandle^, 'keep-open', 'always'); // don't auto close video
-  mpv_set_option_string(FHandle^, 'sub', 'no'); // don't load subtitles
+  //mpv_set_option_string(FMPV_HANDLE^, 'hwdec', 'auto'); // enable best hw decoder
+  mpv_set_option_string(FMPV_HANDLE^, 'keep-open', 'always'); // don't auto close video
+  mpv_set_option_string(FMPV_HANDLE^, 'sub', 'no'); // don't load subtitles
 
-  mpv_set_option_string(FHandle^, 'pause', ''); // Start the player in paused state.
+  mpv_set_option_string(FMPV_HANDLE^, 'pause', ''); // Start the player in paused state.
 
   {$IFDEF LINUX}
   hwnd := GDK_WINDOW_XWINDOW(PGtkWidget(PtrUInt(Parent.Handle))^.window);
   {$ELSE}
   hwnd := Parent.Handle;
   {$ENDIF}
-  mpv_set_option(FHandle^, 'wid', MPV_FORMAT_INT64, @hwnd); // window parent
+  mpv_set_option(FMPV_HANDLE^, 'wid', MPV_FORMAT_INT64, @hwnd); // window parent
 
-  //  mpv_set_option_string(FHandle^, 'osd-color', '#FF0000');
-  mpv_set_option_string(FHandle^, 'osd-duration', '10000');
-  mpv_set_option_string(FHandle^, 'osd-align-x', 'center');
-  mpv_set_option_string(FHandle^, 'osd-align-y', 'bottom');
-  //mpv_set_option_string(FHandle^, 'log-file', 'zmpv.log');
+  //  mpv_set_option_string(FMPV_HANDLE^, 'osd-color', '#FF0000');
+  mpv_set_option_string(FMPV_HANDLE^, 'osd-duration', '10000');
+  mpv_set_option_string(FMPV_HANDLE^, 'osd-align-x', 'center');
+  mpv_set_option_string(FMPV_HANDLE^, 'osd-align-y', 'bottom');
+  //mpv_set_option_string(FMPV_HANDLE^, 'log-file', 'zmpv.log');
 
   {$IFNDEF USETIMER}
-  mpv_observe_property(FHandle^, 0, 'playback-time', MPV_FORMAT_INT64);
+  mpv_observe_property(FMPV_HANDLE^, 0, 'playback-time', MPV_FORMAT_INT64);
   {$ENDIF}
 
-  mpv_initialize(FHandle^);
-  mpv_request_log_messages(FHandle^, 'no');
+  mpv_initialize(FMPV_HANDLE^);
+  mpv_request_log_messages(FMPV_HANDLE^, 'no');
 
-  FThread := TUWMediaEngineThread.Create;
-  FThread.OnCommand := @ReceivedCommand;
-  mpv_set_wakeup_callback(FHandle^, @LibMPV_Event, Self);
+  FEvent := TUWMediaEngineEvent.Create;
+  FEvent.OnEvent := @ReceivedEvent;
+  mpv_set_wakeup_callback(FMPV_HANDLE^, @LIBMPV_EVENT, Self);
 
   Initialized := True;
   Result := Initialized;
@@ -219,7 +219,7 @@ var
   i: Integer;
   sKind: String;
 begin
-  sList := mpv_get_property_string(FHandle^, 'track-list');
+  sList := mpv_get_property_string(FMPV_HANDLE^, 'track-list');
   Data := TJSONArray(GetJSON(sList));
   SetLength(TrackList, Data.Count);
   for i := 0 to Data.Count-1 do
@@ -272,7 +272,7 @@ begin
 //  args[2]   := 'start';
 //  args[3]   := PChar(TimeToString(APos, 'hh:mm:ss.zzz'));
   args[2]   := NIL;
-  ErrorCode := mpv_command(FHandle^, PPChar(@args[0]));
+  ErrorCode := mpv_command(FMPV_HANDLE^, PPChar(@args[0]));
 
   Result := (ErrorCode = MPV_ERROR_SUCCESS);
   if Result and (APos <> 0) then
@@ -291,7 +291,7 @@ begin
   Result := 0;
   if not Initialized then Exit;
 
-  Result := mpv_get_property(FHandle^, 'duration', MPV_FORMAT_DOUBLE, @dur);
+  Result := mpv_get_property(FMPV_HANDLE^, 'duration', MPV_FORMAT_DOUBLE, @dur);
 
   if Result = MPV_ERROR_SUCCESS then
     Result := Trunc(dur * 1000)
@@ -308,7 +308,7 @@ begin
   Result := 0;
   if not Initialized then Exit;
 
-  Result := mpv_get_property(FHandle^, 'time-pos', MPV_FORMAT_DOUBLE, @pos);
+  Result := mpv_get_property(FMPV_HANDLE^, 'time-pos', MPV_FORMAT_DOUBLE, @pos);
 
   if Result = MPV_ERROR_SUCCESS then
     Result := Trunc(pos * 1000)
@@ -325,84 +325,68 @@ begin
   if not Initialized then Exit;
 
   pos := AValue / 1000;
-  mpv_set_property(FHandle^, 'time-pos', MPV_FORMAT_DOUBLE, @pos);
+  mpv_set_property(FMPV_HANDLE^, 'time-pos', MPV_FORMAT_DOUBLE, @pos);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWLibMPV.PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer = 0);
+procedure TUWLibMPV.PushEvent(Sender: TObject);
 begin
-  FThread.PostCommand(ACommand, AParam);
+  FEvent.PushEvent;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWLibMPV.ReceivedCommand(Sender: TObject; ACommand: TUWMediaEngineCommand; AParam: Integer = 0);
+procedure TUWLibMPV.ReceivedEvent(Sender: TObject);
 var
   Event: Pmpv_event;
 begin
-  if (ACommand = mecUser) and (AParam = 1) then
+  Event := mpv_wait_event(FMPV_HANDLE^, 0);
+  while Event^.event_id <> MPV_EVENT_NONE do
   begin
-    Event := mpv_wait_event(FHandle^, 0);
-    while Event^.event_id <> MPV_EVENT_NONE do
-    begin
-      case (Event^.event_id) of
-        MPV_EVENT_START_FILE: begin
-                                ReceivedCommand(Self, mecLoading, 0);
-                                //Break;
-                              end;
+    case (Event^.event_id) of
+      MPV_EVENT_START_FILE: if Assigned(OnStartFile) then OnStartFile(Sender);
 
-        MPV_EVENT_FILE_LOADED: begin
-                                 LoadTracks;
-                                 State := mesPause;
-                                 {$IFDEF USETIMER}
-                                 Timer.Enabled := True;
-                                 {$ENDIF}
-                                 ReceivedCommand(Self, mecLoaded, 0);
-                                 //Break;
-                               end;
+      MPV_EVENT_FILE_LOADED: begin
+                               LoadTracks;
+                               State := mesPause;
+                               {$IFDEF USETIMER}
+                               Timer.Enabled := True;
+                               {$ENDIF}
+                               if Assigned(OnFileLoaded) then OnFileLoaded(Sender);
+                             end;
 
-        MPV_EVENT_SEEK: begin
-                          ReceivedCommand(Self, mecSeek, GetMediaPos);
-                          //Break;
-                        end;
+      MPV_EVENT_SEEK: if Assigned(OnSeek) then OnSeek(Sender, GetMediaPos);
 
-        MPV_EVENT_END_FILE: begin
-                              State := mesEnd;
-                              {$IFDEF USETIMER}
-                              Timer.Enabled := False;
-                              {$ENDIF}
-                              ReceivedCommand(Self, mecEnded, 0);
-                              //Break;
-                            end;
+      MPV_EVENT_END_FILE: begin
+                            State := mesEnd;
+                            {$IFDEF USETIMER}
+                            Timer.Enabled := False;
+                            {$ENDIF}
+                            if Assigned(OnEndFile) then OnEndFile(Sender);
+                          end;
 
-        MPV_EVENT_AUDIO_RECONFIG: begin
-                                    LoadTracks;
-                                    ReceivedCommand(Self, mecTracks, 0);
-                                    //Break;
-                                  end;
-        {$IFNDEF USETIMER}
-        MPV_EVENT_PROPERTY_CHANGE: if (Pmpv_event_property(Event^.Data)^.Name = 'playback-time') and (Pmpv_event_property(Event^.Data)^.format = MPV_FORMAT_INT64) then
-                                   begin
-                                     //ReceivedCommand(Self, mecTimeChanged, Integer(Pmpv_event_property(Event^.Data)^.data));
-                                     ReceivedCommand(Self, mecTimeChanged, GetMediaPos);
-                                     //Break;
-                                   end;
-                                  {if ((Pmpv_event_property(Event^.Data)^.Name = 'aid') or
-                                     (Pmpv_event_property(Event^.Data)^.Name = 'vid')) and
-                                     (Pmpv_event_property(Event^.Data)^.format = MPV_FORMAT_INT64) then
-                                   begin
-                                     LoadTracks;
-                                     ReceivedCommand(Self, mecTracks, 0);
-                                     //Break;
-                                   end;}
-        {$ENDIF}
-      end;
-      Event := mpv_wait_event(FHandle^, 0);
+      MPV_EVENT_AUDIO_RECONFIG: begin
+                                  LoadTracks;
+                                  if Assigned(OnAudioReconfig) then OnAudioReconfig(Sender);
+                                end;
+
+      {$IFNDEF USETIMER}
+      MPV_EVENT_PROPERTY_CHANGE: if (Pmpv_event_property(Event^.Data)^.Name = 'playback-time') and (Pmpv_event_property(Event^.Data)^.format = MPV_FORMAT_INT64) then
+                                 begin
+                                   if Assigned(OnTimeChanged) then OnTimeChanged(Sender, GetMediaPos);
+                                 end;
+                                 {if ((Pmpv_event_property(Event^.Data)^.Name = 'aid') or
+                                   (Pmpv_event_property(Event^.Data)^.Name = 'vid')) and
+                                   (Pmpv_event_property(Event^.Data)^.format = MPV_FORMAT_INT64) then
+                                 begin
+                                   LoadTracks;
+                                   //if Assigned(OnAudioReconfig) then OnAudioReconfig(Sender);
+                                 end;}
+      {$ENDIF}
     end;
-  end
-  else
-    inherited ReceivedCommand(Sender, ACommand, AParam);
+    Event := mpv_wait_event(FMPV_HANDLE^, 0);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -420,7 +404,7 @@ begin
     Exit;
   end;
   Num := ID;
-  mpv_set_property(FHandle^, PChar(s), MPV_FORMAT_INT64, @Num);
+  mpv_set_property(FMPV_HANDLE^, PChar(s), MPV_FORMAT_INT64, @Num);
 end;
 
 // -----------------------------------------------------------------------------
@@ -438,7 +422,7 @@ var
 begin
   Result := False;
   if not Initialized then Exit;
-  mpv_get_property(FHandle^, PChar(APropertyName), MPV_FORMAT_FLAG, @p);
+  mpv_get_property(FMPV_HANDLE^, PChar(APropertyName), MPV_FORMAT_FLAG, @p);
   Result := Boolean(p);
 end;
 
@@ -455,7 +439,7 @@ begin
   else
     p :=0;
 
-  mpv_set_property(FHandle^, PChar(APropertyName), MPV_FORMAT_FLAG, @p);
+  mpv_set_property(FMPV_HANDLE^, PChar(APropertyName), MPV_FORMAT_FLAG, @p);
 end;
 
 // -----------------------------------------------------------------------------
@@ -466,7 +450,7 @@ var
 begin
   if not Initialized then Exit;
   p := PChar(AValue);
-  mpv_set_property_string(FHandle^, PChar(APropertyName), p);
+  mpv_set_property_string(FMPV_HANDLE^, PChar(APropertyName), p);
 end;
 
 // -----------------------------------------------------------------------------
@@ -538,7 +522,7 @@ begin
   SetLength(args, 2);
   args[0] := 'frame-step';
   args[1] := NIL;
-  mpv_command(FHandle^, PPChar(@args[0]));
+  mpv_command(FMPV_HANDLE^, PPChar(@args[0]));
 end;
 
 // -----------------------------------------------------------------------------
@@ -551,7 +535,7 @@ begin
   SetLength(args, 2);
   args[0] := 'frame-back-step';
   args[1] := NIL;
-  mpv_command(FHandle^, PPChar(@args[0]));
+  mpv_command(FMPV_HANDLE^, PPChar(@args[0]));
 end;
 
 // -----------------------------------------------------------------------------
@@ -562,7 +546,7 @@ var
 begin
   if not Initialized then Exit;
   rate := AValue / 100.0;
-  mpv_set_property(FHandle^, 'speed', MPV_FORMAT_DOUBLE, @rate);
+  mpv_set_property(FMPV_HANDLE^, 'speed', MPV_FORMAT_DOUBLE, @rate);
 end;
 
 // -----------------------------------------------------------------------------
@@ -573,8 +557,8 @@ var
 begin
   Result := 0;
   if not Initialized then Exit;
-  mpv_get_property(FHandle^, 'volume', MPV_FORMAT_DOUBLE, @vol);
-  Result := Trunc(vol * (255 / MPVMAXVOLUME));
+  mpv_get_property(FMPV_HANDLE^, 'volume', MPV_FORMAT_DOUBLE, @vol);
+  Result := Trunc(vol * (255 / LIBMPV_MAX_VOLUME));
 end;
 
 // -----------------------------------------------------------------------------
@@ -584,8 +568,8 @@ var
   vol: Double;
 begin
   if not Initialized then Exit;
-  vol := AValue * (MPVMAXVOLUME / 255);
-  mpv_set_property(FHandle^, 'volume', MPV_FORMAT_DOUBLE, @vol);
+  vol := AValue * (LIBMPV_MAX_VOLUME / 255);
+  mpv_set_property(FMPV_HANDLE^, 'volume', MPV_FORMAT_DOUBLE, @vol);
 end;
 
 // -----------------------------------------------------------------------------
@@ -601,7 +585,7 @@ begin
   args[1] := 'show-text';
   args[2] := PChar('${osd-ass-cc/0}' + FText);
   args[3] := NIL;
-  mpv_command(FHandle^, PPChar(@args[0]));
+  mpv_command(FMPV_HANDLE^, PPChar(@args[0]));
 end;
 
 // -----------------------------------------------------------------------------
@@ -609,7 +593,7 @@ end;
 procedure TUWLibMPV.SetTextColor(const AValue: String);
 begin
   if not Initialized then Exit;
-  mpv_set_option_string(FHandle^, 'osd-color', PChar(AValue));
+  mpv_set_option_string(FMPV_HANDLE^, 'osd-color', PChar(AValue));
 end;
 
 // -----------------------------------------------------------------------------
@@ -617,7 +601,7 @@ end;
 procedure TUWLibMPV.SetTextPosition(const AValue: String);
 begin
   if not Initialized then Exit;
-  mpv_set_option_string(FHandle^, 'osd-align-y', PChar(AValue));
+  mpv_set_option_string(FMPV_HANDLE^, 'osd-align-y', PChar(AValue));
 end;
 
 // -----------------------------------------------------------------------------
@@ -628,7 +612,7 @@ var
 begin
   if not Initialized then Exit;
   num := AValue;
-  mpv_set_property(FHandle^, 'osd-font-size', MPV_FORMAT_INT64, @Num);
+  mpv_set_property(FMPV_HANDLE^, 'osd-font-size', MPV_FORMAT_INT64, @Num);
 end;
 
 // -----------------------------------------------------------------------------

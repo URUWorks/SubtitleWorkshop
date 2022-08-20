@@ -1575,7 +1575,12 @@ object frmMain: TfrmMain
       PopupMenu = popVideo
       TabOrder = 3
       OnClick = MPVClick
-      OnCommand = MPVCommand
+      OnFileLoaded = MPVFileLoaded
+      OnAudioReconfig = MPVAudioReconfig
+      OnPlay = MPVPlay
+      OnStop = MPVStop
+      OnPause = MPVStop
+      OnTimeChanged = MPVTimeChanged
     end
   end
   object sptVideo: TSplitter

@@ -457,15 +457,37 @@ type
   TUWMediaPlayer = class(TPanel)
   private
     FMPV: TUWLibMPV;
-    FOnCommand: TUWMediaEngineOnCommand;
+    function GetOnStartFile: TNotifyEvent;
+    procedure SetOnStartFile(Sender: TNotifyEvent);
+    function GetOnEndFile: TNotifyEvent;
+    procedure SetOnEndFile(Sender: TNotifyEvent);
+    function GetOnFileLoaded: TNotifyEvent;
+    procedure SetOnFileLoaded(Sender: TNotifyEvent);
+    function GetOnIdle: TNotifyEvent;
+    procedure SetOnIdle(Sender: TNotifyEvent);
+    function GetOnVideoReconfig: TNotifyEvent;
+    procedure SetOnVideoReconfig(Sender: TNotifyEvent);
+    function GetOnAudioReconfig: TNotifyEvent;
+    procedure SetOnAudioReconfig(Sender: TNotifyEvent);
+    function GetOnSeek: TUWMediaEngineOnEvent;
+    procedure SetOnSeek(Sender: TUWMediaEngineOnEvent);
+    function GetOnPlaybackRestart: TNotifyEvent;
+    procedure SetOnPlaybackRestart(Sender: TNotifyEvent);
+
+    function GetOnPlay: TNotifyEvent;
+    procedure SetOnPlay(Sender: TNotifyEvent);
+    function GetOnStop: TNotifyEvent;
+    procedure SetOnStop(Sender: TNotifyEvent);
+    function GetOnPause: TNotifyEvent;
+    procedure SetOnPause(Sender: TNotifyEvent);
+    function GetOnTimeChanged: TUWMediaEngineOnEvent;
+    procedure SetOnTimeChanged(Sender: TUWMediaEngineOnEvent);
   protected
-    procedure SetOnCommand(const AValue: TUWMediaEngineOnCommand);
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
   published
     property Engine: TUWLibMPV read FMPV;
-    property OnCommand: TUWMediaEngineOnCommand read FOnCommand write SetOnCommand;
     //
     property Align;
     property Anchors;
@@ -521,6 +543,21 @@ type
     property OnStartDock;
     property OnStartDrag;
     property OnUnDock;
+
+    property OnStartFile: TNotifyEvent       read GetOnStartFile       write SetOnStartFile;
+    property OnEndFile: TNotifyEvent         read GetOnEndFile         write SetOnEndFile;
+    property OnFileLoaded: TNotifyEvent      read GetOnFileLoaded      write SetOnFileLoaded;
+    property OnIdle: TNotifyEvent            read GetOnIdle            write SetOnIdle;
+    property OnVideoReconfig: TNotifyEvent   read GetOnVideoReconfig   write SetOnVideoReconfig;
+    property OnAudioReconfig: TNotifyEvent   read GetOnAudioReconfig   write SetOnAudioReconfig;
+    property OnSeek: TUWMediaEngineOnEvent   read GetOnSeek            write SetOnSeek;
+    property OnPlaybackRestart: TNotifyEvent read GetOnPlaybackRestart write SetOnPlaybackRestart;
+
+    property OnPlay : TNotifyEvent           read GetOnPlay  write SetOnPlay;
+    property OnStop : TNotifyEvent           read GetOnStop  write SetOnStop;
+    property OnPause: TNotifyEvent           read GetOnPause write SetOnPause;
+    property OnTimeChanged: TUWMediaEngineOnEvent read GetOnTimeChanged write SetOnTimeChanged;
+
   end;
 
 procedure Register;
@@ -2129,7 +2166,7 @@ begin
   BevelOuter  := bvNone;
   BorderStyle := bsNone;
 
-  FMPV := TUWLibMPV.Create(Self, FOnCommand);
+  FMPV := TUWLibMPV.Create(Self);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2143,10 +2180,124 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWMediaPlayer.SetOnCommand(const AValue: TUWMediaEngineOnCommand);
+function TUWMediaPlayer.GetOnStartFile: TNotifyEvent;
 begin
-  FOnCommand     := AValue;
-  FMPV.OnCommand := FOnCommand;
+  Result := FMPV.OnStartFile;
+end;
+
+procedure TUWMediaPlayer.SetOnStartFile(Sender: TNotifyEvent);
+begin
+  FMPV.OnStartFile := Sender;
+end;
+
+function TUWMediaPlayer.GetOnEndFile: TNotifyEvent;
+begin
+  Result := FMPV.OnEndFile;
+end;
+
+procedure TUWMediaPlayer.SetOnEndFile(Sender: TNotifyEvent);
+begin
+  FMPV.OnEndFile := Sender;
+end;
+
+function TUWMediaPlayer.GetOnFileLoaded: TNotifyEvent;
+begin
+  Result := FMPV.OnFileLoaded;
+end;
+
+procedure TUWMediaPlayer.SetOnFileLoaded(Sender: TNotifyEvent);
+begin
+  FMPV.OnFileLoaded := Sender;
+end;
+
+function TUWMediaPlayer.GetOnIdle: TNotifyEvent;
+begin
+  Result := FMPV.OnIdle;
+end;
+
+procedure TUWMediaPlayer.SetOnIdle(Sender: TNotifyEvent);
+begin
+  FMPV.OnIdle := Sender;
+end;
+
+function TUWMediaPlayer.GetOnVideoReconfig: TNotifyEvent;
+begin
+  Result := FMPV.OnVideoReconfig;
+end;
+
+procedure TUWMediaPlayer.SetOnVideoReconfig(Sender: TNotifyEvent);
+begin
+  FMPV.OnVideoReconfig := Sender;
+end;
+
+function TUWMediaPlayer.GetOnAudioReconfig: TNotifyEvent;
+begin
+  Result := FMPV.OnAudioReconfig;
+end;
+
+procedure TUWMediaPlayer.SetOnAudioReconfig(Sender: TNotifyEvent);
+begin
+  FMPV.OnAudioReconfig := Sender;
+end;
+
+function TUWMediaPlayer.GetOnSeek: TUWMediaEngineOnEvent;
+begin
+  Result := FMPV.OnSeek;
+end;
+
+procedure TUWMediaPlayer.SetOnSeek(Sender: TUWMediaEngineOnEvent);
+begin
+  FMPV.OnSeek := Sender;
+end;
+
+function TUWMediaPlayer.GetOnPlaybackRestart: TNotifyEvent;
+begin
+  Result := FMPV.OnPlaybackRestart;
+end;
+
+procedure TUWMediaPlayer.SetOnPlaybackRestart(Sender: TNotifyEvent);
+begin
+  FMPV.OnPlaybackRestart := Sender;
+end;
+
+function TUWMediaPlayer.GetOnPlay: TNotifyEvent;
+begin
+  Result := FMPV.OnPlay;
+end;
+
+procedure TUWMediaPlayer.SetOnPlay(Sender: TNotifyEvent);
+begin
+  FMPV.OnPlay := Sender;
+end;
+
+function TUWMediaPlayer.GetOnStop: TNotifyEvent;
+begin
+  Result := FMPV.OnStop;
+end;
+
+procedure TUWMediaPlayer.SetOnStop(Sender: TNotifyEvent);
+begin
+  FMPV.OnStop := Sender;
+end;
+
+function TUWMediaPlayer.GetOnPause: TNotifyEvent;
+begin
+  Result := FMPV.OnPause;
+end;
+
+procedure TUWMediaPlayer.SetOnPause(Sender: TNotifyEvent);
+begin
+  FMPV.OnPause := Sender;
+end;
+
+function TUWMediaPlayer.GetOnTimeChanged: TUWMediaEngineOnEvent;
+begin
+  Result := FMPV.OnTimeChanged;
+end;
+
+procedure TUWMediaPlayer.SetOnTimeChanged(Sender: TUWMediaEngineOnEvent);
+begin
+  FMPV.OnTimeChanged := Sender;
 end;
 
 // -----------------------------------------------------------------------------

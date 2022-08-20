@@ -572,9 +572,12 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mmoTextChange(Sender: TObject);
+    procedure MPVAudioReconfig(Sender: TObject);
     procedure MPVClick(Sender: TObject);
-    procedure MPVCommand(Sender: TObject; ACommand: TUWMediaEngineCommand;
-      AParam: Integer=0);
+    procedure MPVFileLoaded(Sender: TObject);
+    procedure MPVPlay(Sender: TObject);
+    procedure MPVStop(Sender: TObject);
+    procedure MPVTimeChanged(Sender: TObject; AParam: Integer=0);
     procedure numLeftValueChange(Sender: TObject);
     procedure popMemoPopup(Sender: TObject);
     procedure popPlayRatePopup(Sender: TObject);
@@ -1445,6 +1448,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.MPVAudioReconfig(Sender: TObject);
+begin
+  FillMenuWithAudioStreams(mnuVideoAudio);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.MPVClick(Sender: TObject);
 begin
   actMediaPlay.Execute;
@@ -1452,45 +1462,49 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.MPVCommand(Sender: TObject; ACommand: TUWMediaEngineCommand;
-  AParam: Integer=0);
+procedure TfrmMain.MPVFileLoaded(Sender: TObject);
 begin
-  case ACommand of
-    mecLoading: begin
-                  //stbStatus.Panels[1].Text := Strings.LoadingVideo;
-                end;
+  //stbStatus.Panels[1].Text := '';
+  LastSubtitle.ShowIndex := 0;
+  sbrSeek.Max := MPV.Engine.Duration;
+  ttTimes.Duration := MSecsToRefTime(sbrSeek.Max);
+  lblMediaTime.Caption := TimeToString(sbrSeek.Max, DefTimeFormat);
+  actMediaPlay.ImageIndex := 29;
+  actCloseVideo.Enabled := True;
 
-    mecLoaded: begin
-                 //stbStatus.Panels[1].Text := '';
-                 LastSubtitle.ShowIndex := 0;
-                 sbrSeek.Max := MPV.Engine.Duration;
-                 ttTimes.Duration := MSecsToRefTime(sbrSeek.Max);
-                 lblMediaTime.Caption := TimeToString(sbrSeek.Max, DefTimeFormat);
-                 actMediaPlay.ImageIndex := 29;
-                 actCloseVideo.Enabled := True;
+  if not actVideoPreview.Checked then actVideoPreview.Execute;
+  if Options.AutoStartPlaying and (MPV.Tag = 0) then
+    actMediaPlay.Execute
+  else if (MPV.Tag = 1) then
+    MPV.Tag := 0;
 
-                 if not actVideoPreview.Checked then actVideoPreview.Execute;
-                 if Options.AutoStartPlaying and (MPV.Tag = 0) then
-                   actMediaPlay.Execute
-                 else if (MPV.Tag = 1) then
-                   MPV.Tag := 0;
+  if actDockVideoControls.Tag <> -2 then
+    OpenAudio(MediaFileExists(MPV.Engine.FileName, TAudioExts))
+  else
+    actDockVideoControls.Tag := 0;
 
-                 if actDockVideoControls.Tag <> -2 then
-                   OpenAudio(MediaFileExists(MPV.Engine.FileName, TAudioExts))
-                 else
-                   actDockVideoControls.Tag := 0;
+  actExtractWaveform.Enabled := True;
+end;
 
-                 actExtractWaveform.Enabled := True;
-               end;
+// -----------------------------------------------------------------------------
 
-    mecTracks: FillMenuWithAudioStreams(mnuVideoAudio);
+procedure TfrmMain.MPVPlay(Sender: TObject);
+begin
+  actMediaPlay.ImageIndex := 55;
+end;
 
-    mecTimeChanged: MediaUpdateProgress(AParam);
+// -----------------------------------------------------------------------------
 
-    mecPlay  : actMediaPlay.ImageIndex := 55;
-    mecStop,
-    mecPause : actMediaPlay.ImageIndex := 29;
-  end;
+procedure TfrmMain.MPVStop(Sender: TObject);
+begin
+  actMediaPlay.ImageIndex := 29;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.MPVTimeChanged(Sender: TObject; AParam: Integer=0);
+begin
+  MediaUpdateProgress(AParam);
 end;
 
 // -----------------------------------------------------------------------------

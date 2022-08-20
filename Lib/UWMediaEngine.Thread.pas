@@ -33,33 +33,31 @@ uses
 
 type
 
-  { TUWCustomMediaEngineThread }
+  { TUWCustomEventThread }
 
-  TUWMediaEngineThread = class;
-  TUWCustomMediaEngineThread = class(TThread)
+  TUWMediaEngineEvent = class;
+  TUWCustomEventThread = class(TThread)
   private
-    procedure DoEvent;
+    procedure HandleEvent;
   public
-    FOwner : TUWMediaEngineThread;
+    FOwner : TUWMediaEngineEvent;
     Event  : PRtlEvent;
-    constructor Create(AOwner: TUWMediaEngineThread);
+    constructor Create(AOwner: TUWMediaEngineEvent);
     procedure Execute; override;
     destructor Destroy; override;
   end;
 
-  { TUWMediaEngineThread }
+  { TUWMediaEngineEvent }
 
-  TUWMediaEngineThread = class
+  TUWMediaEngineEvent = class
   private
-    FThread    : TUWCustomMediaEngineThread;
-    FOnCommand : TUWMediaEngineOnCommand;
-    FCommand   : TUWMediaEngineCommand;
-    FParam     : Integer;
+    FThread  : TUWCustomEventThread;
+    FOnEvent : TNotifyEvent;
   public
     constructor Create;
     destructor Destroy; override;
-    procedure PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer);
-    property OnCommand: TUWMediaEngineOnCommand read FOnCommand write FOnCommand;
+    procedure PushEvent;
+    property OnEvent: TNotifyEvent read FOnEvent write FOnEvent;
   end;
 
 // -----------------------------------------------------------------------------
@@ -68,11 +66,11 @@ implementation
 
 // -----------------------------------------------------------------------------
 
-{ TUWCustomMediaEngineThread }
+{ TUWCustomEventThread }
 
 // -----------------------------------------------------------------------------
 
-constructor TUWCustomMediaEngineThread.Create(AOwner: TUWMediaEngineThread);
+constructor TUWCustomEventThread.Create(AOwner: TUWMediaEngineEvent);
 begin
   inherited Create(True);
   FOwner := AOwner;
@@ -81,26 +79,26 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWCustomMediaEngineThread.Execute;
+procedure TUWCustomEventThread.Execute;
 begin
   while not Terminated do
   begin
     RtlEventWaitFor(Event);
-    if Assigned(FOwner.FOnCommand) and not Terminated then Queue(@DoEvent); //Synchronize(@DoEvent);
+    Queue(@HandleEvent); //Synchronize(@HandleEvent);
     RTLEventResetEvent(Event);
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWCustomMediaEngineThread.DoEvent;
+procedure TUWCustomEventThread.HandleEvent;
 begin
-  if Assigned(FOwner.FOnCommand) then FOwner.FOnCommand(FOwner, FOwner.FCommand, FOwner.FParam);
+  if Assigned(FOwner.OnEvent) then FOwner.OnEvent(FOwner);
 end;
 
 // -----------------------------------------------------------------------------
 
-destructor TUWCustomMediaEngineThread.Destroy;
+destructor TUWCustomEventThread.Destroy;
 begin
   RTLEventDestroy(Event);
   FOwner := NIL;
@@ -109,19 +107,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{ TUWMediaEngineThread }
+{ TUWMediaEngineEvent }
 
 // -----------------------------------------------------------------------------
 
-constructor TUWMediaEngineThread.Create;
+constructor TUWMediaEngineEvent.Create;
 begin
-  FThread := TUWCustomMediaEngineThread.Create(Self);
+  FThread := TUWCustomEventThread.Create(Self);
   FThread.Start;
 end;
 
 // -----------------------------------------------------------------------------
 
-destructor TUWMediaEngineThread.Destroy;
+destructor TUWMediaEngineEvent.Destroy;
 begin
   FThread.Terminate;
   RTLEventSetEvent(FThread.Event);
@@ -132,10 +130,8 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWMediaEngineThread.PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: integer);
+procedure TUWMediaEngineEvent.PushEvent;
 begin
-  FCommand := ACommand;
-  FParam   := AParam;
   RTLEventSetEvent(FThread.Event);
 end;
 

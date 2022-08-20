@@ -1013,7 +1013,6 @@ end;
 function TUWSubtitles.GetStringWPM(Index: Integer; const IsOriginal: Boolean): Double;
 var
   d: TUWTimeCode;
-  wc: Integer;
   s: String;
 begin
   d := GetDuration(Index);
