@@ -18,9 +18,8 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="849"/>
-        <CursorPos X="12" Y="864"/>
+        <TopLine Value="2773"/>
+        <CursorPos X="36" Y="2774"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -36,8 +35,12 @@
       <Unit3>
         <Filename Value="UCommon.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="1795"/>
+        <CursorPos X="65" Y="1806"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="UUndo.pas"/>
@@ -185,7 +188,7 @@
         <ComponentName Value="frmSettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -882,7 +885,7 @@
       </Unit123>
       <Unit124>
         <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="33"/>
         <CursorPos X="25" Y="34"/>
         <UsageCount Value="13"/>
@@ -890,7 +893,7 @@
       </Unit124>
       <Unit125>
         <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="64"/>
         <CursorPos X="31"/>
         <UsageCount Value="27"/>
@@ -1364,7 +1367,7 @@
       </Unit193>
       <Unit194>
         <Filename Value="..\..\..\Lib\UWMediaEngine.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="3"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
@@ -1378,7 +1381,7 @@
         <UsageCount Value="10"/>
       </Unit195>
     </Units>
-    <JumpHistory Count="13" HistoryIndex="12">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="UMain.pas"/>
         <Caret Line="53" Column="16" TopLine="38"/>
@@ -1431,6 +1434,34 @@
         <Filename Value="UMain.pas"/>
         <Caret Line="2775" Column="29" TopLine="2763"/>
       </Position13>
+      <Position14>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="851" Column="32" TopLine="849"/>
+      </Position14>
+      <Position15>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="2675" Column="25" TopLine="2668"/>
+      </Position15>
+      <Position16>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="2677" Column="17" TopLine="2668"/>
+      </Position16>
+      <Position17>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="2774" Column="36" TopLine="2773"/>
+      </Position17>
+      <Position18>
+        <Filename Value="UCommon.pas"/>
+        <Caret Line="104" Column="21" TopLine="95"/>
+      </Position18>
+      <Position19>
+        <Filename Value="UCommon.pas"/>
+        <Caret Line="105" Column="21" TopLine="95"/>
+      </Position19>
+      <Position20>
+        <Filename Value="UCommon.pas"/>
+        <Caret Line="1812" TopLine="1795"/>
+      </Position20>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

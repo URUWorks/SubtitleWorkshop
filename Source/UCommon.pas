@@ -1757,20 +1757,18 @@ end;
 
 procedure SetTextTag(const Tag: String);
 var
-  Memo   : TMemo;
-  i      : Integer;
-  s1, s2 : String;
+  Memo : TMemo;
+  i    : Integer;
 begin
   Memo := GetMemoFocused;
   if Memo = NIL then Exit;
 
-  i  := Memo.SelStart;
-  s1 := Copy(Memo.Text, 1, Memo.SelStart);
+  i := Memo.SelStart;
   if Memo.SelText <> '' then
-    s2 := Copy(Memo.Text, Memo.SelStart+Memo.SelLength+1, Length(Memo.Text)-(Memo.SelStart+Memo.SelLength))
+    Memo.SelText := Format('{\%s1}%s{\%s0}', [Tag, Memo.SelText, Tag])
   else
-    s2 := Copy(Memo.Text, Memo.SelStart+1, Length(Memo.Text)-Memo.SelStart);
-  Memo.Text := Format('%s{\%s1}%s{\%s0}%s', [s1, Tag, Memo.SelText, Tag, s2]);
+    Memo.Text := Format('{\%s1}%s{\%s0}', [Tag, Memo.Text, Tag]);
+
   Memo.SelStart := i+5;
 end;
 
@@ -1778,20 +1776,18 @@ end;
 
 procedure SetTextTagColor(const HexColor: String);
 var
-  Memo   : TMemo;
-  i      : Integer;
-  s1, s2 : String;
+  Memo : TMemo;
+  i    : Integer;
 begin
   Memo := GetMemoFocused;
   if Memo = NIL then Exit;
 
-  i  := Memo.SelStart;
-  s1 := Copy(Memo.Text, 1, Memo.SelStart);
+  i := Memo.SelStart;
   if Memo.SelText <> '' then
-    s2 := Copy(Memo.Text, Memo.SelStart+Memo.SelLength+1, Length(Memo.Text)-(Memo.SelStart+Memo.SelLength))
+    Memo.SelText := Format('{\%s&%s&}%s{\%s}', [swt_Color, HexColor, Memo.SelText, swt_Color])
   else
-    s2 := Copy(Memo.Text, Memo.SelStart+1, Length(Memo.Text)-Memo.SelStart);
-  Memo.Text := Format('%s{\%s&%s&}%s{\%s}%s', [s1, swt_Color, HexColor, Memo.SelText, swt_Color, s2]);
+    Memo.Text := Format('{\%s&%s&}%s{\%s}', [swt_Color, HexColor, Memo.Text, swt_Color]);
+
   Memo.SelStart := i+12;
 end;
 
@@ -1799,20 +1795,18 @@ end;
 
 procedure SetTextCustomTag(const Tag: String);
 var
-  Memo   : TMemo;
-  i      : Integer;
-  s1, s2 : String;
+  Memo : TMemo;
+  i    : Integer;
 begin
   Memo := GetMemoFocused;
   if Memo = NIL then Exit;
 
-  i  := Memo.SelStart;
-  s1 := Copy(Memo.Text, 1, Memo.SelStart);
+  i := Memo.SelStart;
   if Memo.SelText <> '' then
-    s2 := Copy(Memo.Text, Memo.SelStart+Memo.SelLength+1, Length(Memo.Text)-(Memo.SelStart+Memo.SelLength))
+    Memo.SelText := Format('%s %s %s', [Tag, Memo.SelText, Tag])
   else
-    s2 := Copy(Memo.Text, Memo.SelStart+1, Length(Memo.Text)-Memo.SelStart);
-  Memo.Text := Format('%s%s %s %s%s', [s1, Tag, Memo.SelText, Tag, s2]);
+    Memo.Text := Format('%s %s %s', [Tag, Memo.Text, Tag]);
+
   Memo.SelStart := i+2;
 end;
 
