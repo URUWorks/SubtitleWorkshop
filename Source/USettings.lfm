@@ -39,6 +39,25 @@ object frmSettings: TfrmSettings
         OnClick = btnCloseClick
         TabOrder = 0
       end
+      object lblLanguage: TLabel
+        Left = 8
+        Height = 15
+        Top = 20
+        Width = 88
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'Language'
+        ParentColor = False
+      end
+      object cboLanguage: TComboBox
+        Left = 104
+        Height = 23
+        Top = 16
+        Width = 476
+        ItemHeight = 15
+        Style = csDropDownList
+        TabOrder = 1
+      end
     end
   end
 end

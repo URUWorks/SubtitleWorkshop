@@ -27,7 +27,7 @@ unit USettings;
 interface
 
 uses
-  Classes, Forms, Controls, ComCtrls, ExtCtrls, StdCtrls;
+  Classes, Forms, Controls, ComCtrls, ExtCtrls, StdCtrls, SysUtils;
 
 type
 
@@ -35,6 +35,8 @@ type
 
   TfrmSettings = class(TForm)
     btnClose: TButton;
+    cboLanguage: TComboBox;
+    lblLanguage: TLabel;
     pagSettings: TPageControl;
     tabGeneral: TTabSheet;
     procedure btnCloseClick(Sender: TObject);
@@ -42,7 +44,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { private declarations }
-    procedure FillComboWithLangs(const Combo: TCombobox; const Index: Integer = 0);
+    procedure GetLanguageFiles;
   public
     { public declarations }
   end;
@@ -54,9 +56,12 @@ var
 
 implementation
 
-uses UTypes, UCommon;
+uses UTypes, UCommon, UWSystem.Globalization;
 
 {$R *.lfm}
+
+var
+  Langs: TStringList;
 
 // -----------------------------------------------------------------------------
 
@@ -66,7 +71,9 @@ uses UTypes, UCommon;
 
 procedure TfrmSettings.FormCreate(Sender: TObject);
 begin
+  Langs := TStringList.Create;
   ReadLangForForm(LanguageFileName, Self);
+  GetLanguageFiles;
 end;
 
 // -----------------------------------------------------------------------------
@@ -76,25 +83,36 @@ procedure TfrmSettings.FormClose(Sender: TObject;
 begin
   CloseAction := caFree;
   frmSettings := NIL;
+  Langs.Free;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmSettings.btnCloseClick(Sender: TObject);
 begin
+  Options.Language := Langs[cboLanguage.ItemIndex];
   Close;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmSettings.FillComboWithLangs(const Combo: TCombobox; const Index: Integer = 0);
-//var
-//  i: Integer;
+procedure TfrmSettings.GetLanguageFiles;
+var
+  SearchRec : TSearchRec;
+  s: String;
+  i: Integer;
 begin
-//  for i := 0 to Length(GoogleTranslateName)-1 do
-//    Combo.Items.Add(GoogleTranslateName[i]);
-
-//  Combo.ItemIndex := Index;
+  if SysUtils.FindFirst(LanguageFolder + '*.lng', faAnyFile, SearchRec) = 0 then
+  try
+    repeat
+      s := ChangeFileExt(SearchRec.Name, '');
+      Langs.Add(s);
+      i := cboLanguage.Items.Add(GetCultureDisplayName(AnsiString(s)));
+      if Options.Language = s then cboLanguage.ItemIndex := i;
+    until FindNext(SearchRec) <> 0;
+  finally
+    FindClose(SearchRec);
+  end;
 end;
 
 // -----------------------------------------------------------------------------

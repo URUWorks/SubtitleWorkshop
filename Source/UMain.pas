@@ -2516,11 +2516,23 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actSettingsExecute(Sender: TObject);
+var
+  lng: String;
+  i: Integer;
 begin
   if frmSettings = NIL then
   begin
+    lng := Options.Language;
     frmSettings := TfrmSettings.Create(Application);
     frmSettings.ShowModal;
+    // reload lang if needed
+    if lng <> Options.Language then
+      for i := 0 to Screen.FormCount-1 do
+        if Screen.Forms[i] <> NIL then
+        begin
+          ReadLangForForm(LanguageFileName, Screen.Forms[i]);
+          UpdateValues;
+        end;
   end;
 end;
 
