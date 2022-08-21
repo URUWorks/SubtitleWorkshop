@@ -766,7 +766,7 @@ var
 // -----------------------------------------------------------------------------
 
 procedure Free_libMPV_Render;
-function Load_libMPV_Render(const LIB_DLL_NAME: String): Boolean;
+function Load_libMPV_Render: Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -795,11 +795,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function Load_libMPV_Render(const LIB_DLL_NAME: String): Boolean;
+function Load_libMPV_Render: Boolean;
 begin
   Result := False;
 
-  hLib := LoadLibrary(LIB_DLL_NAME);
+  hLib := LoadLibrary({$IFDEF WINDOWS}LIBMPV_DLL_NAME{$ELSE}libmpv_GetInstallPath{$ENDIF});
   if hLib = 0 then Exit;
 
   Pointer(mpv_render_context_create) := GetProcAddress(hLib,'mpv_render_context_create');

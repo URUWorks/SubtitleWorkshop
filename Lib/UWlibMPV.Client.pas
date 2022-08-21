@@ -2060,6 +2060,9 @@ var
 
 // -----------------------------------------------------------------------------
 
+{$IFDEF UNIX}
+function libmpv_GetInstallPath: String;
+{$ENDIF}
 procedure Free_libMPV;
 function Load_libMPV: Integer;
 

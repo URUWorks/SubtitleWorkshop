@@ -1,5 +1,5 @@
 {*
- *  URUWorks Subtitle Workshop
+ *  URUWorks Media Engine (libMPV)
  *
  *  Author  : URUWorks
  *  Website : uruworks.net
@@ -15,7 +15,10 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
+ *
+ *  Based on the great work of OvoM3U
+ *  Copyright (C) 2020 Marco Caselli.
  *}
 
 unit UWMediaEngine.libMPV;
@@ -28,9 +31,8 @@ unit UWMediaEngine.libMPV;
 interface
 
 uses
-  Classes, Controls, SysUtils, UWMediaEngine, UWMediaEngine.Thread,
-  UWlibMPV.Client {$IFDEF USEOPENGL}, UWlibMPV.Render, UWlibMPV.Render_gl,
-  gl, glext{$ENDIF}
+  Classes, Controls, SysUtils, UWMediaEngine, {$IFDEF USETHREADEVENTS}UWMediaEngine.Thread,{$ENDIF}
+  UWlibMPV.Client {$IFDEF USEOPENGL}, UWlibMPV.Render, gl, Forms{$ENDIF}
   {$IFDEF LINUX}
   , gtk2, gdk2x
   {$ENDIF};
@@ -45,11 +47,21 @@ type
   private
     FMPV_HANDLE: Pmpv_handle;
     FText: String;
+    {$IFDEF USEOPENGL}
+    glRender: TUWMediaEngineGlRender;
+    {$ENDIF}
     function GetBoolProperty(const APropertyName: String): Boolean;
     procedure SetBoolProperty(const APropertyName:string; const AValue: Boolean);
     procedure SetStringProperty(const APropertyName, AValue: String);
   protected
+    {$IFDEF USETHREADEVENTS}
     FEvent: TUWMediaEngineEvent;
+    {$ELSE}
+    FEvent: PRtlEvent;
+    {$ENDIF}
+    {$IFDEF USEOPENGL}
+    procedure Initialize_GL(Data: PtrInt);
+    {$ENDIF}
     function GetVolume: Integer; override;
     procedure SetVolume(const AValue: Integer); override;
     function GetMediaPos: Integer; override;
@@ -58,7 +70,7 @@ type
     function DoPlay(const AFileName: String; const APos: Integer = 0): Boolean; override;
   public
     class function GetMediaEngineName: String; override;
-    procedure PushEvent(Sender: TObject); override;
+    procedure PushEvent(Sender: Pointer); override;
     procedure ReceivedEvent(Sender: TObject); override;
     constructor Create(const AParent: TWinControl); override;
     destructor Destroy; override;
@@ -91,22 +103,10 @@ const
 
 // -----------------------------------------------------------------------------
 
-{$IFDEF USEOPENGL}
-function GetProcAddress_OPENGL(ctx: Pointer; Name: PChar): Pointer; cdecl;
+procedure LIBMPV_EVENT(Sender: Pointer); cdecl;
 begin
-  Result := GetProcAddress(LibGL, Name);
-  if Result = NIL then Result := wglGetProcAddress(Name);
-end;
-{$ENDIF}
-
-// -----------------------------------------------------------------------------
-
-procedure LIBMPV_EVENT(Data: Pointer); cdecl;
-begin
-  if (Data = NIL) then
-    Exit
-  else
-    TUWLibMPV(Data).PushEvent(TUWLibMPV(Data));
+  if (Sender <> NIL) then
+    TUWLibMPV(Sender).PushEvent(Sender);
 end;
 
 // -----------------------------------------------------------------------------
@@ -116,6 +116,9 @@ begin
   inherited Create(AParent);
 
   ErrorCode := Load_libMPV;
+  {$IFDEF USEOPENGL}
+  if ErrorCode <> 0 then Load_libMPV_Render;
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
@@ -147,8 +150,15 @@ end;
 procedure TUWLibMPV.UnInitialize;
 begin
   FText := '';
+  {$IFDEF USEOPENGL}
+  glRender.Free;
+  {$ENDIF};
   if Assigned(mpv_set_wakeup_callback) and Assigned(FMPV_HANDLE) then mpv_set_wakeup_callback(FMPV_HANDLE^, NIL, Self);
+  {$IFDEF USETHREADEVENTS}
   if Assigned(FEvent) then FEvent.Free;
+  {$ELSE}
+  RTLEventDestroy(FEvent);
+  {$ENDIF};
   if Assigned(mpv_terminate_destroy) and Assigned(FMPV_HANDLE) then mpv_terminate_destroy(FMPV_HANDLE^);
 end;
 
@@ -176,7 +186,10 @@ begin
   {$ELSE}
   hwnd := Parent.Handle;
   {$ENDIF}
+
+  {$IFNDEF USEOPENGL}
   mpv_set_option(FMPV_HANDLE^, 'wid', MPV_FORMAT_INT64, @hwnd); // window parent
+  {$ENDIF}
 
   //  mpv_set_option_string(FMPV_HANDLE^, 'osd-color', '#FF0000');
   mpv_set_option_string(FMPV_HANDLE^, 'osd-duration', '10000');
@@ -191,13 +204,33 @@ begin
   mpv_initialize(FMPV_HANDLE^);
   mpv_request_log_messages(FMPV_HANDLE^, 'no');
 
+  {$IFDEF USETHREADEVENTS}
   FEvent := TUWMediaEngineEvent.Create;
   FEvent.OnEvent := @ReceivedEvent;
+  {$ELSE}
+  FEvent := RTLEventCreate;
+  {$ENDIF}
   mpv_set_wakeup_callback(FMPV_HANDLE^, @LIBMPV_EVENT, Self);
+
+  {$IFDEF USEOPENGL}
+  Application.QueueAsyncCall(@Initialize_GL, 0);
+  {$ENDIF}
 
   Initialized := True;
   Result := Initialized;
 end;
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF USEOPENGL}
+procedure TUWLibMPV.Initialize_GL(Data: PtrInt);
+begin
+  OpenGlControl.Visible := False;
+  OpenGlControl.ReleaseContext;
+  Application.ProcessMessages;
+  glRender := TUWMediaEngineGlRender.Create(OpenGlControl, FMPV_HANDLE);
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 
@@ -330,9 +363,15 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWLibMPV.PushEvent(Sender: TObject);
+procedure TUWLibMPV.PushEvent(Sender: Pointer);
 begin
+  {$IFDEF USETHREADEVENTS}
   FEvent.PushEvent;
+  {$ELSE}
+  RTLEventWaitFor(FEvent);
+  ReceivedEvent(TUWLibMPV(Sender));
+  RTLEventResetEvent(FEvent);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
