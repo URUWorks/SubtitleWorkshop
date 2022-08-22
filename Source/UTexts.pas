@@ -169,6 +169,7 @@ begin
   cboOutput.ItemIndex := 1;
 
   strClose := btnClose.Caption;
+  btnMoreLess.Caption := strMore;
 end;
 
 // -----------------------------------------------------------------------------

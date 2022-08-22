@@ -114,6 +114,7 @@ begin
     rdoAllTheSubtitles.Checked := True;
 
   ReadLangForForm(LanguageFileName, Self);
+  btnMoreLess.Caption := strMore;
 end;
 
 // -----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 {*
- *  URUWorks Subtitle Workshop
+ *  URUWorks Media Engine (Thread)
  *
  *  Author  : URUWorks
  *  Website : uruworks.net
@@ -15,7 +15,10 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2022 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
+ *
+ *  Based on the great work of OvoM3U
+ *  Copyright (C) 2020 Marco Caselli.
  *}
 
 unit UWMediaEngine.Thread;
@@ -23,56 +26,99 @@ unit UWMediaEngine.Thread;
 // -----------------------------------------------------------------------------
 
 {$mode ObjFPC}{$H+}
+{$I UWMediaEngine.inc}
 
 interface
 
 uses
-  Classes, SysUtils, UWMediaEngine;
+  Classes, SysUtils
+  {$IFDEF USEOPENGL}, UWlibMPV.Client, UWlibMPV.Render, UWlibMPV.Render_gl,
+  gl, glext, OpenGLContext{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
 type
 
-  { TUWCustomMediaEngineThread }
+  // used to handle mpv envents
 
-  TUWMediaEngineThread = class;
-  TUWCustomMediaEngineThread = class(TThread)
+  { TUWCustomEventThread }
+
+  TUWMediaEngineEvent = class;
+  TUWCustomEventThread = class(TThread)
   private
-    procedure DoEvent;
+    procedure HandleEvent;
   public
-    FOwner : TUWMediaEngineThread;
+    FOwner : TUWMediaEngineEvent;
     Event  : PRtlEvent;
-    constructor Create(AOwner: TUWMediaEngineThread);
+    constructor Create(AOwner: TUWMediaEngineEvent);
     procedure Execute; override;
     destructor Destroy; override;
   end;
 
-  { TUWMediaEngineThread }
+  { TUWMediaEngineEvent }
 
-  TUWMediaEngineThread = class
+  TUWMediaEngineEvent = class
   private
-    FThread    : TUWCustomMediaEngineThread;
-    FOnCommand : TUWMediaEngineOnCommand;
-    FCommand   : TUWMediaEngineCommand;
-    FParam     : Integer;
+    FThread  : TUWCustomEventThread;
+    FOnEvent : TNotifyEvent;
   public
     constructor Create;
     destructor Destroy; override;
-    procedure PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer);
-    property OnCommand: TUWMediaEngineOnCommand read FOnCommand write FOnCommand;
+    procedure PushEvent;
+    property OnEvent: TNotifyEvent read FOnEvent write FOnEvent;
   end;
+
+  {$IFDEF USEOPENGL}
+  // used to handle mpv/opengl envents
+
+  { TUWCustomGlRenderThread }
+
+  TUWMediaEngineGlRender = class;
+  TUWCustomGlRenderThread = class(TThread)
+  private
+    FOpenGlControl : TOpenGlControl;
+    FRenderContext : pmpv_render_context;
+    FMPVHandle     : Pmpv_handle;
+    FCreateParams  : array of mpv_render_param;
+    FRenderParams  : array of mpv_render_param;
+    FOpenGLParams  : mpv_opengl_init_params;
+    procedure Initialize_GL;
+  public
+    FOwner : TUWMediaEngineGlRender;
+    Event  : PRtlEvent;
+    constructor Create(AOwner: TUWMediaEngineGlRender; AControl: TOpenGlControl; AHandle: Pmpv_handle);
+    procedure Execute; override;
+    destructor Destroy; override;
+  end;
+
+  { TUWMediaEngineGlRender }
+
+  TUWMediaEngineGlRender = class
+  private
+    FThread: TUWCustomGlRenderThread;
+  public
+    constructor Create(AControl: TOpenGlControl; AHandle: pmpv_handle);
+    destructor Destroy; override;
+    procedure Render;
+  end;
+  {$ENDIF}
 
 // -----------------------------------------------------------------------------
 
 implementation
 
+{$IFDEF USEOPENGL}
+const
+  glFlip: longint = 1;
+{$ENDIF}
+
 // -----------------------------------------------------------------------------
 
-{ TUWCustomMediaEngineThread }
+{ TUWCustomEventThread }
 
 // -----------------------------------------------------------------------------
 
-constructor TUWCustomMediaEngineThread.Create(AOwner: TUWMediaEngineThread);
+constructor TUWCustomEventThread.Create(AOwner: TUWMediaEngineEvent);
 begin
   inherited Create(True);
   FOwner := AOwner;
@@ -81,26 +127,26 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWCustomMediaEngineThread.Execute;
+procedure TUWCustomEventThread.Execute;
 begin
   while not Terminated do
   begin
-    RtlEventWaitFor(Event);
-    if Assigned(FOwner.FOnCommand) and not Terminated then Queue(@DoEvent); //Synchronize(@DoEvent);
+    RTLEventWaitFor(Event);
+    Queue(@HandleEvent); //Synchronize(@HandleEvent);
     RTLEventResetEvent(Event);
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWCustomMediaEngineThread.DoEvent;
+procedure TUWCustomEventThread.HandleEvent;
 begin
-  if Assigned(FOwner.FOnCommand) then FOwner.FOnCommand(FOwner, FOwner.FCommand, FOwner.FParam);
+  if Assigned(FOwner.OnEvent) then FOwner.OnEvent(FOwner);
 end;
 
 // -----------------------------------------------------------------------------
 
-destructor TUWCustomMediaEngineThread.Destroy;
+destructor TUWCustomEventThread.Destroy;
 begin
   RTLEventDestroy(Event);
   FOwner := NIL;
@@ -109,19 +155,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{ TUWMediaEngineThread }
+{ TUWMediaEngineEvent }
 
 // -----------------------------------------------------------------------------
 
-constructor TUWMediaEngineThread.Create;
+constructor TUWMediaEngineEvent.Create;
 begin
-  FThread := TUWCustomMediaEngineThread.Create(Self);
+  FThread := TUWCustomEventThread.Create(Self);
   FThread.Start;
 end;
 
 // -----------------------------------------------------------------------------
 
-destructor TUWMediaEngineThread.Destroy;
+destructor TUWMediaEngineEvent.Destroy;
 begin
   FThread.Terminate;
   RTLEventSetEvent(FThread.Event);
@@ -132,14 +178,149 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWMediaEngineThread.PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: integer);
+procedure TUWMediaEngineEvent.PushEvent;
 begin
-  FCommand := ACommand;
-  FParam   := AParam;
   RTLEventSetEvent(FThread.Event);
 end;
 
+{$IFDEF USEOPENGL}
 // -----------------------------------------------------------------------------
+
+{ TUWCustomGlRenderThread }
+
+// -----------------------------------------------------------------------------
+
+function GetProcAddress_GL(ctx: Pointer; Name: PChar): Pointer; cdecl;
+begin
+  Result := GetProcAddress(LibGL, Name);
+  if Result = NIL then Result := wglGetProcAddress(Name);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure Update_GL(cb_ctx: Pointer); cdecl;
+begin
+  if (cb_ctx <> NIL) then TUWMediaEngineGlRender(cb_ctx).Render;
+end;
+
+// -----------------------------------------------------------------------------
+
+constructor TUWCustomGlRenderThread.Create(AOwner: TUWMediaEngineGlRender; AControl: TOpenGlControl; AHandle: Pmpv_handle);
+begin
+  inherited Create(True);
+
+  FOwner         := AOwner;
+  FOpenGlControl := AControl;
+  FMPVHandle     := AHandle;
+  FOpenGlControl.Visible := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWCustomGlRenderThread.Initialize_GL;
+var
+  res: Integer;
+begin
+  mpv_set_option_string(FMPVHandle^,'vd-lavc-dr','no');
+  FCreateParams := NIL;
+  SetLength(FCreateParams, 4);
+  FCreateParams[0]._type    := MPV_RENDER_PARAM_API_TYPE;
+  FCreateParams[0].Data     := PChar(MPV_RENDER_API_TYPE_OPENGL);
+  FCreateParams[1]._type    := MPV_RENDER_PARAM_OPENGL_INIT_PARAMS;
+  FOpenGLParams.get_proc_address := @GetProcAddress_GL;
+  FCreateParams[1].Data     := @FOpenGLParams;
+  FCreateParams[2]._type    := MPV_RENDER_PARAM_ADVANCED_CONTROL;
+  FCreateParams[2].Data     := @glFlip;
+  FCreateParams[3]._type    := MPV_RENDER_PARAM_INVALID;
+  FCreateParams[3].Data     := NIL;
+  FOpenGlControl.MakeCurrent();
+  res := mpv_render_context_create(FRenderContext, FMPVHandle^, Pmpv_render_param(@FCreateParams[0]));
+  if (res < 0) then raise Exception.Create('Failed to initialize mpv GL context');
+
+  SetLength(FRenderParams, 3);
+  FRenderParams[0]._type := MPV_RENDER_PARAM_OPENGL_FBO;
+  FRenderParams[0].Data  := NIL;
+  FRenderParams[1]._type := MPV_RENDER_PARAM_FLIP_Y;
+  FRenderParams[1].Data  := @glFlip;
+  FRenderParams[2]._type := MPV_RENDER_PARAM_INVALID;
+  FRenderParams[3].Data  := NIL;
+  Event := RTLEventCreate;
+  FOpenGlControl.MakeCurrent();
+  mpv_render_context_set_update_callback(FRenderContext^, @Update_GL, FOwner);
+  mpv_render_context_update(FRenderContext^);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWCustomGlRenderThread.Execute;
+var
+  mpvfbo: mpv_opengl_fbo;
+begin
+  Initialize_GL;
+  while not Terminated do
+  begin
+    RTLEventWaitFor(Event);
+    begin
+      while (mpv_render_context_update(FRenderContext^) and MPV_RENDER_UPDATE_FRAME) <> 0 do
+      begin
+        FOpenGlControl.MakeCurrent();
+        mpvfbo.fbo             := 0;
+        mpvfbo.h               := FOpenGlControl.Height;
+        mpvfbo.w               := FOpenGlControl.Width;
+        mpvfbo.internal_format := 0;
+        FRenderParams[0].Data  := @mpvfbo;
+        mpv_render_context_render(FRenderContext^, Pmpv_render_param(@FRenderParams[0]));
+        FOpenGlControl.SwapBuffers();
+        mpv_render_context_report_swap(FRenderContext^);
+      end;
+    end;
+    RTLeventResetEvent(Event);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TUWCustomGlRenderThread.Destroy;
+begin
+  mpv_render_context_set_update_callback(FRenderContext^, NIL, NIL);
+  mpv_render_context_update(FRenderContext^);
+  mpv_render_context_free(FRenderContext^);
+  RTLeventdestroy(Event);
+
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ TUWMediaEngineGlRender }
+
+// -----------------------------------------------------------------------------
+
+constructor TUWMediaEngineGlRender.Create(AControl: TOpenGlControl; AHandle: pmpv_handle);
+begin
+  FThread := TUWCustomGlRenderThread.Create(Self, AControl, AHandle);
+  FThread.FreeOnTerminate := True;
+  FThread.Start;
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TUWMediaEngineGlRender.Destroy;
+begin
+  FThread.Terminate;
+  Render;
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWMediaEngineGlRender.Render;
+begin
+  RTLeventSetEvent(FThread.Event);
+end;
+
+// -----------------------------------------------------------------------------
+{$ENDIF}
 
 end.
 

@@ -1,11 +1,14 @@
 {*
  *  URUWorks Media Engine
  *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
+ *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
@@ -13,6 +16,9 @@
  *  rights and limitations under the License.
  *
  *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
+ *
+ *  Based on the great work of OvoM3U
+ *  Copyright (C) 2020 Marco Caselli.
  *}
 
 unit UWMediaEngine;
@@ -35,8 +41,7 @@ type
   { TUWMediaEngine Types }
 
   TUWMediaEngineSate      = (mesStop, mesPlay, mesPause, mesEnd);
-  TUWMediaEngineCommand   = (mecInvalid, mecLoading, mecLoaded, mecEnded, mecStop, mecPlay, mecPause, mecSeek, mecTimeChanged, mecTracks, mecUser);
-  TUWMediaEngineOnCommand = procedure(Sender: TObject; ACommand: TUWMediaEngineCommand; AParam: Integer = 0) of object;
+  TUWMediaEngineOnEvent   = procedure(Sender: TObject; AParam: Integer = 0) of object;
   TUWMediaEngineTrackType = (trkVideo, trkAudio, trkSubtitle, trkUnknown);
 
   TUWMediaEngineTrackInfo = record
@@ -63,8 +68,21 @@ type
     {$IFDEF USEOPENGL}
     FOpenGlControl : TOpenGlControl;
     {$ENDIF}
-    FOnCommand   : TUWMediaEngineOnCommand;
     FFileName    : String;
+
+    FOnStartFile: TNotifyEvent;        // Notification before playback start of a file (before the file is loaded).
+    FOnEndFile: TNotifyEvent;          // Notification after playback end (after the file was unloaded).
+    FOnFileLoaded: TNotifyEvent;       // Notification when the file has been loaded (headers were read etc.)
+    FOnIdle: TNotifyEvent;             // Idle mode was entered.
+    FOnVideoReconfig: TNotifyEvent;    // Happens after video changed in some way.
+    FOnAudioReconfig: TNotifyEvent;    // Similar to VIDEO_RECONFIG.
+    FOnSeek: TUWMediaEngineOnEvent;    // Happens when a seek was initiated.
+    FOnPlaybackRestart: TNotifyEvent;  // Usually happens on start of playback and after seeking.
+
+    FOnPlay: TNotifyEvent;
+    FOnStop: TNotifyEvent;
+    FOnPause: TNotifyEvent;
+    FOnTimeChanged: TUWMediaEngineOnEvent;
   protected
     function GetMediaPos: Integer; virtual; abstract;
     procedure SetMediaPos(const AValue: Integer); virtual; abstract;
@@ -72,12 +90,11 @@ type
     procedure LoadTracks; virtual; abstract;
 
     function DoPlay(const AFileName: String; const APos: Integer = 0): Boolean; virtual; abstract;
-    procedure PostCommand(const ACommand: TUWMediaEngineCommand; const AParam: Integer = 0); virtual; abstract;
-    procedure ReceivedCommand(Sender: TObject; ACommand: TUWMediaEngineCommand; AParam: Integer = 0); virtual;
+    procedure PushEvent(Sender: Pointer); virtual; abstract;
+    procedure ReceivedEvent(Sender: TObject); virtual; abstract;
 
     function GetVolume: Integer; virtual; abstract;
     procedure SetVolume(const AValue: Integer); virtual; abstract;
-
   public
     TrackList: TUWMediaEngineTrackList;
     class function GetMediaEngineName: String; virtual; abstract;
@@ -104,8 +121,12 @@ type
     procedure SetTextPosition(const AValue: String); virtual; abstract;
     procedure SetTextSize(const AValue: Integer); virtual; abstract;
 
-    constructor Create(const AParent: TWinControl; AOnCommand: TUWMediaEngineOnCommand); virtual;
+    constructor Create(const AParent: TWinControl); virtual;
     destructor Destroy; override;
+
+    {$IFDEF USEOPENGL}
+    property OpenGlControl : TOpenGlControl read FOpenGlControl;
+    {$ENDIF}
 
     property Initialized   : Boolean read FInitialized write FInitialized;
     property State         : TUWMediaEngineSate read FState write FState;
@@ -116,7 +137,20 @@ type
     {$IFDEF USETIMER}
     property Timer         : TTimer read FTimer;
     {$ENDIF}
-    property OnCommand     : TUWMediaEngineOnCommand read FOnCommand  write FOnCommand;
+
+    property OnStartFile: TNotifyEvent read FOnStartFile write FOnStartFile;
+    property OnEndFile: TNotifyEvent read FOnEndFile write FOnEndFile;
+    property OnFileLoaded: TNotifyEvent read FOnFileLoaded write FOnFileLoaded;
+    property OnIdle: TNotifyEvent read FOnIdle write FOnIdle;
+    property OnVideoReconfig: TNotifyEvent read FOnVideoReconfig write FOnVideoReconfig;
+    property OnAudioReconfig: TNotifyEvent read FOnAudioReconfig write FOnAudioReconfig;
+    property OnSeek: TUWMediaEngineOnEvent read FOnSeek write FOnSeek;
+    property OnPlaybackRestart: TNotifyEvent read FOnPlaybackRestart write FOnPlaybackRestart;
+
+    property OnPlay : TNotifyEvent read FOnPlay  write FOnPlay;
+    property OnStop : TNotifyEvent read FOnStop  write FOnStop;
+    property OnPause: TNotifyEvent read FOnPause write FOnPause;
+    property OnTimeChanged: TUWMediaEngineOnEvent read FOnTimeChanged write FOnTimeChanged;
   end;
 
 // -----------------------------------------------------------------------------
@@ -129,11 +163,9 @@ implementation
 
 // -----------------------------------------------------------------------------
 
-constructor TUWMediaEngine.Create(const AParent: TWinControl; AOnCommand: TUWMediaEngineOnCommand);
+constructor TUWMediaEngine.Create(const AParent: TWinControl);
 begin
   inherited Create;
-
-  FOnCommand := AOnCommand;
 
   {$IFDEF USETIMER}
   FTimer := TTimer.Create(NIL);
@@ -190,11 +222,12 @@ begin
   {$IFDEF USETIMER}
   FTimer.Enabled := IsPlaying;
   {$ENDIF}
-  if Assigned(FOnCommand) then
-    if IsPlaying then
-      FOnCommand(Self, mecPlay, 0)
-    else
-      FOnCommand(Self, mecPause, 0);
+  if IsPlaying then
+  begin
+    if Assigned(OnPlay) then OnPlay(Self);
+  end
+  else
+    if Assigned(OnPause) then OnPause(Self);
 end;
 
 // -----------------------------------------------------------------------------
@@ -204,7 +237,7 @@ begin
   {$IFDEF USETIMER}
   FTimer.Enabled := False;
   {$ENDIF}
-  if Assigned(FOnCommand) then FOnCommand(Self, mecStop, 0);
+  if Assigned(OnStop) then OnStop(Self);
 end;
 
 // -----------------------------------------------------------------------------
@@ -223,17 +256,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWMediaEngine.ReceivedCommand(Sender: TObject; ACommand: TUWMediaEngineCommand; AParam: Integer = 0);
-begin
-  if Assigned(FOnCommand) then FOnCommand(Sender, ACommand, AParam);
-end;
-
-// -----------------------------------------------------------------------------
-
 {$IFDEF USETIMER}
 procedure TUWMediaEngine.DoTimer(Sender: TObject);
 begin
-  if Assigned(FOnCommand) then FOnCommand(Sender, mecTimeChanged, GetMediaPos);
+  if Assigned(OnTimeChanged) then OnTimeChanged(Sender, GetMediaPos);
 end;
 {$ENDIF}
 

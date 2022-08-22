@@ -572,9 +572,12 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mmoTextChange(Sender: TObject);
+    procedure MPVAudioReconfig(Sender: TObject);
     procedure MPVClick(Sender: TObject);
-    procedure MPVCommand(Sender: TObject; ACommand: TUWMediaEngineCommand;
-      AParam: Integer=0);
+    procedure MPVFileLoaded(Sender: TObject);
+    procedure MPVPlay(Sender: TObject);
+    procedure MPVStop(Sender: TObject);
+    procedure MPVTimeChanged(Sender: TObject; AParam: Integer=0);
     procedure numLeftValueChange(Sender: TObject);
     procedure popMemoPopup(Sender: TObject);
     procedure popPlayRatePopup(Sender: TObject);
@@ -848,18 +851,22 @@ begin
   numBottom.Left := numRight.Left+numRight.Width + mTed;
 
   lyoEditorLeftPanel.Width := cboStyle.Width+spdInitial.Width+(mTed*3);
+  tedInitial.Left  := 25;
   tedInitial.Width := cboStyle.Width;
-  tedInitial.Top  := 0;
-  spdInitial.Top  := tedInitial.Top;
+  tedInitial.Top   := 0;
+  spdInitial.Top   := tedInitial.Top;
+  tedFinal.Left  := tedInitial.Left;
   tedFinal.Width := cboStyle.Width;
-  tedFinal.Top    := tedInitial.Top + tedInitial.Height + mTed;
-  spdFinal.Top    := tedFinal.Top;
+  tedFinal.Top   := tedInitial.Top + tedInitial.Height + mTed;
+  spdFinal.Top   := tedFinal.Top;
+  tedDuration.Left  := tedInitial.Left;
   tedDuration.Width := cboStyle.Width;
-  tedDuration.Top := tedFinal.Top + tedInitial.Height + mTed;
-  spdDuration.Top := tedDuration.Top;
+  tedDuration.Top   := tedFinal.Top + tedInitial.Height + mTed;
+  spdDuration.Top   := tedDuration.Top;
+  tedPause.Left  := tedInitial.Left;
   tedPause.Width := cboStyle.Width;
-  tedPause.Top    := tedDuration.Top + tedInitial.Height + mTed;
-  spdPause.Top    := tedPause.Top;
+  tedPause.Top   := tedDuration.Top + tedInitial.Height + mTed;
+  spdPause.Top   := tedPause.Top;
 
   cpsText.Height := 6;
   cpsText.Top := mmoText.Top+mmoText.Height;
@@ -1441,6 +1448,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.MPVAudioReconfig(Sender: TObject);
+begin
+  FillMenuWithAudioStreams(mnuVideoAudio);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.MPVClick(Sender: TObject);
 begin
   actMediaPlay.Execute;
@@ -1448,45 +1462,49 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.MPVCommand(Sender: TObject; ACommand: TUWMediaEngineCommand;
-  AParam: Integer=0);
+procedure TfrmMain.MPVFileLoaded(Sender: TObject);
 begin
-  case ACommand of
-    mecLoading: begin
-                  //stbStatus.Panels[1].Text := Strings.LoadingVideo;
-                end;
+  //stbStatus.Panels[1].Text := '';
+  LastSubtitle.ShowIndex := 0;
+  sbrSeek.Max := MPV.Engine.Duration;
+  ttTimes.Duration := MSecsToRefTime(sbrSeek.Max);
+  lblMediaTime.Caption := TimeToString(sbrSeek.Max, DefTimeFormat);
+  actMediaPlay.ImageIndex := 29;
+  actCloseVideo.Enabled := True;
 
-    mecLoaded: begin
-                 //stbStatus.Panels[1].Text := '';
-                 LastSubtitle.ShowIndex := 0;
-                 sbrSeek.Max := MPV.Engine.Duration;
-                 ttTimes.Duration := MSecsToRefTime(sbrSeek.Max);
-                 lblMediaTime.Caption := TimeToString(sbrSeek.Max, DefTimeFormat);
-                 actMediaPlay.ImageIndex := 29;
-                 actCloseVideo.Enabled := True;
+  if not actVideoPreview.Checked then actVideoPreview.Execute;
+  if Options.AutoStartPlaying and (MPV.Tag = 0) then
+    actMediaPlay.Execute
+  else if (MPV.Tag = 1) then
+    MPV.Tag := 0;
 
-                 if not actVideoPreview.Checked then actVideoPreview.Execute;
-                 if Options.AutoStartPlaying and (MPV.Tag = 0) then
-                   actMediaPlay.Execute
-                 else if (MPV.Tag = 1) then
-                   MPV.Tag := 0;
+  if actDockVideoControls.Tag <> -2 then
+    OpenAudio(MediaFileExists(MPV.Engine.FileName, TAudioExts))
+  else
+    actDockVideoControls.Tag := 0;
 
-                 if actDockVideoControls.Tag <> -2 then
-                   OpenAudio(MediaFileExists(MPV.Engine.FileName, TAudioExts))
-                 else
-                   actDockVideoControls.Tag := 0;
+  actExtractWaveform.Enabled := True;
+end;
 
-                 actExtractWaveform.Enabled := True;
-               end;
+// -----------------------------------------------------------------------------
 
-    mecTracks: FillMenuWithAudioStreams(mnuVideoAudio);
+procedure TfrmMain.MPVPlay(Sender: TObject);
+begin
+  actMediaPlay.ImageIndex := 55;
+end;
 
-    mecTimeChanged: MediaUpdateProgress(AParam);
+// -----------------------------------------------------------------------------
 
-    mecPlay  : actMediaPlay.ImageIndex := 55;
-    mecStop,
-    mecPause : actMediaPlay.ImageIndex := 29;
-  end;
+procedure TfrmMain.MPVStop(Sender: TObject);
+begin
+  actMediaPlay.ImageIndex := 29;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.MPVTimeChanged(Sender: TObject; AParam: Integer=0);
+begin
+  MediaUpdateProgress(AParam);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2498,11 +2516,23 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actSettingsExecute(Sender: TObject);
+var
+  lng: String;
+  i: Integer;
 begin
   if frmSettings = NIL then
   begin
+    lng := Options.Language;
     frmSettings := TfrmSettings.Create(Application);
     frmSettings.ShowModal;
+    // reload lang if needed
+    if lng <> Options.Language then
+      for i := 0 to Screen.FormCount-1 do
+        if Screen.Forms[i] <> NIL then
+        begin
+          ReadLangForForm(LanguageFileName, Screen.Forms[i]);
+          UpdateValues;
+        end;
   end;
 end;
 

@@ -62,6 +62,7 @@
 		{"Name" : "mnuTimings", "Text" : "Timings", "Desc" : ""},
 		{"Name" : "mnuRTL", "Text" : "Right-to-left", "Desc" : ""},
 		{"Name" : "mnuSubtitles", "Text" : "Subtitles", "Desc" : ""},
+		{"Name" : "mnuFormat", "Text" : "Format", "Desc" : ""},
 		{"Name" : "mnuFind", "Text" : "Find", "Desc" : ""},
 		{"Name" : "mnuTools", "Text" : "Tools", "Desc" : ""},
 		{"Name" : "mnuView", "Text" : "View", "Desc" : ""},
