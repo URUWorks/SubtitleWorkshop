@@ -63,6 +63,7 @@
 		{"Name" : "mnuTimings", "Text" : "计时", "Desc" : ""},
 		{"Name" : "mnuRTL", "Text" : "方向", "Desc" : ""},
 		{"Name" : "mnuSubtitles", "Text" : "字幕", "Desc" : ""},
+		{"Name" : "mnuFormat", "Text" : "样式", "Desc" : ""},
 		{"Name" : "mnuFind", "Text" : "查找", "Desc" : ""},
 		{"Name" : "mnuTools", "Text" : "工具", "Desc" : ""},
 		{"Name" : "mnuView", "Text" : "查看", "Desc" : ""},
