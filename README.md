@@ -16,7 +16,7 @@ The best choice for the beginner, expert or the fansubber.
 # Let's take a closer look
 
 ### Windows
-![win](https://uruworks.net/img/sw_win2.png)
+![win](https://uruworks.net/img/sw_win1.png)
 
 ### MacOS
 ![mac](https://uruworks.net/img/sw_macos2.png)
