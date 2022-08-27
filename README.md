@@ -11,7 +11,7 @@ Includes a spell check function and an advanced video and audio waveform preview
 
 The best choice for the beginner, expert or the fansubber. 
 
-Have a try, and you'll forget the rest!
+**Have a try, and you'll forget the rest!**
 
 # Let's take a closer look
 
@@ -23,6 +23,12 @@ Have a try, and you'll forget the rest!
 
 ### Linux Mint
 ![lnx](https://uruworks.net/img/sw_linux1.png)
+
+# Packages required to compile
+
+- VirtualTreeView V5
+- Indy 10
+- UWLazarus
 
 # Is easy to help us
 
