@@ -135,6 +135,9 @@
 		{"Name" : "actAlignToLeft", "Text" : "Align to left", "Desc" : ""},
 		{"Name" : "actAlignToCenter", "Text" : "Align to center", "Desc" : ""},
 		{"Name" : "actAlignToRight", "Text" : "Align to right", "Desc" : ""},
+		{"Name" : "actVAlignToBottom", "Text" : "Vertical align to bottom", "Desc" : ""},
+		{"Name" : "actVAlignToMiddle", "Text" : "Vertical align to middle", "Desc" : ""},
+		{"Name" : "actVAlignToTop", "Text" : "Vertical align to top", "Desc" : ""},
 		{"Name" : "numLeft", "Text" : "Left/X1", "Desc" : ""},
 		{"Name" : "numTop", "Text" : "Top/Y1", "Desc" : ""},
 		{"Name" : "numRight", "Text" : "Right/X2", "Desc" : ""},
@@ -184,6 +187,8 @@
 		{"Name" : "actViewWPM", "Text" : "Words per minute", "Desc" : ""},
 		{"Name" : "actViewCPL", "Text" : "Characters per line", "Desc" : ""},
 		{"Name" : "actViewToolbarAdditional", "Text" : "Additional", "Desc" : ""},
+		{"Name" : "actViewToolbarColors", "Text" : "Color bar", "Desc" : ""},
+		{"Name" : "actViewToolbarCoords", "Text" : "Coordinates", "Desc" : ""},
 		{"Name" : "actSettings", "Text" : "Settings...", "Desc" : ""}
 	],
 	"frmTexts" :[

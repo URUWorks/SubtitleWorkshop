@@ -80,6 +80,11 @@ type
     actCustomSearch: TAction;
     actGlossary: TAction;
     actChangeWorkspace: TAction;
+    actViewToolbarColors: TAction;
+    actViewToolbarCoords: TAction;
+    actVAlignToMiddle: TAction;
+    actVAlignToTop: TAction;
+    actVAlignToBottom: TAction;
     actSettings: TAction;
     actViewWPM: TAction;
     actTMValidate: TAction;
@@ -188,6 +193,8 @@ type
     MenuItem116: TMenuItem;
     MenuItem117: TMenuItem;
     MenuItem118: TMenuItem;
+    MenuItem119: TMenuItem;
+    MenuItem120: TMenuItem;
     MenuItem47: TMenuItem;
     MenuItem7: TMenuItem;
     mnuVST_Validate: TMenuItem;
@@ -377,6 +384,10 @@ type
     ToolButton56: TToolButton;
     ToolButton57: TToolButton;
     ToolButton58: TToolButton;
+    ToolButton59: TToolButton;
+    ToolButton60: TToolButton;
+    ToolButton61: TToolButton;
+    ToolButton62: TToolButton;
     ttTimes: TUWTickTime;
     MPV: TUWMediaPlayer;
     lyoNotes: TUWLayout;
@@ -551,6 +562,9 @@ type
     procedure actUnbreakSubtitleExecute(Sender: TObject);
     procedure actUndoExecute(Sender: TObject);
     procedure actUnMarkSubtitleExecute(Sender: TObject);
+    procedure actVAlignToBottomExecute(Sender: TObject);
+    procedure actVAlignToMiddleExecute(Sender: TObject);
+    procedure actVAlignToTopExecute(Sender: TObject);
     procedure actVideoPreviewExecute(Sender: TObject);
     procedure actViewCPLExecute(Sender: TObject);
     procedure actViewCPSExecute(Sender: TObject);
@@ -560,6 +574,8 @@ type
     procedure actViewTimesExecute(Sender: TObject);
     procedure actViewToolbarAdditionalExecute(Sender: TObject);
     procedure actChangeWorkspaceExecute(Sender: TObject);
+    procedure actViewToolbarColorsExecute(Sender: TObject);
+    procedure actViewToolbarCoordsExecute(Sender: TObject);
     procedure actViewWPMExecute(Sender: TObject);
     procedure cboActorChange(Sender: TObject);
     procedure cboFindChange(Sender: TObject);
@@ -1712,6 +1728,11 @@ begin
           2: actAlignToCenter.Checked := True;
           3: actAlignToRight.Checked  := True;
         end;
+        case Subtitles[NodeIndex].VAlign of
+          0: actVAlignToBottom.Checked := True;
+          1: actVAlignToMiddle.Checked := True;
+          2: actVAlignToTop.Checked    := True;
+        end;
         actShiftToPrevious.Enabled := (NodeIndex > 0);
         actDefaultPause.Enabled    := actShiftToPrevious.Enabled;
         actShiftToNext.Enabled     := NodeIndex < Subtitles.Count-1;
@@ -1736,6 +1757,9 @@ begin
         actAlignToLeft.Checked   := False;
         actAlignToCenter.Checked := False;
         actAlignToRight.Checked  := False;
+        actVAlignToBottom.Checked := False;
+        actVAlignToMiddle.Checked := False;
+        actVAlignToTop.Checked    := False;
 
         actShiftToPrevious.Enabled := True;
         actDefaultPause.Enabled    := True;
@@ -2482,6 +2506,27 @@ end;
 procedure TfrmMain.actUnMarkSubtitleExecute(Sender: TObject);
 begin
   VSTMarkSubtitles(False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAlignToBottomExecute(Sender: TObject);
+begin
+  SetVAlignTo(0);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAlignToMiddleExecute(Sender: TObject);
+begin
+  SetVAlignTo(1);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAlignToTopExecute(Sender: TObject);
+begin
+  SetVAlignTo(2);
 end;
 
 // -----------------------------------------------------------------------------
@@ -3411,6 +3456,36 @@ end;
 procedure TfrmMain.actChangeWorkspaceExecute(Sender: TObject);
 begin
   SetWorkspace(actChangeWorkspace.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actViewToolbarColorsExecute(Sender: TObject);
+begin
+  with (Sender as TAction) do
+  begin
+    shpColor1.Visible := Checked;
+    shpColor2.Visible := Checked;
+    shpColor3.Visible := Checked;
+    shpColor4.Visible := Checked;
+    shpColor5.Visible := Checked;
+    shpColor6.Visible := Checked;
+    shpColor7.Visible := Checked;
+    shpColor8.Visible := Checked;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actViewToolbarCoordsExecute(Sender: TObject);
+begin
+  with (Sender as TAction) do
+  begin
+    numLeft.Visible   := Checked;
+    numTop.Visible    := Checked;
+    numRight.Visible  := Checked;
+    numBottom.Visible := Checked;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

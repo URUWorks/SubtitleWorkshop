@@ -98,6 +98,7 @@ procedure SetTimeEditMode(const Mode: TUWTimeEditMode);
 procedure SetWorkspace(const Alternative: Boolean);
 
 procedure SetAlignTo(const Tag: Integer);
+procedure SetVAlignTo(const Tag: Integer);
 procedure SetActor;
 procedure SetStyle;
 
@@ -164,6 +165,7 @@ procedure ApplyShiftToNext(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAutomaticDuration(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyDefaultPause(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAlign(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyVAlign(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyActor(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyStyle(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyXY(const Item: PUWSubtitleItem; const Index: Integer);
@@ -1064,6 +1066,10 @@ begin
       OpenKey('Toolbars');
       frmMain.actViewToolbarAdditional.Checked := GetValue('Additional', False);
       frmMain.actViewToolbarAdditionalExecute(frmMain.actViewToolbarAdditional);
+      frmMain.actViewToolbarColors.Checked := GetValue('Colors', True);
+      frmMain.actViewToolbarColorsExecute(frmMain.actViewToolbarColors);
+      frmMain.actViewToolbarCoords.Checked := GetValue('Coords', False);
+      frmMain.actViewToolbarCoordsExecute(frmMain.actViewToolbarCoords);
       CloseKey;
 
       with Colors do
@@ -1174,6 +1180,8 @@ begin
 
       OpenKey('Toolbars');
       SetValue('Additional', frmMain.actViewToolbarAdditional.Checked);
+      SetValue('Colors', frmMain.actViewToolbarColors.Checked);
+      SetValue('Coords', frmMain.actViewToolbarCoords.Checked);
       CloseKey;
 
       with Colors do
@@ -1725,6 +1733,16 @@ begin
     VSTDoLoop(@ApplyAlign)
   else
     Subtitles.ItemPointer[VSTFocusedNode]^.Align := Tag;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SetVAlignTo(const Tag: Integer);
+begin
+  if GetMemoFocused = NIL then
+    VSTDoLoop(@ApplyVAlign)
+  else
+    Subtitles.ItemPointer[VSTFocusedNode]^.VAlign := Tag;
 end;
 
 // -----------------------------------------------------------------------------
@@ -2892,6 +2910,23 @@ begin
       Item^.Align := 3
     else
       Item^.Align := 0;
+
+  IncrementUndoGroup;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyVAlign(const Item: PUWSubtitleItem; const Index: Integer);
+begin
+  Undo.AddUndo(utSubtitleChange, Index, Subtitles[Index], LastUndoGroup);
+
+  with frmMain do
+    if actVAlignToMiddle.Checked then
+      Item^.VAlign := 1
+    else if actVAlignToTop.Checked then
+      Item^.VAlign := 2
+    else
+      Item^.VAlign := 0;
 
   IncrementUndoGroup;
 end;

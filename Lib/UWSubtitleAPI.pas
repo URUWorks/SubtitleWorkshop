@@ -105,6 +105,7 @@ type
     Marked      : Boolean;
     ErrorType   : TSubtitleErrorTypeSet;
     Align       : Integer;
+    VAlign      : Integer;
     R           : TRect;
     Style       : String;
     Actor       : String;
@@ -729,6 +730,7 @@ begin
       Result.Marked      := Marked;
       Result.ErrorType   := ErrorType;
       Result.Align       := Align;
+      Result.VAlign      := VAlign;
       Result.R           := R;
       Result.Style       := Style;
       Result.Actor       := Actor;
@@ -758,6 +760,7 @@ begin
       Marked      := Item.Marked;
       ErrorType   := Item.ErrorType;
       Align       := Item.Align;
+      VAlign      := Item.VAlign;
       R           := Item.R;
       Style       := Item.Style;
       Actor       := Item.Actor;
@@ -1092,6 +1095,7 @@ begin
     Marked       := False;
     ErrorType    := [];
     Align        := 0;
+    VAlign       := 0;
     R            := Rect(0, 0, 0, 0);
     Style        := '';
     Actor        := '';
@@ -1494,6 +1498,7 @@ begin
     Marked      := False;
     ErrorType   := [];
     Align       := 0;
+    VAlign      := 0;
     R           := Rect(0, 0, 0, 0);
     Style       := '';
     Actor       := '';
