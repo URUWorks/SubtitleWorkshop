@@ -187,9 +187,9 @@ begin
     for i := FromItem to ToItem do
     begin
       Element := XmlDoc.CreateElement('p');
-      TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'));
+      TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS));
       TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
-      TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'));
+      TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS));
       SubNode := XmlDoc.CreateTextNode(SWTagsToHTML(ReplaceEnters(Subtitles.Text[i], sLineBreak, '<br/>')));
       Element.AppendChild(SubNode);
       Node.AppendChild(Element);

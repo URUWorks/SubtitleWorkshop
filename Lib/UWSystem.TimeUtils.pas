@@ -33,7 +33,7 @@ function TimeToFrames(const Time: Cardinal; const FPS: Single): Cardinal;
 function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Single): Cardinal;
 function FramesToTime(const Frames, FPS: Single): Cardinal;
 function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Single = 25; const ATrim: Boolean = False): String;
-function StringToTime(const Time: String; const NoHours: Boolean = False): Cardinal;
+function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Single = 0): Cardinal;
 function TimeInFormat(const Time, Format: String): Boolean;
 function TrimTimeString(Text: String): String;
 function MSToHHMMSSFFTime(const Time: Integer; const FPS: Single; const FramesSeparator: Char = ':'): String;
@@ -168,7 +168,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function StringToTime(const Time: String; const NoHours: Boolean = False): Cardinal;
+function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Single = 0): Cardinal;
 var
   H, M, S, Z, i                : Integer;
   PCount, PFirst, PSec, PThird : Integer;
@@ -234,7 +234,10 @@ begin
         begin
           S := StringToInt(Copy(Time, PSec + 1, PThird - PSec - 1));
 
-          Z := StringToInt(AddCharR('0', Copy(Time, PThird + 1, Length(Time)), 3));
+          if FPS = 0 then
+            Z := StringToInt(AddCharR('0', Copy(Time, PThird + 1, Length(Time)), 3))
+          else
+            Z := FramesToTime( StringToInt(Copy(Time, PThird + 1, Length(Time))), FPS);
         end
         else
           if not NoHours then
@@ -254,7 +257,7 @@ function TimeInFormat(const Time, Format: String): Boolean;
 begin
   Result := False;
 
-  if StringToTime(Time) >= 0 then
+  if StringToTime(Time) > 0 then
   begin
     if (Pos(':', Time) = Pos(':', Format)) and
        (Pos('.', Time) = Pos('.', Format)) and

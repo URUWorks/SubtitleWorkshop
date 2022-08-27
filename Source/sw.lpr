@@ -1,8 +1,15 @@
 program sw;
 
 {$mode objfpc}{$H+}
-{$IFDEF UNIX}{$DEFINE UseCThreads}{$ENDIF}
 
+{$IFOPT D+}
+  {$APPTYPE CONSOLE}
+  {$DEFINE DEBUG}
+{$ENDIF}
+
+{$IFDEF UNIX}
+  {$DEFINE UseCThreads}
+{$ENDIF}
 uses
   {$IFDEF UNIX}
     {$IFDEF UseCThreads}
@@ -18,7 +25,7 @@ uses
   UAbout, UWelcome, UTexts, UTimings, UInfoAndErrors, UVideo,
   UInfoAndErrorsTypes, UAudioExtraction, UStylesAndActors, UGlossary, UTM, 
   UProject, USettings
-  { you can add units after this };
+  {$IFDEF DEBUG}, UWDebug{$ENDIF};
 
 {$R *.res}
 
