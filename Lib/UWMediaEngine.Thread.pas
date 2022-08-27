@@ -312,7 +312,6 @@ end;
 constructor TUWMediaEngineGlRender.Create(AControl: TOpenGlControl; AHandle: pmpv_handle);
 begin
   FThread := TUWCustomGlRenderThread.Create(Self, AControl, AHandle);
-  //FThread.FreeOnTerminate := True;
   FThread.Start;
 end;
 
@@ -322,6 +321,9 @@ destructor TUWMediaEngineGlRender.Destroy;
 begin
   FThread.Terminate;
   RTLeventSetEvent(FThread.Event);
+  FThread.WaitFor;
+  FThread.Free;
+
   inherited Destroy;
 end;
 

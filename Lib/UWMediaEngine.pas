@@ -184,6 +184,8 @@ begin
   FOpenGlControl := TOpenGlControl.Create(FParent);
   FOpenGlControl.Parent := FParent;
   FOpenGlControl.DoubleBuffered := True;
+  FOpenGlControl.Align := alClient;
+  FOpenGlControl.OnClick := FParent.OnClick;
   {$ENDIF}
 
   SetLength(TrackList, 0);

@@ -3,7 +3,9 @@ program sw;
 {$mode objfpc}{$H+}
 
 {$IFOPT D+}
-  {$APPTYPE CONSOLE}
+  {$IFDEF WINDOWS}
+    {$APPTYPE CONSOLE}
+  {$ENDIF}
   {$DEFINE DEBUG}
 {$ENDIF}
 

@@ -228,7 +228,7 @@ type
     MenuItem45: TMenuItem;
     MenuItem46: TMenuItem;
     mnuExit: TMenuItem;
-    MenuItem48: TMenuItem;
+    mnuAbout: TMenuItem;
     MenuItem49: TMenuItem;
     MenuItem50: TMenuItem;
     MenuItem51: TMenuItem;
@@ -689,6 +689,9 @@ const
 
 var
   s: String;
+  {$IFDEF DARWIN}
+  AppMenu, AboutMenu: TMenuItem;
+  {$ENDIF}
 begin
   Randomize; // used for tips
   DoubleBuffered := True;
@@ -808,7 +811,16 @@ begin
 
   // Prepare GUI
   {$IFDEF DARWIN}
-  mnuExit.Visible := False;
+  AppMenu := TMenuItem.Create(Self); {Application menu}
+  AppMenu.Caption := #$EF#$A3#$BF;   {Unicode Apple logo char}
+  mnuMain.Items.Insert(0, AppMenu);
+
+  AboutMenu := TMenuItem.Create(Self);
+  AboutMenu.Action := actAbout;
+  AppMenu.Add(AboutMenu); {Add About as item in application menu}
+
+  mnuAbout.Visible := False;
+  mnuExit.Visible  := False;
   {$ENDIF}
   //tlbMain.Height := cboFind.Height;
   imgFind.Top := 0;

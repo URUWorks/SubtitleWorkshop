@@ -2840,7 +2840,7 @@ object frmMain: TfrmMain
     end
     object mnuHelp: TMenuItem
       Caption = 'Help'
-      object MenuItem48: TMenuItem
+      object mnuAbout: TMenuItem
         Action = actAbout
       end
     end
