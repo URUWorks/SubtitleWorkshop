@@ -32,7 +32,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, UWMediaEngine, {$IFDEF USETHREADEVENTS}UWMediaEngine.Thread,{$ENDIF}
-  UWlibMPV.Client {$IFDEF USEOPENGL}, UWlibMPV.Render, gl, Forms{$ENDIF}
+  UWlibMPV.Client {$IFDEF ENABLE_OPENGL}, UWlibMPV.Render, gl, Forms{$ENDIF}
   {$IFDEF LINUX}
   , gtk2, gdk2x
   {$ENDIF};
@@ -47,7 +47,7 @@ type
   private
     FMPV_HANDLE: Pmpv_handle;
     FText: String;
-    {$IFDEF USEOPENGL}
+    {$IFDEF ENABLE_OPENGL}
     glRender: TUWMediaEngineGlRender;
     {$ENDIF}
     function GetBoolProperty(const APropertyName: String): Boolean;
@@ -56,10 +56,8 @@ type
   protected
     {$IFDEF USETHREADEVENTS}
     FEvent: TUWMediaEngineEvent;
-    {$ELSE}
-    FEvent: PRtlEvent;
     {$ENDIF}
-    {$IFDEF USEOPENGL}
+    {$IFDEF ENABLE_OPENGL}
     procedure Initialize_GL(Data: PtrInt);
     {$ENDIF}
     function GetVolume: Integer; override;
@@ -96,7 +94,7 @@ type
 
 implementation
 
-uses fpjson, jsonparser;
+uses fpjson, jsonparser {$IFDEF DEBUG}, UWDebug{$ENDIF};
 
 const
    LIBMPV_MAX_VOLUME = 100;
@@ -105,6 +103,8 @@ const
 
 procedure LIBMPV_EVENT(Sender: Pointer); cdecl;
 begin
+  {$IFDEF DEBUG}DebugMsg('libmpv: wakeup_event');{$ENDIF}
+
   if (Sender <> NIL) then
     TUWLibMPV(Sender).PushEvent(Sender);
 end;
@@ -112,12 +112,18 @@ end;
 // -----------------------------------------------------------------------------
 
 constructor TUWLibMPV.Create(const AParent: TWinControl);
+var
+  res: Boolean;
 begin
   inherited Create(AParent);
+  {$IFDEF DEBUG}DebugMsg('libmpv: constructor');{$ENDIF}
 
+  {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV;');{$ENDIF}
   ErrorCode := Load_libMPV;
-  {$IFDEF USEOPENGL}
-  if ErrorCode <> 0 then Load_libMPV_Render;
+  {$IFDEF ENABLE_OPENGL}
+  {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render;');{$ENDIF}
+  if ErrorCode = 0 then res := Load_libMPV_Render;
+  {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render -> ' + IntToStr(Integer(res)));{$ENDIF}
   {$ENDIF}
 end;
 
@@ -125,6 +131,8 @@ end;
 
 destructor TUWLibMPV.Destroy;
 begin
+  {$IFDEF DEBUG}DebugMsg('libmpv: destructor');{$ENDIF}
+
   UnInitialize;
   Free_libMPV;
 
@@ -149,16 +157,18 @@ end;
 
 procedure TUWLibMPV.UnInitialize;
 begin
+  {$IFDEF DEBUG}DebugMsg('libmpv: unitialize');{$ENDIF}
   FText := '';
-  {$IFDEF USEOPENGL}
+  {$IFDEF ENABLE_OPENGL}
   glRender.Free;
   {$ENDIF};
+  {$IFDEF DEBUG}DebugMsg('libmpv: set_wakeup_callback');{$ENDIF}
   if Assigned(mpv_set_wakeup_callback) and Assigned(FMPV_HANDLE) then mpv_set_wakeup_callback(FMPV_HANDLE^, NIL, Self);
   {$IFDEF USETHREADEVENTS}
+  {$IFDEF DEBUG}DebugMsg('libmpv: fevent free');{$ENDIF}
   if Assigned(FEvent) then FEvent.Free;
-  {$ELSE}
-  RTLEventDestroy(FEvent);
   {$ENDIF};
+  {$IFDEF DEBUG}DebugMsg('libmpv: terminate');{$ENDIF}
   if Assigned(mpv_terminate_destroy) and Assigned(FMPV_HANDLE) then mpv_terminate_destroy(FMPV_HANDLE^);
 end;
 
@@ -168,14 +178,17 @@ function TUWLibMPV.Initialize: Boolean;
 var
   hwnd: {$IFDEF WINDOWS}THandle;{$ELSE}PtrUInt;{$ENDIF}
 begin
+  {$IFDEF DEBUG}DebugMsg('libmpv: initialize');{$ENDIF}
   Result := False;
   FText  := '';
 
+  {$IFDEF DEBUG}DebugMsg('libmpv: create');{$ENDIF}
   if not Assigned(mpv_create) then Exit;
   FMPV_HANDLE := mpv_create();
   if not Assigned(FMPV_HANDLE) then Exit;
 
-  //mpv_set_option_string(FMPV_HANDLE^, 'hwdec', 'auto'); // enable best hw decoder
+  {$IFDEF DEBUG}DebugMsg('libmpv: set options');{$ENDIF}
+  mpv_set_option_string(FMPV_HANDLE^, 'hwdec', 'auto'); // enable best hw decoder
   mpv_set_option_string(FMPV_HANDLE^, 'keep-open', 'always'); // don't auto close video
   mpv_set_option_string(FMPV_HANDLE^, 'sub', 'no'); // don't load subtitles
 
@@ -187,7 +200,8 @@ begin
   hwnd := Parent.Handle;
   {$ENDIF}
 
-  {$IFNDEF USEOPENGL}
+  {$IFNDEF ENABLE_OPENGL}
+  {$IFDEF DEBUG}DebugMsg('libmpv: wid');{$ENDIF}
   mpv_set_option(FMPV_HANDLE^, 'wid', MPV_FORMAT_INT64, @hwnd); // window parent
   {$ENDIF}
 
@@ -201,18 +215,20 @@ begin
   mpv_observe_property(FMPV_HANDLE^, 0, 'playback-time', MPV_FORMAT_INT64);
   {$ENDIF}
 
+  {$IFDEF DEBUG}DebugMsg('libmpv: initialize handle');{$ENDIF}
   mpv_initialize(FMPV_HANDLE^);
   mpv_request_log_messages(FMPV_HANDLE^, 'no');
 
   {$IFDEF USETHREADEVENTS}
+  {$IFDEF DEBUG}DebugMsg('libmpv: event create');{$ENDIF}
   FEvent := TUWMediaEngineEvent.Create;
   FEvent.OnEvent := @ReceivedEvent;
-  {$ELSE}
-  FEvent := RTLEventCreate;
   {$ENDIF}
+  {$IFDEF DEBUG}DebugMsg('libmpv: set_wakeup_callback');{$ENDIF}
   mpv_set_wakeup_callback(FMPV_HANDLE^, @LIBMPV_EVENT, Self);
 
-  {$IFDEF USEOPENGL}
+  {$IFDEF ENABLE_OPENGL}
+  {$IFDEF DEBUG}DebugMsg('libmpv: QueueAsyncCall');{$ENDIF}
   Application.QueueAsyncCall(@Initialize_GL, 0);
   {$ENDIF}
 
@@ -222,9 +238,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{$IFDEF USEOPENGL}
+{$IFDEF ENABLE_OPENGL}
 procedure TUWLibMPV.Initialize_GL(Data: PtrInt);
 begin
+  {$IFDEF DEBUG}DebugMsg('libmpv: initialize_gl');{$ENDIF}
   OpenGlControl.Visible := False;
   OpenGlControl.ReleaseContext;
   Application.ProcessMessages;
@@ -368,9 +385,7 @@ begin
   {$IFDEF USETHREADEVENTS}
   FEvent.PushEvent;
   {$ELSE}
-  RTLEventWaitFor(FEvent);
   ReceivedEvent(TUWLibMPV(Sender));
-  RTLEventResetEvent(FEvent);
   {$ENDIF}
 end;
 
@@ -380,9 +395,14 @@ procedure TUWLibMPV.ReceivedEvent(Sender: TObject);
 var
   Event: Pmpv_event;
 begin
-  Event := mpv_wait_event(FMPV_HANDLE^, 0);
-  while Event^.event_id <> MPV_EVENT_NONE do
+  while True do
   begin
+    {$IFDEF DEBUG}DebugMsg('libmpv: ReceivedEvent');{$ENDIF}
+    Event := mpv_wait_event(FMPV_HANDLE^, 0);
+    if Event = NIL then Break;
+    {$IFDEF DEBUG}DebugMsg('libmpv: ReceivedEvent ID --> ' + IntToStr(Event^.event_id));{$ENDIF}
+    if Event^.event_id = MPV_EVENT_NONE then Break;
+
     case (Event^.event_id) of
       MPV_EVENT_START_FILE: if Assigned(OnStartFile) then OnStartFile(Sender);
 
@@ -424,7 +444,6 @@ begin
                                  end;}
       {$ENDIF}
     end;
-    Event := mpv_wait_event(FMPV_HANDLE^, 0);
   end;
 end;
 

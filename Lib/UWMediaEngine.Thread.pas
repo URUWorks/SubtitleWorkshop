@@ -32,7 +32,7 @@ interface
 
 uses
   Classes, SysUtils
-  {$IFDEF USEOPENGL}, UWlibMPV.Client, UWlibMPV.Render, UWlibMPV.Render_gl,
+  {$IFDEF ENABLE_OPENGL}, UWlibMPV.Client, UWlibMPV.Render, UWlibMPV.Render_gl,
   gl, glext, OpenGLContext{$ENDIF};
 
 // -----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ type
     property OnEvent: TNotifyEvent read FOnEvent write FOnEvent;
   end;
 
-  {$IFDEF USEOPENGL}
+  {$IFDEF ENABLE_OPENGL}
   // used to handle mpv/opengl envents
 
   { TUWCustomGlRenderThread }
@@ -107,9 +107,11 @@ type
 
 implementation
 
-{$IFDEF USEOPENGL}
+{$IFDEF DEBUG}uses UWDebug;{$ENDIF}
+
+{$IFDEF ENABLE_OPENGL}
 const
-  glFlip: longint = 1;
+  glFlip: Longint = 1;
 {$ENDIF}
 
 // -----------------------------------------------------------------------------
@@ -161,6 +163,7 @@ end;
 
 constructor TUWMediaEngineEvent.Create;
 begin
+  FOnEvent := NIL;
   FThread := TUWCustomEventThread.Create(Self);
   FThread.Start;
 end;
@@ -169,8 +172,10 @@ end;
 
 destructor TUWMediaEngineEvent.Destroy;
 begin
+  {$IFDEF DEBUG}DebugMsg('TUWMediaEngineEvent: destroy');{$ENDIF}
   FThread.Terminate;
   RTLEventSetEvent(FThread.Event);
+  FThread.WaitFor;
   FThread.Free;
 
   inherited Destroy;
@@ -183,7 +188,7 @@ begin
   RTLEventSetEvent(FThread.Event);
 end;
 
-{$IFDEF USEOPENGL}
+{$IFDEF ENABLE_OPENGL}
 // -----------------------------------------------------------------------------
 
 { TUWCustomGlRenderThread }
@@ -194,6 +199,7 @@ function GetProcAddress_GL(ctx: Pointer; Name: PChar): Pointer; cdecl;
 begin
   Result := GetProcAddress(LibGL, Name);
   if Result = NIL then Result := wglGetProcAddress(Name);
+  {$IFDEF DEBUG}if Result = NIL then DebugMsg('GetProcAddress_GL: NIL!');{$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
@@ -221,29 +227,38 @@ procedure TUWCustomGlRenderThread.Initialize_GL;
 var
   res: Integer;
 begin
-  mpv_set_option_string(FMPVHandle^,'vd-lavc-dr','no');
+  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: Initialize_GL');{$ENDIF}
+
+  mpv_set_option_string(FMPVHandle^,'vd-lavc-dr', 'no');
+
+  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: CreateParams');{$ENDIF}
   FCreateParams := NIL;
+  FOpenGLParams.get_proc_address := @GetProcAddress_GL;
+  FOpenGLParams.get_proc_address_ctx := NIL;
+
   SetLength(FCreateParams, 4);
   FCreateParams[0]._type    := MPV_RENDER_PARAM_API_TYPE;
   FCreateParams[0].Data     := PChar(MPV_RENDER_API_TYPE_OPENGL);
   FCreateParams[1]._type    := MPV_RENDER_PARAM_OPENGL_INIT_PARAMS;
-  FOpenGLParams.get_proc_address := @GetProcAddress_GL;
   FCreateParams[1].Data     := @FOpenGLParams;
   FCreateParams[2]._type    := MPV_RENDER_PARAM_ADVANCED_CONTROL;
   FCreateParams[2].Data     := @glFlip;
   FCreateParams[3]._type    := MPV_RENDER_PARAM_INVALID;
   FCreateParams[3].Data     := NIL;
   FOpenGlControl.MakeCurrent();
+  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create');{$ENDIF}
   res := mpv_render_context_create(FRenderContext, FMPVHandle^, Pmpv_render_param(@FCreateParams[0]));
+  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create --> ' + IntToStr(res));{$ENDIF}
   if (res < 0) then raise Exception.Create('Failed to initialize mpv GL context');
 
+  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: CreateRenderParams');{$ENDIF}
   SetLength(FRenderParams, 3);
   FRenderParams[0]._type := MPV_RENDER_PARAM_OPENGL_FBO;
   FRenderParams[0].Data  := NIL;
   FRenderParams[1]._type := MPV_RENDER_PARAM_FLIP_Y;
   FRenderParams[1].Data  := @glFlip;
   FRenderParams[2]._type := MPV_RENDER_PARAM_INVALID;
-  FRenderParams[3].Data  := NIL;
+  FRenderParams[2].Data  := NIL;
   Event := RTLEventCreate;
   FOpenGlControl.MakeCurrent();
   mpv_render_context_set_update_callback(FRenderContext^, @Update_GL, FOwner);
@@ -260,19 +275,17 @@ begin
   while not Terminated do
   begin
     RTLEventWaitFor(Event);
+    while (mpv_render_context_update(FRenderContext^) and MPV_RENDER_UPDATE_FRAME) <> 0 do
     begin
-      while (mpv_render_context_update(FRenderContext^) and MPV_RENDER_UPDATE_FRAME) <> 0 do
-      begin
-        FOpenGlControl.MakeCurrent();
-        mpvfbo.fbo             := 0;
-        mpvfbo.h               := FOpenGlControl.Height;
-        mpvfbo.w               := FOpenGlControl.Width;
-        mpvfbo.internal_format := 0;
-        FRenderParams[0].Data  := @mpvfbo;
-        mpv_render_context_render(FRenderContext^, Pmpv_render_param(@FRenderParams[0]));
-        FOpenGlControl.SwapBuffers();
-        mpv_render_context_report_swap(FRenderContext^);
-      end;
+      FOpenGlControl.MakeCurrent();
+      mpvfbo.fbo             := 0;
+      mpvfbo.h               := FOpenGlControl.Height;
+      mpvfbo.w               := FOpenGlControl.Width;
+      mpvfbo.internal_format := 0;
+      FRenderParams[0].Data  := @mpvfbo;
+      mpv_render_context_render(FRenderContext^, Pmpv_render_param(@FRenderParams[0]));
+      FOpenGlControl.SwapBuffers();
+      mpv_render_context_report_swap(FRenderContext^);
     end;
     RTLeventResetEvent(Event);
   end;
@@ -285,7 +298,7 @@ begin
   mpv_render_context_set_update_callback(FRenderContext^, NIL, NIL);
   mpv_render_context_update(FRenderContext^);
   mpv_render_context_free(FRenderContext^);
-  RTLeventdestroy(Event);
+  RTLeventDestroy(Event);
 
   inherited Destroy;
 end;
@@ -299,7 +312,7 @@ end;
 constructor TUWMediaEngineGlRender.Create(AControl: TOpenGlControl; AHandle: pmpv_handle);
 begin
   FThread := TUWCustomGlRenderThread.Create(Self, AControl, AHandle);
-  FThread.FreeOnTerminate := True;
+  //FThread.FreeOnTerminate := True;
   FThread.Start;
 end;
 
@@ -308,7 +321,7 @@ end;
 destructor TUWMediaEngineGlRender.Destroy;
 begin
   FThread.Terminate;
-  Render;
+  RTLeventSetEvent(FThread.Event);
   inherited Destroy;
 end;
 

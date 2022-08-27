@@ -32,7 +32,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, LazFileUtils, ExtCtrls
-  {$IFDEF USEOPENGL}, OpenGLContext{$ENDIF};
+  {$IFDEF ENABLE_OPENGL}, OpenGLContext{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ type
     {$IFDEF USETIMER}
     FTimer       : TTimer;
     {$ENDIF}
-    {$IFDEF USEOPENGL}
+    {$IFDEF ENABLE_OPENGL}
     FOpenGlControl : TOpenGlControl;
     {$ENDIF}
     FFileName    : String;
@@ -124,7 +124,7 @@ type
     constructor Create(const AParent: TWinControl); virtual;
     destructor Destroy; override;
 
-    {$IFDEF USEOPENGL}
+    {$IFDEF ENABLE_OPENGL}
     property OpenGlControl : TOpenGlControl read FOpenGlControl;
     {$ENDIF}
 
@@ -157,6 +157,8 @@ type
 
 implementation
 
+{$IFDEF DEBUG}uses UWDebug;{$ENDIF}
+
 // -----------------------------------------------------------------------------
 
 { TUWMediaEngine }
@@ -178,8 +180,9 @@ begin
   FErrorCode := 0;
   FFileName := '';
 
-  {$IFDEF USEOPENGL}
+  {$IFDEF ENABLE_OPENGL}
   FOpenGlControl := TOpenGlControl.Create(FParent);
+  FOpenGlControl.Parent := FParent;
   FOpenGlControl.DoubleBuffered := True;
   {$ENDIF}
 
@@ -194,7 +197,7 @@ begin
   {$IFDEF USETIMER}
   FTimer.Free;
   {$ENDIF}
-  {$IFDEF USEOPENGL}
+  {$IFDEF ENABLE_OPENGL}
   FOpenGlControl.Free;
   {$ENDIF}
   FParent := NIL;

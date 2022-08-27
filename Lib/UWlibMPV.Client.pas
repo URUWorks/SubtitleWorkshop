@@ -1,11 +1,14 @@
 {*
  *  URUWorks libMPV (client.h)
  *
+ *  Author  : URUWorks
+ *  Website : uruworks.net
+ *
  *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 1.1 (the "License"); you may
- *  not use this file except in compliance with the License. You may
- *  obtain a copy of the License at
- *  http://www.mozilla.org/MPL/MPL-1.1.html
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
  *  Software distributed under the License is distributed on an
  *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
@@ -13,8 +16,7 @@
  *  rights and limitations under the License.
  *
  *  Copyright (C) 2021-2022 URUWorks, uruworks@gmail.com.
- *
- *}
+*}
 
 {$PACKRECORDS C}
 
@@ -171,8 +173,6 @@ type
    * - Using UNIX IPC (off by default) will override the SIGPIPE signal handler,
    *   and set it to SIG_IGN. Some invocations of the "subprocess" command will
    *   also do that.
-   * - mpv will reseed the legacy C random number generator by calling srand() at
-   *   some random point once.
    * - mpv may start sub processes, so overriding SIGCHLD, or waiting on all PIDs
    *   (such as calling wait()) by the parent process or any other library within
    *   the process must be avoided. libmpv itself only waits for its own PIDs.
