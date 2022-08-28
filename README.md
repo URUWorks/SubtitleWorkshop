@@ -26,8 +26,10 @@ The best choice for the beginner, expert or the fansubber.
 
 # Packages required to compile
 
-- VirtualTreeView V5
 - Indy 10
+- LCLExtensions
+- pl_OpenGL
+- VirtualTreeView V5
 - UWLazarus
 
 # Is easy to help us
