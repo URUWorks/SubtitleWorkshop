@@ -788,6 +788,7 @@ begin
   // Initialize libMPV
   if MPV.Engine.ErrorCode = 0 then
   begin
+    MPV.Engine.UseOpenGl := Options.UseOpenGl;
     MPV.Engine.Initialize;
     MPV.Engine.SetTextColor(Options.Marquee.Color);
     MPV.Engine.SetTextPosition(Options.Marquee.Position);
