@@ -47,9 +47,6 @@ type
   private
     FMPV_HANDLE: Pmpv_handle;
     FText: String;
-    {$IFDEF ENABLE_OPENGL}
-    glRender: TUWMediaEngineGlRender;
-    {$ENDIF}
     function GetBoolProperty(const APropertyName: String): Boolean;
     procedure SetBoolProperty(const APropertyName:string; const AValue: Boolean);
     procedure SetStringProperty(const APropertyName, AValue: String);
@@ -67,6 +64,9 @@ type
     procedure LoadTracks; override;
     function DoPlay(const AFileName: String; const APos: Integer = 0): Boolean; override;
   public
+    {$IFDEF ENABLE_OPENGL}
+    glRender: TUWMediaEngineGlRender;
+    {$ENDIF}
     class function GetMediaEngineName: String; override;
     procedure PushEvent(Sender: Pointer); override;
     procedure ReceivedEvent(Sender: TObject); override;
@@ -117,13 +117,17 @@ var
 begin
   inherited Create(AParent);
   {$IFDEF DEBUG}DebugMsg('libmpv: constructor');{$ENDIF}
+  glRender := NIL;
 
   {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV;');{$ENDIF}
   ErrorCode := Load_libMPV;
   {$IFDEF ENABLE_OPENGL}
-  {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render;');{$ENDIF}
-  if ErrorCode = 0 then res := Load_libMPV_Render;
-  {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render -> ' + IntToStr(Integer(res)));{$ENDIF}
+  if UseOpenGl then
+  begin
+    {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render;');{$ENDIF}
+    if ErrorCode = 0 then res := Load_libMPV_Render;
+    {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render -> ' + IntToStr(Integer(res)));{$ENDIF}
+  end;
   {$ENDIF}
 end;
 
@@ -160,7 +164,7 @@ begin
   {$IFDEF DEBUG}DebugMsg('libmpv: unitialize');{$ENDIF}
   FText := '';
   {$IFDEF ENABLE_OPENGL}
-  glRender.Free;
+  if Assigned(glRender) then glRender.Free;
   {$ENDIF};
   {$IFDEF DEBUG}DebugMsg('libmpv: set_wakeup_callback');{$ENDIF}
   if Assigned(mpv_set_wakeup_callback) and Assigned(FMPV_HANDLE) then mpv_set_wakeup_callback(FMPV_HANDLE^, NIL, Self);
@@ -200,10 +204,8 @@ begin
   hwnd := Parent.Handle;
   {$ENDIF}
 
-  {$IFNDEF ENABLE_OPENGL}
   {$IFDEF DEBUG}DebugMsg('libmpv: wid');{$ENDIF}
   mpv_set_option(FMPV_HANDLE^, 'wid', MPV_FORMAT_INT64, @hwnd); // window parent
-  {$ENDIF}
 
   //  mpv_set_option_string(FMPV_HANDLE^, 'osd-color', '#FF0000');
   mpv_set_option_string(FMPV_HANDLE^, 'osd-duration', '10000');
@@ -228,8 +230,11 @@ begin
   mpv_set_wakeup_callback(FMPV_HANDLE^, @LIBMPV_EVENT, Self);
 
   {$IFDEF ENABLE_OPENGL}
-  {$IFDEF DEBUG}DebugMsg('libmpv: QueueAsyncCall');{$ENDIF}
-  Application.QueueAsyncCall(@Initialize_GL, 0);
+  if UseOpenGl then
+  begin
+    {$IFDEF DEBUG}DebugMsg('libmpv: QueueAsyncCall');{$ENDIF}
+    Application.QueueAsyncCall(@Initialize_GL, 0);
+  end;
   {$ENDIF}
 
   Initialized := True;
@@ -242,7 +247,7 @@ end;
 procedure TUWLibMPV.Initialize_GL(Data: PtrInt);
 begin
   {$IFDEF DEBUG}DebugMsg('libmpv: initialize_gl');{$ENDIF}
-  OpenGlControl.Visible := False;
+  if OpenGlControl.Visible then OpenGlControl.Visible := False;
   OpenGlControl.ReleaseContext;
   Application.ProcessMessages;
   glRender := TUWMediaEngineGlRender.Create(OpenGlControl, FMPV_HANDLE);

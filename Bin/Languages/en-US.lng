@@ -12,6 +12,7 @@
 		{"Name" : "ExtractAudio", "Text" : "Audio waveform was not found, do you want to extract it?"},
 		{"Name" : "ExtractLibError", "Text" : "Unable to find %s."},
 		{"Name" : "libMPVError", "Text" : "Unable to find the required libraries to run the embedded mpv player. Please go and download them."},
+		{"Name" : "libMPVglError", "Text" : "Failed to initialize mpv GL context."},
 		{"Name" : "LoadingVideo", "Text" : "Loading video..."}
 	],
 	"ErrorStrings" :[

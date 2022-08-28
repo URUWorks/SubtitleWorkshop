@@ -794,6 +794,9 @@ begin
     MPV.Engine.SetTextSize(Options.Marquee.Size);
 
     stbStatus.Panels[0].Text := MPV.Engine.GetMediaEngineName;
+
+    if Assigned(MPV.Engine.glRender) and (MPV.Engine.glRender.ErrorCode <> 0) then
+      Showmessage(Strings.libMPVglError);
   end
   else
     Showmessage(Strings.libMPVError);

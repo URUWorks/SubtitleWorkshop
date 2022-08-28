@@ -467,6 +467,7 @@ begin
           if s = 'ExtractAudio' then Strings.ExtractAudio := desc;
           if s = 'ExtractLibError' then Strings.ExtractLibError := desc;
           if s = 'libMPVError' then Strings.libMPVError := desc;
+          if s = 'libMPVglError' then Strings.libMPVglError := desc;
           if s = 'LoadingVideo' then Strings.LoadingVideo := desc;
         end;
         // Error strings
@@ -970,6 +971,7 @@ begin
     ShowWelcomeAtStartup := True;
 
     CustomSearch := CustomSearchWordReference;
+    UseOpenGl := {$IFDEF DARWIN}True{$ELSE}False{$ENDIF};
   end;
 
   with LastSubtitle do
@@ -1044,6 +1046,7 @@ begin
       frmMain.actMediaAutoScroll.Checked := GetValue('MediaAutoScroll', True);
       frmMain.actMediaChangePlayRate.Checked := GetValue('MediaChangePlayRate', False);
       CustomSearch := GetValue('CustomSearch', CustomSearchWordReference);
+      UseOpenGl := GetValue('UseOpenGl', False);
       CloseKey;
 
       OpenKey('VST');
@@ -1166,6 +1169,7 @@ begin
       SetValue('MediaAutoScroll', frmMain.actMediaAutoScroll.Checked);
       SetValue('MediaChangePlayRate', frmMain.actMediaChangePlayRate.Checked);
       SetValue('CustomSearch', CustomSearch);
+      SetValue('UseOpenGl', UseOpenGl);
       CloseKey;
 
       OpenKey('VST');

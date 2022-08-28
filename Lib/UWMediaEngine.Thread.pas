@@ -82,10 +82,11 @@ type
     FCreateParams  : array of mpv_render_param;
     FRenderParams  : array of mpv_render_param;
     FOpenGLParams  : mpv_opengl_init_params;
-    procedure Initialize_GL;
+    function Initialize_GL: Boolean;
   public
-    FOwner : TUWMediaEngineGlRender;
-    Event  : PRtlEvent;
+    FOwner    : TUWMediaEngineGlRender;
+    Event     : PRtlEvent;
+    ErrorCode : Integer;
     constructor Create(AOwner: TUWMediaEngineGlRender; AControl: TOpenGlControl; AHandle: Pmpv_handle);
     procedure Execute; override;
     destructor Destroy; override;
@@ -100,6 +101,7 @@ type
     constructor Create(AControl: TOpenGlControl; AHandle: pmpv_handle);
     destructor Destroy; override;
     procedure Render;
+    function ErrorCode: Integer;
   end;
   {$ENDIF}
 
@@ -218,17 +220,18 @@ begin
   FOwner         := AOwner;
   FOpenGlControl := AControl;
   FMPVHandle     := AHandle;
-  FOpenGlControl.Visible := True;
+  ErrorCode      := 0;
+
+  if FOpenGlControl.Visible then FOpenGlControl.Visible := False;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWCustomGlRenderThread.Initialize_GL;
-var
-  res: Integer;
+function TUWCustomGlRenderThread.Initialize_GL: Boolean;
 begin
+  Result := False;
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: Initialize_GL');{$ENDIF}
-
+  Event := RTLEventCreate;
   mpv_set_option_string(FMPVHandle^,'vd-lavc-dr', 'no');
 
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: CreateParams');{$ENDIF}
@@ -247,10 +250,9 @@ begin
   FCreateParams[3].Data     := NIL;
   FOpenGlControl.MakeCurrent();
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create');{$ENDIF}
-  res := mpv_render_context_create(FRenderContext, FMPVHandle^, Pmpv_render_param(@FCreateParams[0]));
-  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create --> ' + IntToStr(res));{$ENDIF}
-  if (res < 0) then raise Exception.Create('Failed to initialize mpv GL context');
-
+  ErrorCode := mpv_render_context_create(FRenderContext, FMPVHandle^, Pmpv_render_param(@FCreateParams[0]));
+  {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create --> ' + IntToStr(ErrorCode));{$ENDIF}
+  if (ErrorCode < 0) then Exit; //raise Exception.Create('Failed to initialize mpv GL context');
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: CreateRenderParams');{$ENDIF}
   SetLength(FRenderParams, 3);
   FRenderParams[0]._type := MPV_RENDER_PARAM_OPENGL_FBO;
@@ -259,10 +261,12 @@ begin
   FRenderParams[1].Data  := @glFlip;
   FRenderParams[2]._type := MPV_RENDER_PARAM_INVALID;
   FRenderParams[2].Data  := NIL;
-  Event := RTLEventCreate;
+
+  FOpenGlControl.Visible := True;
   FOpenGlControl.MakeCurrent();
   mpv_render_context_set_update_callback(FRenderContext^, @Update_GL, FOwner);
   mpv_render_context_update(FRenderContext^);
+  Result := True;
 end;
 
 // -----------------------------------------------------------------------------
@@ -271,7 +275,7 @@ procedure TUWCustomGlRenderThread.Execute;
 var
   mpvfbo: mpv_opengl_fbo;
 begin
-  Initialize_GL;
+  if not Initialize_GL then Exit;
   while not Terminated do
   begin
     RTLEventWaitFor(Event);
@@ -295,9 +299,12 @@ end;
 
 destructor TUWCustomGlRenderThread.Destroy;
 begin
-  mpv_render_context_set_update_callback(FRenderContext^, NIL, NIL);
-  mpv_render_context_update(FRenderContext^);
-  mpv_render_context_free(FRenderContext^);
+  if ErrorCode = 0 then
+  begin
+    mpv_render_context_set_update_callback(FRenderContext^, NIL, NIL);
+    mpv_render_context_update(FRenderContext^);
+    mpv_render_context_free(FRenderContext^);
+  end;
   RTLeventDestroy(Event);
 
   inherited Destroy;
@@ -335,7 +342,17 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+function TUWMediaEngineGlRender.ErrorCode: Integer;
+begin
+  Result := FThread.ErrorCode;
+end;
+
+// -----------------------------------------------------------------------------
+
 {$ENDIF}
+
+// -----------------------------------------------------------------------------
 
 end.
 

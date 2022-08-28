@@ -31,7 +31,7 @@ unit UWMediaEngine;
 interface
 
 uses
-  Classes, Controls, SysUtils, LazFileUtils, ExtCtrls
+  Classes, Controls, SysUtils, LazFileUtils, ExtCtrls, Graphics
   {$IFDEF ENABLE_OPENGL}, OpenGLContext{$ENDIF};
 
 // -----------------------------------------------------------------------------
@@ -66,6 +66,7 @@ type
     FTimer       : TTimer;
     {$ENDIF}
     {$IFDEF ENABLE_OPENGL}
+    FUseOpenGl     : Boolean;
     FOpenGlControl : TOpenGlControl;
     {$ENDIF}
     FFileName    : String;
@@ -126,6 +127,7 @@ type
 
     {$IFDEF ENABLE_OPENGL}
     property OpenGlControl : TOpenGlControl read FOpenGlControl;
+    property UseOpenGl     : Boolean read FUseOpenGl write FUseOpenGl;
     {$ENDIF}
 
     property Initialized   : Boolean read FInitialized write FInitialized;
@@ -181,11 +183,15 @@ begin
   FFileName := '';
 
   {$IFDEF ENABLE_OPENGL}
+  FUseOpenGl := False;
+
   FOpenGlControl := TOpenGlControl.Create(FParent);
   FOpenGlControl.Parent := FParent;
   FOpenGlControl.DoubleBuffered := True;
   FOpenGlControl.Align := alClient;
+  FOpenGlControl.Color := clBlack;
   FOpenGlControl.OnClick := FParent.OnClick;
+  FOpenGlControl.Visible := False;
   {$ENDIF}
 
   SetLength(TrackList, 0);

@@ -109,6 +109,7 @@ type
     AutoStartPlaying     : Boolean;
     ShowWelcomeAtStartup : Boolean;
     CustomSearch         : String;
+    UseOpenGl            : Boolean;
   end;
 
   TLangStrings = packed record
@@ -124,6 +125,7 @@ type
     ExtractAudio,
     ExtractLibError,
     libMPVError,
+    libMPVglError,
     LoadingVideo: String;
   end;
 
