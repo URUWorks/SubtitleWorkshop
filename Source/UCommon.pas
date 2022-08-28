@@ -247,7 +247,7 @@ end;
 function ShortCutFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetCustomFolderPath('Resources') + 'sw.key';
+  Result := GetCustomFolderPath('Resources') + 'sw.mac';
   {$ELSE}
   Result := GetCustomFilePath('sw.key');
   {$ENDIF}
@@ -901,9 +901,6 @@ begin
         if Comp <> NIL then
         begin
           s := joItem.Get('Key', '');
-          {$IFDEF DARWIN}
-          s := s.Replace('Ctrl', 'Meta');
-          {$ENDIF}
           if (Comp is TAction) then
           begin
             with (Comp as TAction) do
