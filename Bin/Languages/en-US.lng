@@ -94,6 +94,7 @@
 		{"Name" : "actSelectAll", "Text" : "Select all", "Desc" : ""},
 		{"Name" : "actLoadSubtitle", "Text" : "Load subtitles...", "Desc" : "Load a subtitle file"},
 		{"Name" : "actSaveSubtitleAs", "Text" : "Save subtitles as...", "Desc" : "Save subtitle to file"},
+		{"Name" : "actSaveTranslationAs", "Text" : "Save translation as...", "Desc" : "Save translation to file"},
 		{"Name" : "actNewSubtitle", "Text" : "New subtitle", "Desc" : "Start a new subtitle project"},
 		{"Name" : "actCloseSubtitle", "Text" : "Close subtitle", "Desc" : ""},
 		{"Name" : "actOpenVideo", "Text" : "Open...", "Desc" : "Open a video file"},

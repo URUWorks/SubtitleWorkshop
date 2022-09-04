@@ -40,7 +40,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -394,7 +394,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCavena890.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWCavena890.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   Stream    : TStream;
   Buffer    : TBytes;
@@ -450,7 +450,7 @@ begin
       Move(TUnkownCodes[0], Buffer[0], SizeOf(TUnkownCodes));
       Stream.Write(Buffer, Length(Buffer));
 
-      WriteText(Stream, Subtitles.Text[i], i = ToItem, langId);
+      WriteText(Stream, iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), i = ToItem, langId);
 
       Inc(number, 16);
     end;

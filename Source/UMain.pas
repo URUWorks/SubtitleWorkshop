@@ -80,6 +80,7 @@ type
     actCustomSearch: TAction;
     actGlossary: TAction;
     actChangeWorkspace: TAction;
+    actSaveTranslationAs: TAction;
     actViewToolbarColors: TAction;
     actViewToolbarCoords: TAction;
     actVAlignToMiddle: TAction;
@@ -196,6 +197,7 @@ type
     MenuItem119: TMenuItem;
     MenuItem120: TMenuItem;
     MenuItem47: TMenuItem;
+    MenuItem48: TMenuItem;
     MenuItem7: TMenuItem;
     mnuVST_Validate: TMenuItem;
     mnuWorkspace: TMenuItem;
@@ -536,6 +538,7 @@ type
     procedure actReplaceExecute(Sender: TObject);
     procedure actReverseTextExecute(Sender: TObject);
     procedure actSaveSubtitleAsExecute(Sender: TObject);
+    procedure actSaveTranslationAsExecute(Sender: TObject);
     procedure actSelectAllExecute(Sender: TObject);
     procedure actSetDelayExecute(Sender: TObject);
     procedure actSetMaximumLineLengthExecute(Sender: TObject);
@@ -655,7 +658,7 @@ type
     procedure EnableWorkArea(const Value: Boolean = True);
     function CloseSubtitle: Boolean;
     procedure LoadSubtitle(const FileName: String; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVW: Boolean = True);
-    procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
+    procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
     procedure OpenVideo(const FileName: String; const Pos: Int64 = 0);
     procedure OpenAudio(const FileName: String);
     procedure DictionaryItemClick(Sender: TObject);
@@ -1873,7 +1876,7 @@ begin
       begin
         r := MsgSaveSubtitle(SubtitleFile.Translation.FileName);
         case r of
-          mrYes    : ;//actSubtitleSaveTranslationAs.Execute;
+          mrYes    : actSaveTranslationAs.Execute;
           mrCancel : Abort;
         end;
       end;
@@ -1922,7 +1925,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
+procedure TfrmMain.SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
   _FPS      : Single;
   _Encoding : TEncoding;
@@ -1932,7 +1935,7 @@ begin
   _Encoding := AEncoding;
   if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID);
 
-  Subtitles.SaveToFile(FileName, _FPS, _Encoding, Format);
+  Subtitles.SaveToFile(FileName, _FPS, _Encoding, Format, SubtitleMode);
   MRU.Add(FileName);
 end;
 
@@ -3110,21 +3113,15 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actSaveSubtitleAsExecute(Sender: TObject);
-var
-  SD : TSaveDialog;
 begin
-  SD := TSaveDialog.Create(Self);
-  try
-    SD.Filter := Subtitles.FillDialogFilter('');
-    SD.FilterIndex := cboFormat.ItemIndex+1;
-    SD.FileName := ChangeFileExt(ExtractFileName(SubtitleFile.Text.FileName), '');
-    if SD.Execute then
-    begin
-      SaveSubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex));
-    end;
-  finally
-    SD.Free;
-  end;
+  SaveSubtitleDialog;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSaveTranslationAsExecute(Sender: TObject);
+begin
+  SaveSubtitleDialog(smTranslation);
 end;
 
 // -----------------------------------------------------------------------------

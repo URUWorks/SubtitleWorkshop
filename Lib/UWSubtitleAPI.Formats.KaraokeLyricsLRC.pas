@@ -38,7 +38,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -119,10 +119,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWKaraokeLyricsLRC.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWKaraokeLyricsLRC.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   SubFile : TUWStringList;
   i       : Integer;
+  Text    : String;
 begin
   Result  := False;
   SubFile := TUWStringList.Create;
@@ -135,8 +136,8 @@ begin
 
     for i := FromItem to ToItem do
     begin
-      Subtitles.Text[i] := RemoveSWTags(Subtitles.Text[i]);
-      SubFile.Add('[' + TimeToString(Subtitles[i].InitialTime, 'mm:ss.zz') + ']' + ReplaceEnters(Subtitles[i].Text, ''), False);
+      Text := RemoveSWTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+      SubFile.Add('[' + TimeToString(Subtitles[i].InitialTime, 'mm:ss.zz') + ']' + ReplaceEnters(Text, ''), False);
       SubFile.Add('[' + TimeToString(Subtitles[i].FinalTime, 'mm:ss.zz') + ']');
     end;
 

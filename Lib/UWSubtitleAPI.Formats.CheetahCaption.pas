@@ -40,7 +40,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -48,7 +48,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags,
+uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils,
   UWSubtitleAPI.Formats.CheetahCaption.Types;
 
 // -----------------------------------------------------------------------------
@@ -248,7 +248,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCheetahCaption.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWCheetahCaption.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   Stream       : TStream;
   i, j, c, idx : Integer;
@@ -295,7 +295,7 @@ begin
 
     for i := FromItem to ToItem do
     begin
-      Text := RemoveSWTags(Subtitles[i].Text) + ' ';
+      Text := RemoveSWTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])) + ' ';
 
       len    := Text.Length + 20;
       endpos := Stream.Position + len;

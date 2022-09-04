@@ -40,7 +40,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -123,10 +123,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCPC600.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWCPC600.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   SubFile : TUWStringList;
   i       : Integer;
+  Text    : String;
 begin
   Result  := False;
   SubFile := TUWStringList.Create;
@@ -134,8 +135,8 @@ begin
     SubFile.Add('~CPCC6.38~;UpperLower;PopOn;01;', False);
     for i := FromItem to ToItem do
     begin
-      Subtitles.Text[i] := RemoveSWTags(Subtitles.Text[i]);
-      SubFile.Add(TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + '_0NEN_' + ReplaceString(Subtitles[i].Text, LineEnding, '\'), False);
+      Text := RemoveSWTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+      SubFile.Add(TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + '_0NEN_' + ReplaceString(Text, LineEnding, '\'), False);
       SubFile.Add(TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + '_0NEN_');
     end;
 

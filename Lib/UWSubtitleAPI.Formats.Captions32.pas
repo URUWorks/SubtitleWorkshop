@@ -40,7 +40,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -126,7 +126,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCaptions32.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWCaptions32.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   SubFile : TUWStringList;
   i, c    : Integer;
@@ -137,7 +137,7 @@ begin
   try
     for i := FromItem to ToItem do
     begin
-      Text := ReplaceEnters(RemoveSWTags(Subtitles.Text[i]));
+      Text := ReplaceEnters(RemoveSWTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
       s    := Text;
       c    := StringCount('|', s);
       if c = 0 then

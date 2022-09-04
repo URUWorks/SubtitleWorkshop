@@ -95,6 +95,7 @@ type
   );
 
   TSubtitleErrorTypeSet = set of TSubtitleErrorType;
+  TSubtitleMode = (smText, smTranslation);
 
   PUWSubtitleItem = ^TUWSubtitleItem;
   TUWSubtitleItem = record
@@ -176,7 +177,7 @@ type
     function FindNextPointer: PUWSubtitleItem;
     procedure Sort;
     function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
-    function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+    function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
     function FillDialogFilter(const AllSupportedText: String = 'All supported files'): String;
     property Count: Integer read GetCount;
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
@@ -215,7 +216,7 @@ type
     function HasStyleSupport: Boolean; virtual;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; virtual;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; virtual;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; virtual;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; virtual;
     function ToText(const Subtitles: TUWSubtitles): String; virtual;
   end;
 
@@ -1348,7 +1349,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWSubtitles.SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   AList      : TUWSubtitleCustomFormatList;
   f          : Integer;
@@ -1363,7 +1364,7 @@ begin
       begin
         if FromItem = -1 then iFrom := 0 else iFrom := FromItem;
         if ToItem   = -1 then iTo := Count-1 else iTo := ToItem;
-        Result := AList[f].SaveSubtitle(FileName, FPS, Encoding, Self, iFrom, iTo);
+        Result := AList[f].SaveSubtitle(FileName, FPS, Encoding, Self, SubtitleMode, iFrom, iTo);
         Exit;
       end;
   finally
@@ -1469,7 +1470,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitleCustomFormat.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWSubtitleCustomFormat.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 begin
   Result := False;
 end;

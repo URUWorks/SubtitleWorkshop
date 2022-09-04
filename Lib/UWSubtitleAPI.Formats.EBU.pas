@@ -41,7 +41,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -50,7 +50,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSubtitleAPI.Formats.EBU.Types,
-  UWSystem.FileUtils;
+  UWSystem.FileUtils, UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -217,7 +217,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWEBU.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWEBU.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   Stream   : TStream;
   Buffer   : TBytes;
@@ -291,7 +291,7 @@ begin
           TimeCodeToByteArray(TimeCodeIn, InitialTime, FPS);
           TimeCodeToByteArray(TimeCodeOut, FinalTime, FPS);
         end;
-        Buffer := Encoding.GetBytes(ReplaceTagsSW2EBU(Subtitles.Text[i]));
+        Buffer := Encoding.GetBytes(ReplaceTagsSW2EBU(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
         TBytesToArray(TextField, Buffer, 0);
       end;
       Stream.WriteBuffer(TTIBlock, SizeOf(TTTIBlock));

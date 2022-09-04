@@ -1985,6 +1985,9 @@ object frmMain: TfrmMain
       ImageIndex = 24
       OnExecute = actSaveSubtitleAsExecute
     end
+    object actSaveTranslationAs: TAction
+      OnExecute = actSaveTranslationAsExecute
+    end
     object actCut: TAction
       Tag = 1
       ImageIndex = 25
@@ -2482,6 +2485,9 @@ object frmMain: TfrmMain
       end
       object MenuItem22: TMenuItem
         Action = actSaveSubtitleAs
+      end
+      object MenuItem48: TMenuItem
+        Action = actSaveTranslationAs
       end
       object MenuItem23: TMenuItem
         Caption = '-'

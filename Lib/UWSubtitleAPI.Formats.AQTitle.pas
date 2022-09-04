@@ -39,7 +39,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -138,10 +138,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWAQTitle.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWAQTitle.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   SubFile : TUWStringList;
   i       : Integer;
+  TextSrc,
   Text    : String;
 begin
   Result  := False;
@@ -151,9 +152,10 @@ begin
     begin
       SubFile.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles[i].InitialTime, FPS)), 6), False);
 
-      if StringCount(#13#10, Subtitles[i].Text) = 0      then Text := Subtitles[i].Text + #13#10
-      else if StringCount(#13#10, Subtitles[i].Text) = 1 then Text := Subtitles[i].Text
-      else if StringCount(#13#10, Subtitles[i].Text) > 1 then Text := Copy(Subtitles[i].Text, 0, Pos(#13#10, Subtitles[i].Text) + 2) + ReplaceEnters(Copy(Subtitles[i].Text, Pos(#13#10, Subtitles[i].Text) + 2, Length(Subtitles[i].Text)), ' ');
+      TextSrc := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
+      if StringCount(sLineBreak, TextSrc) = 0      then Text := TextSrc + sLineBreak
+      else if StringCount(sLineBreak, TextSrc) = 1 then Text := TextSrc
+      else if StringCount(sLineBreak, TextSrc) > 1 then Text := Copy(TextSrc, 0, Pos(sLineBreak, TextSrc) + 2) + ReplaceEnters(Copy(TextSrc, Pos(sLineBreak, TextSrc) + 2, Length(TextSrc)), ' ');
 
       SubFile.Add(Text, False);
       SubFile.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles[i].FinalTime, FPS)), 6), False);

@@ -39,7 +39,7 @@ type
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
     function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
     function ToText(const Subtitles: TUWSubtitles): String; override;
   end;
 
@@ -47,7 +47,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags;
+uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -139,19 +139,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWMacSUB.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWMacSUB.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   SubFile : TUWStringList;
   i       : Integer;
+  Text    : String;
 begin
   Result  := False;
   SubFile := TUWStringList.Create;
   try
     for i := FromItem to ToItem do
     begin
-      Subtitles.Text[i] := RemoveSWTags(Subtitles.Text[i]);
+      Text := RemoveSWTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
       SubFile.Add('/' + IntToStr(TimeToFrames(Subtitles[i].InitialTime, FPS)), False);
-      SubFile.Add(Subtitles[i].Text, False);
+      SubFile.Add(Text, False);
       SubFile.Add('/' + IntToStr(TimeToFrames(Subtitles[i].FinalTime, FPS)), False);
     end;
 

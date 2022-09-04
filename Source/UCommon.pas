@@ -60,6 +60,7 @@ procedure SaveSettings;
 procedure CommandLineProcess;
 
 function MsgSaveSubtitle(const FileName: String): Integer;
+procedure SaveSubtitleDialog(const SubtitleMode: TSubtitleMode = smText);
 
 function GetInitialTime(const Index: Integer): Integer;
 function GetInitialTimeStr(const Index: Integer; const Trim: Boolean = False; const Format: String = DefTimeFormat): String;
@@ -1270,6 +1271,27 @@ function MsgSaveSubtitle(const FileName: String): Integer;
 begin
   Result := MessageDlg(Format(Strings.SaveDialog, [FileName, sLineBreak]),
     TMsgDlgType.mtConfirmation, [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo, TMsgDlgBtn.mbCancel], 0);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveSubtitleDialog(const SubtitleMode: TSubtitleMode = smText);
+var
+  SD : TSaveDialog;
+begin
+  SD := TSaveDialog.Create(frmMain);
+  try
+    SD.Filter := Subtitles.FillDialogFilter('');
+    SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
+    SD.FileName := ChangeFileExt(ExtractFileName(SubtitleFile.Text.FileName), '');
+    SD.Options := [ofOverwritePrompt, ofEnableSizing];
+    if SD.Execute then
+    begin
+      frmMain.SaveSubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
+    end;
+  finally
+    SD.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
