@@ -11,7 +11,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   ShowHint = True
   LCLVersion = '2.2.2.0'
   object tlbMain: TToolBar

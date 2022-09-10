@@ -1124,6 +1124,14 @@ begin
         Params   := GetValue('Params', Params);
         CloseKey;
       end;
+
+      with frmMain do
+      begin
+        OpenKey('Main');
+        SetBounds(GetValue('X', Left), GetValue('Y', Top), GetValue('W', Width), GetValue('H', Height));
+        lyoVideo.Width := GetValue('VW', lyoVideo.Width);
+        CloseKey;
+      end;
     end;
   finally
     Free;
@@ -1235,6 +1243,17 @@ begin
         OpenKey('AudioExtraction');
         SetValue('EXE', FileName);
         SetValue('Params', Params);
+        CloseKey;
+      end;
+
+      with frmMain do
+      begin
+        OpenKey('Main');
+        SetValue('X', Left);
+        SetValue('Y', Top);
+        SetValue('W', Width);
+        SetValue('H', Height);
+        SetValue('VW', lyoVideo.Width);
         CloseKey;
       end;
     end;

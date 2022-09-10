@@ -17,9 +17,8 @@
         <ComponentName Value="frmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="1871"/>
-        <CursorPos X="105" Y="1873"/>
+        <TopLine Value="1852"/>
+        <CursorPos X="54" Y="1875"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -35,9 +34,10 @@
       <Unit3>
         <Filename Value="UCommon.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="54"/>
-        <CursorPos Y="63"/>
+        <TopLine Value="1245"/>
+        <CursorPos Y="1257"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -1461,7 +1461,7 @@
         <UsageCount Value="9"/>
       </Unit205>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="UMain.pas"/>
         <Caret Line="3118" Column="42" TopLine="3115"/>
@@ -1559,6 +1559,14 @@
         <Filename Value="UMain.pas"/>
         <Caret Line="1878" Column="25" TopLine="1870"/>
       </Position25>
+      <Position26>
+        <Filename Value="UCommon.pas"/>
+        <Caret Line="59" Column="23" TopLine="54"/>
+      </Position26>
+      <Position27>
+        <Filename Value="UCommon.pas"/>
+        <Caret Line="1245" Column="29" TopLine="1238"/>
+      </Position27>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
