@@ -2153,7 +2153,8 @@ end;
 
 procedure Free_libMPV;
 begin
-  FreeLibrary(hLib);
+  if hLib <> 0 then FreeLibrary(hLib);
+
   mpv_client_api_version := NIL;
   mpv_error_string := NIL;
   mpv_free := NIL;
@@ -2202,27 +2203,15 @@ end;
 // -----------------------------------------------------------------------------
 
 function Load_libMPV: Integer;
-
-  function LoadDLL(const ALib: String): Boolean;
-  begin
-    hLib   := LoadLibrary(ALib);
-    Result := (hLib <> 0);
-  end;
-
 begin
   Result := -1;
   {$IFDEF LINUX}
   setlocale(1, 'C');
   {$ENDIF}
 
-  if not LoadDLL({$IFDEF WINDOWS}LIBMPV_DLL_NAME{$ELSE}libmpv_GetInstallPath{$ENDIF}) then
-  begin
-    {$IFDEF WINDOWS}
-    if not LoadDLL('mpv-1.dll') then Exit;
-    {$ELSE}
-    Exit;
-    {$ENDIF}
-  end;
+
+  hLib := LoadLibrary({$IFDEF WINDOWS}LIBMPV_DLL_NAME{$ELSE}libmpv_GetInstallPath{$ENDIF});
+  if (hLib = 0) then Exit;
 
   Pointer(mpv_client_api_version) := GetProcAddress(hLib,'mpv_client_api_version');
   Pointer(mpv_error_string) := GetProcAddress(hLib,'mpv_error_string');
@@ -2267,6 +2256,53 @@ begin
   Pointer(mpv_hook_add) := GetProcAddress(hLib,'mpv_hook_add');
   Pointer(mpv_hook_continue) := GetProcAddress(hLib,'mpv_hook_continue');
   Pointer(mpv_get_wakeup_pipe) := GetProcAddress(hLib,'mpv_get_wakeup_pipe');
+
+  if not Assigned(mpv_client_api_version) or
+     not Assigned(mpv_error_string) or
+     not Assigned(mpv_free) or
+     not Assigned(mpv_client_name) or
+     not Assigned(mpv_client_id) or
+     not Assigned(mpv_create) or
+     not Assigned(mpv_initialize) or
+     not Assigned(mpv_destroy) or
+     not Assigned(mpv_terminate_destroy) or
+     not Assigned(mpv_create_weak_client) or
+     not Assigned(mpv_load_config_file) or
+     not Assigned(mpv_get_time_us) or
+     not Assigned(mpv_free_node_contents) or
+     not Assigned(mpv_set_option) or
+     not Assigned(mpv_set_option_string) or
+     not Assigned(mpv_command) or
+     not Assigned(mpv_command_node) or
+     not Assigned(mpv_command_ret) or
+     not Assigned(mpv_command_string) or
+     not Assigned(mpv_command_async) or
+     not Assigned(mpv_command_node_async) or
+     not Assigned(mpv_abort_async_command) or
+     not Assigned(mpv_set_property) or
+     not Assigned(mpv_set_property_string) or
+     not Assigned(mpv_set_property_async) or
+     not Assigned(mpv_get_property) or
+     not Assigned(mpv_get_property_string) or
+     not Assigned(mpv_get_property_osd_string) or
+     not Assigned(mpv_get_property_async) or
+     not Assigned(mpv_observe_property) or
+     not Assigned(mpv_unobserve_property) or
+     not Assigned(mpv_event_name) or
+     not Assigned(mpv_event_to_node) or
+     not Assigned(mpv_request_event) or
+     not Assigned(mpv_request_log_messages) or
+     not Assigned(mpv_wait_event) or
+     not Assigned(mpv_wakeup) or
+     not Assigned(mpv_set_wakeup_callback) or
+     not Assigned(mpv_wait_async_requests) or
+     not Assigned(mpv_hook_add) or
+     not Assigned(mpv_hook_continue) or
+     not Assigned(mpv_get_wakeup_pipe) then
+  begin
+    Free_libMPV;
+    Exit;
+  end;
 
   Result := 0;
 end;

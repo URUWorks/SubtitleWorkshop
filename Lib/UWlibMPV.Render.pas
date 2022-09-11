@@ -784,7 +784,7 @@ var
 
 procedure Free_libMPV_Render;
 begin
-  FreeLibrary(hLib);
+  if hLib <> 0 then FreeLibrary(hLib);
   mpv_render_context_create := NIL;
   mpv_render_context_set_parameter := NIL;
   mpv_render_context_get_info := NIL;
@@ -812,6 +812,19 @@ begin
   Pointer(mpv_render_context_render) := GetProcAddress(hLib,'mpv_render_context_render');
   Pointer(mpv_render_context_report_swap) := GetProcAddress(hLib,'mpv_render_context_report_swap');
   Pointer(mpv_render_context_free) := GetProcAddress(hLib,'mpv_render_context_free');
+
+  if not Assigned(mpv_render_context_create) or
+     not Assigned(mpv_render_context_set_parameter) or
+     not Assigned(mpv_render_context_get_info) or
+     not Assigned(mpv_render_context_set_update_callback) or
+     not Assigned(mpv_render_context_update) or
+     not Assigned(mpv_render_context_render) or
+     not Assigned(mpv_render_context_report_swap) or
+     not Assigned(mpv_render_context_free) then
+  begin
+    Free_libMPV_Render;
+    Exit;
+  end;
 
   Result := True;
 end;

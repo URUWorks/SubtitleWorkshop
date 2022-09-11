@@ -250,9 +250,13 @@ begin
   FCreateParams[3].Data     := NIL;
   FOpenGlControl.MakeCurrent();
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create');{$ENDIF}
-  ErrorCode := mpv_render_context_create(FRenderContext, FMPVHandle^, Pmpv_render_param(@FCreateParams[0]));
+
+  if Assigned(mpv_render_context_create) then
+    ErrorCode := mpv_render_context_create(FRenderContext, FMPVHandle^, Pmpv_render_param(@FCreateParams[0]))
+  else
+    ErrorCode := -99;
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: mpv_render_context_create --> ' + IntToStr(ErrorCode));{$ENDIF}
-  if (ErrorCode < 0) then Exit; //raise Exception.Create('Failed to initialize mpv GL context');
+  if (ErrorCode <> 0) then Exit; //raise Exception.Create('Failed to initialize mpv GL context');
   {$IFDEF DEBUG}DebugMsg('CustomGlRenderThread: CreateRenderParams');{$ENDIF}
   SetLength(FRenderParams, 3);
   FRenderParams[0]._type := MPV_RENDER_PARAM_OPENGL_FBO;

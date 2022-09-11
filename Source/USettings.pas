@@ -27,7 +27,7 @@ unit USettings;
 interface
 
 uses
-  Classes, Forms, Controls, ComCtrls, ExtCtrls, StdCtrls, SysUtils;
+  Classes, Forms, Controls, ComCtrls, ExtCtrls, StdCtrls, Spin, SysUtils;
 
 type
 
@@ -36,8 +36,28 @@ type
   TfrmSettings = class(TForm)
     btnClose: TButton;
     cboLanguage: TComboBox;
+    chkDotsOnSplit: TCheckBox;
+    chkShowSplashWindow: TCheckBox;
+    chkDrawTags: TCheckBox;
+    edtWebReference: TEdit;
+    lblWebReference: TLabel;
+    ledRepeatableChars: TLabeledEdit;
+    lblNewSubtitle: TLabel;
+    ledProhibitedChars: TLabeledEdit;
+    lblMinDuration: TLabel;
+    lblMaxDuration: TLabel;
+    lblMaxLineLength: TLabel;
+    lblShiftTime: TLabel;
+    lblSubtitlePause: TLabel;
+    letNewSubtitle: TLabeledEdit;
     lblLanguage: TLabel;
     pagSettings: TPageControl;
+    spnNewSubtitle: TSpinEdit;
+    spnMinDuration: TSpinEdit;
+    spnMaxDuration: TSpinEdit;
+    spnMaxLineLength: TSpinEdit;
+    spnShiftTime: TSpinEdit;
+    spnSubtitlePause: TSpinEdit;
     tabGeneral: TTabSheet;
     procedure btnCloseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -74,6 +94,19 @@ begin
   Langs := TStringList.Create;
   ReadLangForForm(LanguageFileName, Self);
   GetLanguageFiles;
+
+  edtWebReference.Text        := Options.CustomSearch;
+  spnNewSubtitle.Value        := Options.NewSubtitleMS;
+  spnMinDuration.Value        := Options.ErrCfg.MinDuration;
+  spnMaxDuration.Value        := Options.ErrCfg.MaxDuration;
+  spnMaxLineLength.Value      := Options.ErrCfg.MaxLineLength;
+  spnShiftTime.Value          := Options.ShiftTimeMS;
+  spnSubtitlePause.Value      := Options.DefSubtitlePauseMS;
+  ledProhibitedChars.Text     := Options.ErrCfg.ProhibitedChars;
+  ledRepeatableChars.Text     := Options.ErrCfg.RepeatableChars;
+  chkShowSplashWindow.Checked := Options.ShowWelcomeAtStartup;
+  chkDrawTags.Checked         := Options.DrawTags;
+  chkDotsOnSplit.Checked      := Options.DotsOnSplit;
 end;
 
 // -----------------------------------------------------------------------------
@@ -90,7 +123,19 @@ end;
 
 procedure TfrmSettings.btnCloseClick(Sender: TObject);
 begin
-  Options.Language := Langs[cboLanguage.ItemIndex];
+  Options.Language               := Langs[cboLanguage.ItemIndex];
+  Options.CustomSearch           := edtWebReference.Text;
+  Options.NewSubtitleMS          := spnNewSubtitle.Value;
+  Options.ErrCfg.MinDuration     := spnMinDuration.Value;
+  Options.ErrCfg.MaxDuration     := spnMaxDuration.Value;
+  Options.ErrCfg.MaxLineLength   := spnMaxLineLength.Value;
+  Options.ShiftTimeMS            := spnShiftTime.Value;
+  Options.DefSubtitlePauseMS     := spnSubtitlePause.Value;
+  Options.ErrCfg.ProhibitedChars := ledProhibitedChars.Text;
+  Options.ErrCfg.RepeatableChars := ledRepeatableChars.Text;
+  Options.ShowWelcomeAtStartup   := chkShowSplashWindow.Checked;
+  Options.DrawTags               := chkDrawTags.Checked;
+  Options.DotsOnSplit            := chkDotsOnSplit.Checked;
   Close;
 end;
 

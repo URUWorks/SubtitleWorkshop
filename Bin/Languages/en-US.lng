@@ -417,5 +417,23 @@
 		{"Name" : "lblOpenFile", "Text" : "Open file...", "Desc" : ""},
 		{"Name" : "lblNewProject", "Text" : "New project...", "Desc" : ""},
 		{"Name" : "chkShowOnStartup", "Text" : "Show on startup", "Desc" : ""}
+	],
+	"frmSettings" :[
+		{"Name" : "frmSettings", "Text" : "Settings", "Desc" : ""},
+		{"Name" : "tabGeneral", "Text" : "General", "Desc" : ""},
+		{"Name" : "lblLanguage", "Text" : "Language", "Desc" : ""},
+		{"Name" : "lblWebReference", "Text" : "Web reference", "Desc" : ""},
+		{"Name" : "lblNewSubtitle", "Text" : "New subtitle (ms)", "Desc" : ""},
+		{"Name" : "lblMinDuration", "Text" : "Min. duration (ms)", "Desc" : ""},
+		{"Name" : "lblMaxDuration", "Text" : "Max. duration (ms)", "Desc" : ""},
+		{"Name" : "lblMaxLineLength", "Text" : "Max. line length (chars)", "Desc" : ""},
+		{"Name" : "lblShiftTime", "Text" : "Shift time (ms)", "Desc" : ""},
+		{"Name" : "lblSubtitlePause", "Text" : "Subtitle pause (ms)", "Desc" : ""},
+		{"Name" : "ledProhibitedChars", "Text" : "Prohibited chars", "Desc" : ""},
+		{"Name" : "ledRepeatableChars", "Text" : "Repeatable chars", "Desc" : ""},
+		{"Name" : "chkShowSplashWindow", "Text" : "Show splash window", "Desc" : ""},
+		{"Name" : "chkDrawTags", "Text" : "Draw tags in list", "Desc" : ""},
+		{"Name" : "chkDotsOnSplit", "Text" : "Add '...' on split subtitle", "Desc" : ""},
+		{"Name" : "btnClose", "Text" : "Close", "Desc" : ""}
 	]
 }

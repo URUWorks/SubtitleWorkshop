@@ -112,8 +112,6 @@ end;
 // -----------------------------------------------------------------------------
 
 constructor TUWLibMPV.Create(const AParent: TWinControl);
-var
-  res: Boolean;
 begin
   inherited Create(AParent);
   {$IFDEF DEBUG}DebugMsg('libmpv: constructor');{$ENDIF}
@@ -121,14 +119,8 @@ begin
 
   {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV;');{$ENDIF}
   ErrorCode := Load_libMPV;
-  {$IFDEF ENABLE_OPENGL}
-  if UseOpenGl then
-  begin
-    {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render;');{$ENDIF}
-    if ErrorCode = 0 then res := Load_libMPV_Render;
-    {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render -> ' + IntToStr(Integer(res)));{$ENDIF}
-  end;
-  {$ENDIF}
+  {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV -> ' + IntToStr(ErrorCode));{$ENDIF}
+  {$IFDEF DEBUG}DebugMsg('libmpv: constructor.. Success!');{$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
@@ -161,7 +153,7 @@ end;
 
 procedure TUWLibMPV.UnInitialize;
 begin
-  {$IFDEF DEBUG}DebugMsg('libmpv: unitialize');{$ENDIF}
+  {$IFDEF DEBUG}DebugMsg('libmpv: uninitialize');{$ENDIF}
   FText := '';
   {$IFDEF ENABLE_OPENGL}
   if Assigned(glRender) then glRender.Free;
@@ -181,10 +173,23 @@ end;
 function TUWLibMPV.Initialize: Boolean;
 var
   hwnd: {$IFDEF WINDOWS}THandle;{$ELSE}PtrUInt;{$ENDIF}
+  {$IFDEF ENABLE_OPENGL}
+  res: Boolean;
+  {$ENDIF}
 begin
   {$IFDEF DEBUG}DebugMsg('libmpv: initialize');{$ENDIF}
   Result := False;
   FText  := '';
+
+  {$IFDEF ENABLE_OPENGL}
+  {$IFDEF DEBUG}DebugMsg('libmpv: UseOpenGl -> ' + BoolToStr(UseOpenGl));{$ENDIF}
+  if UseOpenGl then
+  begin
+    {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render;');{$ENDIF}
+    if ErrorCode = 0 then res := Load_libMPV_Render;
+    {$IFDEF DEBUG}DebugMsg('libmpv: Load_libMPV_Render -> ' + BoolToStr(res));{$ENDIF}
+  end;
+  {$ENDIF}
 
   {$IFDEF DEBUG}DebugMsg('libmpv: create');{$ENDIF}
   if not Assigned(mpv_create) then Exit;

@@ -91,7 +91,7 @@ const
           'Target CPU: ' + {$I %FPCTARGET%};
   cUW   = 'uruworks.net' + sLineBreak +
           'Copyright © 2001-2022 URUWorks.' + sLineBreak +
-          'Copyright © 2022 Bedazzle.';
+          '© 2022 Bedazzle, CM630.';
 begin
   lblSW.Caption := Format('%s %s %s', [ProgramName,
     Format('%.2f', [ProgramVer / 1000], FormatSettings), BuildNumber]);

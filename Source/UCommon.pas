@@ -29,7 +29,7 @@ interface
 uses
   SysUtils, Classes, Types, VirtualTrees, Graphics, StdCtrls, Forms, ActnList,
   Menus, LCLProc, fpjson, jsonparser, LCLIntf, XMLConf, UTypes, UWControls,
-  UWSubtitleAPI, LazUTF8, FileUtil, Controls, ComCtrls
+  UWSubtitleAPI, LazUTF8, FileUtil, Controls, ComCtrls, ExtCtrls
   {$IFDEF WINDOWS}, registry{$ENDIF};
 
 function GetCustomFolderPath(const SubFolder: String): String;
@@ -590,6 +590,17 @@ begin
             with (Comp as TRadioButton) do
             begin
               Caption := s;
+              if desc <> '' then
+                Hint := s + sLineBreak + sLineBreak + desc
+              //else
+                //Hint := s;
+            end;
+          end
+          else if (Comp is TLabeledEdit) then
+          begin
+            with (Comp as TLabeledEdit) do
+            begin
+              EditLabel.Caption := s;
               if desc <> '' then
                 Hint := s + sLineBreak + sLineBreak + desc
               //else
