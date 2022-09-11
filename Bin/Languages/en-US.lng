@@ -260,7 +260,7 @@
 		{"Name" : "tabReplace", "Text" : "Replace", "Desc" : ""},
 		{"Name" : "lblReplaceBy", "Text" : "Replace with:", "Desc" : ""},
 		{"Name" : "btnReplace", "Text" : "Replace", "Desc" : ""},
-		{"Name" : "btnReplaceAll", "Text" : "Replace all", "Desc" : ""},
+		{"Name" : "btnReplaceAll", "Text" : "Repl. all", "Desc" : ""},
 		{"Name" : "btnFindPrevious", "Text" : "Find prev", "Desc" : ""},
 		{"Name" : "btnFindNext", "Text" : "Find next", "Desc" : ""},
 		{"Name" : "tabGoTo", "Text" : "Go to", "Desc" : ""},
