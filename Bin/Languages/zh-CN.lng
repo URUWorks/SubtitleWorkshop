@@ -136,6 +136,11 @@
 		{"Name" : "actAlignToLeft", "Text" : "向左对齐", "Desc" : ""},
 		{"Name" : "actAlignToCenter", "Text" : "向中间对齐", "Desc" : ""},
 		{"Name" : "actAlignToRight", "Text" : "向右对齐", "Desc" : ""},
+		{"Name" : "actVAlignToBottom", "Text" : "靠底部对齐", "Desc" : ""},
+		{"Name" : "actVAlignToMiddle", "Text" : "垂直居中对齐", "Desc" : ""},
+		-
+		{"Name" : "actVAlignToTop", "Text" : "垂直顶部对齐", "Desc" : ""},
+		-
 		{"Name" : "numLeft", "Text" : "左边距/X1", "Desc" : ""},
 		{"Name" : "numTop", "Text" : "上边距/Y1", "Desc" : ""},
 		{"Name" : "numRight", "Text" : "右边距/X2", "Desc" : ""},
