@@ -94,6 +94,7 @@
 		{"Name" : "actSelectAll", "Text" : "全选", "Desc" : ""},
 		{"Name" : "actLoadSubtitle", "Text" : "载入字幕...", "Desc" : "载入字幕文件"},
 		{"Name" : "actSaveSubtitleAs", "Text" : "字幕另存为...", "Desc" : "字幕另存为文件"},
+		{"Name" : "actSaveTranslationAs", "Text" : "翻译文本另存为...", "Desc" : "保存翻译文本到单独文件"},
 		{"Name" : "actNewSubtitle", "Text" : "新建字幕", "Desc" : "开始一个新的字幕工程"},
 		{"Name" : "actCloseSubtitle", "Text" : "关闭字幕", "Desc" : ""},
 		{"Name" : "actOpenVideo", "Text" : "打开...", "Desc" : "打开视频文件"},
@@ -136,6 +137,9 @@
 		{"Name" : "actAlignToLeft", "Text" : "向左对齐", "Desc" : ""},
 		{"Name" : "actAlignToCenter", "Text" : "向中间对齐", "Desc" : ""},
 		{"Name" : "actAlignToRight", "Text" : "向右对齐", "Desc" : ""},
+		{"Name" : "actVAlignToBottom", "Text" : "靠底部对齐", "Desc" : ""},
+		{"Name" : "actVAlignToMiddle", "Text" : "垂直居中对齐", "Desc" : ""},
+		{"Name" : "actVAlignToTop", "Text" : "垂直顶部对齐", "Desc" : ""},
 		{"Name" : "numLeft", "Text" : "左边距/X1", "Desc" : ""},
 		{"Name" : "numTop", "Text" : "上边距/Y1", "Desc" : ""},
 		{"Name" : "numRight", "Text" : "右边距/X2", "Desc" : ""},
@@ -184,7 +188,10 @@
 		{"Name" : "actViewCPS", "Text" : "每秒字符数", "Desc" : ""},
 		{"Name" : "actViewWPM", "Text" : "每分钟字数", "Desc" : ""},
 		{"Name" : "actViewCPL", "Text" : "每行字符数", "Desc" : ""},
-		{"Name" : "actViewToolbarAdditional", "Text" : "附加", "Desc" : ""}
+		{"Name" : "actViewToolbarAdditional", "Text" : "附加", "Desc" : ""},
+		{"Name" : "actViewToolbarColors", "Text" : "颜色栏", "Desc" : ""},
+		{"Name" : "actViewToolbarCoords", "Text" : "坐标", "Desc" : ""},
+		{"Name" : "actSettings", "Text" : "设置...", "Desc" : ""}
 	],
 	"frmTexts" :[
 		{"Name" : "frmTexts", "Text" : "文本", "Desc" : ""},
@@ -410,5 +417,23 @@
 		{"Name" : "lblOpenFile", "Text" : "打开文件...", "Desc" : ""},
 		{"Name" : "lblNewProject", "Text" : "新工程...", "Desc" : ""},
 		{"Name" : "chkShowOnStartup", "Text" : "每次打开都显示此窗口", "Desc" : ""}
+	],
+	"frmSettings" :[
+		{"Name" : "frmSettings", "Text" : "设置", "Desc" : ""},
+		{"Name" : "tabGeneral", "Text" : "常规", "Desc" : ""},
+		{"Name" : "lblLanguage", "Text" : "语言", "Desc" : ""},
+		{"Name" : "lblWebReference", "Text" : "网络参考", "Desc" : ""},
+		{"Name" : "lblNewSubtitle", "Text" : "新建字幕(ms)", "Desc" : ""},
+		{"Name" : "lblMinDuration", "Text" : "最小持续时间(ms)", "Desc" : ""},
+		{"Name" : "lblMaxDuration", "Text" : "最大持续时间(ms)", "Desc" : ""},
+		{"Name" : "lblMaxLineLength", "Text" : "最大行长 (字)", "Desc" : ""},
+		{"Name" : "lblShiftTime", "Text" : "平移时间(ms)", "Desc" : ""},
+		{"Name" : "lblSubtitlePause", "Text" : "字幕停顿时间(ms)", "Desc" : ""},
+		{"Name" : "ledProhibitedChars", "Text" : "禁止使用的字符", "Desc" : ""},
+		{"Name" : "ledRepeatableChars", "Text" : "可重复的字符", "Desc" : ""},
+		{"Name" : "chkShowSplashWindow", "Text" : "Show splash window", "Desc" : ""},
+		{"Name" : "chkDrawTags", "Text" : "在列表中显示标签", "Desc" : ""},
+		{"Name" : "chkDotsOnSplit", "Text" : "在分割字幕上添加'...'", "Desc" : ""},
+		{"Name" : "btnClose", "Text" : "关闭", "Desc" : ""}
 	]
 }
