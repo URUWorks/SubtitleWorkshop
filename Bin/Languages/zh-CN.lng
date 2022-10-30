@@ -5,7 +5,6 @@
 		{"Name" : "TextChars", "Text" : "文本 (%s 字符):"},
 		{"Name" : "Translation", "Text" : "译文"},
 		{"Name" : "TranslationChars", "Text" : "译文 (%s 字符):"},
-		{"Name" : "CPS", "Text" : "每秒字符数: %.2f"},
 		{"Name" : "AllSupportedFiles", "Text" : "所有支持的文件"},
 		{"Name" : "Selection", "Text" : "选择: %s-%s"},
 		{"Name" : "SaveDialog", "Text" : "文件 '%s' 已被更改。%s你想要保存更改吗？"},
@@ -13,6 +12,7 @@
 		{"Name" : "ExtractAudio", "Text" : "无法识别音频波纹，继续提取？"},
 		{"Name" : "ExtractLibError", "Text" : "找不到 %s."},
 		{"Name" : "libMPVError", "Text" : "找不到运行嵌入式mpv播放器所需的库。请下载。"},
+		{"Name" : "libMPVglError", "Text" : "Failed to initialize mpv GL context."},
 		{"Name" : "LoadingVideo", "Text" : "载入视频..."}
 	],
 	"ErrorStrings" :[
