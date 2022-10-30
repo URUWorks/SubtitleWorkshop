@@ -404,7 +404,8 @@
 		{"Name" : "grpTerm", "Text" : "术语数据库", "Desc" : ""},
 		{"Name" : "lblTermFile", "Text" : "文件（可选）:", "Desc" : ""},
 		{"Name" : "btnNew", "Text" : "新建", "Desc" : ""},
-		{"Name" : "btnClose", "Text" : "关闭", "Desc" : ""}
+		{"Name" : "btnClose", "Text" : "关闭", "Desc" : ""},
+		{"Name" : "btnCancel", "Text" : "Cancel", "Desc" : ""}
 	],
 	"frmAbout" :[
 		{"Name" : "frmAbout", "Text" : "关于", "Desc" : ""},

@@ -404,7 +404,8 @@
 		{"Name" : "grpTerm", "Text" : "Terminology database", "Desc" : ""},
 		{"Name" : "lblTermFile", "Text" : "File (optional):", "Desc" : ""},
 		{"Name" : "btnNew", "Text" : "Generate", "Desc" : ""},
-		{"Name" : "btnClose", "Text" : "Close", "Desc" : ""}
+		{"Name" : "btnClose", "Text" : "Close", "Desc" : ""},
+		{"Name" : "btnCancel", "Text" : "Cancel", "Desc" : ""}
 	],
 	"frmAbout" :[
 		{"Name" : "frmAbout", "Text" : "About", "Desc" : ""},
