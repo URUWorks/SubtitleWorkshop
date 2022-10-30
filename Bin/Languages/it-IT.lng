@@ -5,7 +5,6 @@
 		{"Name" : "TextChars", "Text" : "Testo (%s caratteri, %.2f cps):"},
 		{"Name" : "Translation", "Text" : "Traduzione"},
 		{"Name" : "TranslationChars", "Text" : "Traduzione (%s caratteri, %.2f cps):"},
-		{"Name" : "CPS", "Text" : "CPS: %.2f"},
 		{"Name" : "AllSupportedFiles", "Text" : "Tutti i file supportati"},
 		{"Name" : "Selection", "Text" : "Selezione: %s-%s"},
 		{"Name" : "SaveDialog", "Text" : "Il file '%s' è cambiato.%sVuoi salvare le modifiche?."},
