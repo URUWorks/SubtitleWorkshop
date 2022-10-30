@@ -37,9 +37,9 @@
 		{"Name" : "CompileScript", "Text" : "Errore: impossibile compilare lo script."}
 	],
 	"Tips" :[
-		{"Name" : "Tip1", "Text" : "Tip: Usa <%s/%s> per anadaree al sottotitolo precedente/successivo"},
-		{"Name" : "Tip2", "Text" : "Tip: Usa <%s> per un riferimento ad una parola web"},
-		{"Name" : "Tip3", "Text" : "Tip: Usa <%s> ancorare/sganciare la finestra video"}
+		{"Name" : "Tip1", "Text" : "Suggerimento: usa <%s/%s> per andare al sottotitolo precedente/successivo"},
+		{"Name" : "Tip2", "Text" : "Suggerimento: usa <%s> per un riferimento ad una parola web"},
+		{"Name" : "Tip3", "Text" : "Suggerimento: usa <%s> ancorare/sganciare la finestra video"}
 	],
 	"frmMain" :[
 		{"Name" : "hdrIndex", "Text" : "#/GAP", "Desc" : ""},
