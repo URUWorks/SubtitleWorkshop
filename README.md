@@ -28,7 +28,6 @@ The best choice for the beginner, expert or the fansubber.
 
 - Indy 10
 - LCLExtensions
-- pl_OpenGL
 - VirtualTreeView V5
 - UWLazarus
 
@@ -41,3 +40,9 @@ We ask you to download our software and test it. If you like it and think we des
 We remember you that donations are completely voluntary, you will not receive less support or less consideration if you can't afford to donate. 
  
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Subtitle+Workshop&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
+
+# Thanks
+
+Marco Caselli
+Scott Napier
+and all SW users!
