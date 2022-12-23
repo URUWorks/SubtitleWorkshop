@@ -199,6 +199,7 @@ begin
   {$IFDEF DEBUG}DebugMsg('libmpv: set options');{$ENDIF}
   mpv_set_option_string(FMPV_HANDLE^, 'hwdec', 'auto'); // enable best hw decoder
   mpv_set_option_string(FMPV_HANDLE^, 'keep-open', 'always'); // don't auto close video
+  mpv_set_option_string(FMPV_HANDLE^, 'idle', 'yes');
   mpv_set_option_string(FMPV_HANDLE^, 'sub', 'no'); // don't load subtitles
 
   mpv_set_option_string(FMPV_HANDLE^, 'pause', ''); // Start the player in paused state.
