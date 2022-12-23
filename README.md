@@ -43,6 +43,6 @@ We remember you that donations are completely voluntary, you will not receive le
 
 # Thanks
 
-Marco Caselli
+Marco Caselli,
 Scott Napier
 and all SW users!
