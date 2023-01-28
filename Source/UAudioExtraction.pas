@@ -69,7 +69,7 @@ var
 
 implementation
 
-uses UTypes, UCommon, UMain, UWMediaEngine;
+uses UTypes, UCommon, UMain, MPVPlayer;
 
 {$R *.lfm}
 
@@ -90,6 +90,7 @@ end;
 procedure TfrmAudioExtraction.FormCreate(Sender: TObject);
 var
   i, tl: Integer;
+  s: String;
 begin
   ReadLangForForm(LanguageFileName, Self);
 
@@ -101,16 +102,19 @@ begin
   edtApp.Text    := AudioExtraction.FileName;
   edtParams.Text := AudioExtraction.Params;
 
-  tl := Length(frmMain.MPV.Engine.TrackList);
+  tl := Length(frmMain.MPV.TrackList);
   if tl > 0 then
   begin
     for i := 0 to tl-1 do
     begin
-      if frmMain.MPV.Engine.TrackList[i].Kind = trkAudio then
+      if frmMain.MPV.TrackList[i].Kind = ttAudio then
       begin
-        cboTrack.Items.Add(IntToStr(frmMain.MPV.Engine.TrackList[i].ID) + ': '
-        + frmMain.MPV.Engine.TrackList[i].Decoder + ', '
-        + frmMain.MPV.Engine.TrackList[i].Info);
+        s := IntToStr(frmMain.MPV.TrackList[i].ID) + ': ';
+        if frmMain.MPV.TrackList[i].Title <> '' then s := s + frmMain.MPV.TrackList[i].Title + ', ';
+        if frmMain.MPV.TrackList[i].Lang <> '' then s := s + frmMain.MPV.TrackList[i].Lang + ', ';
+        if frmMain.MPV.TrackList[i].Codec <> '' then s := s + '(' + frmMain.MPV.TrackList[i].Codec + ')';
+
+        cboTrack.Items.Add(s);
 
         if cboTrack.Items.Count > 0 then cboTrack.ItemIndex := 0;
       end;
@@ -181,20 +185,20 @@ begin
       end;
       AudioExtraction.FileName := edtApp.Text;
       AudioExtraction.Params   := edtParams.Text;
-      s := WaveformsFolder + ChangeFileExt(ExtractFileName(frmMain.MPV.Engine.FileName), '.wav');
+      s := WaveformsFolder + ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '.wav');
 
-      p := frmMain.MPV.Engine.IsPlaying;
-      if p then frmMain.MPV.Engine.Pause;
+      p := frmMain.MPV.IsPlaying;
+      if p then frmMain.MPV.Pause;
 
       ExecuteApp(AudioExtraction.FileName,
-        Format(AudioExtraction.Params, [frmMain.MPV.Engine.FileName, cboTrack.ItemIndex+1, s]),
+        Format(AudioExtraction.Params, [frmMain.MPV.FileName, cboTrack.ItemIndex+1, s]),
         True, True, @ProcessCB);
 
       if FileExists(s) then
         if frmMain.WAVE.LoadWaveFromFile(s) then
           if not frmMain.actAudioPreview.Checked then frmMain.actAudioPreview.Execute;
 
-      if p then frmMain.MPV.Engine.Pause;
+      if p then frmMain.MPV.Pause;
     finally
       lblWait.Visible := False;
       lblStatus.Visible := False;

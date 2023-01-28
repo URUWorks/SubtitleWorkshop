@@ -4,11 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="208">
+    <Units Count="209">
       <Unit0>
         <Filename Value="sw.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="2"/>
+        <CursorPos X="124" Y="15"/>
         <UsageCount Value="200"/>
       </Unit0>
       <Unit1>
@@ -18,8 +20,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="794"/>
-        <CursorPos X="7" Y="803"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -28,18 +28,17 @@
         <Filename Value="UTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="79"/>
-        <CursorPos X="20" Y="94"/>
+        <TopLine Value="77"/>
+        <CursorPos X="5" Y="88"/>
         <UsageCount Value="200"/>
       </Unit2>
       <Unit3>
         <Filename Value="UCommon.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="1048"/>
-        <CursorPos X="32" Y="1061"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2119"/>
+        <CursorPos X="10" Y="2124"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="UUndo.pas"/>
@@ -81,8 +80,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="89"/>
-        <CursorPos X="51" Y="96"/>
+        <TopLine Value="87"/>
+        <CursorPos X="13" Y="89"/>
         <UsageCount Value="200"/>
       </Unit8>
       <Unit9>
@@ -130,6 +129,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="73"/>
+        <CursorPos X="30" Y="84"/>
         <UsageCount Value="200"/>
       </Unit13>
       <Unit14>
@@ -147,6 +148,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="103"/>
+        <CursorPos X="9" Y="118"/>
         <UsageCount Value="202"/>
       </Unit15>
       <Unit16>
@@ -193,12 +196,10 @@
         <ComponentName Value="frmSettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="10"/>
-        <CursorPos Y="10"/>
-        <UsageCount Value="81"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="31"/>
+        <CursorPos X="55" Y="18"/>
+        <UsageCount Value="86"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\..\..\Lib\UWSystem.Graphics.pas"/>
@@ -890,19 +891,17 @@
       </Unit123>
       <Unit124>
         <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="172"/>
         <CursorPos X="13" Y="186"/>
         <UsageCount Value="36"/>
-        <Loaded Value="True"/>
       </Unit124>
       <Unit125>
         <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="247"/>
-        <CursorPos Y="251"/>
-        <UsageCount Value="52"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="28"/>
+        <UsageCount Value="53"/>
       </Unit125>
       <Unit126>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\fcl-xml\src\xmlconf.pp"/>
@@ -959,9 +958,10 @@
       </Unit132>
       <Unit133>
         <Filename Value="..\..\..\Lib\UWMediaEngine.Thread.pas"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="33"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="333"/>
+        <CursorPos X="12" Y="345"/>
+        <UsageCount Value="34"/>
       </Unit133>
       <Unit134>
         <Filename Value="..\..\..\Lib\UWSystem.Process.pas"/>
@@ -1327,11 +1327,10 @@
       </Unit185>
       <Unit186>
         <Filename Value="..\..\..\Lib\UWlibMPV.Client.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2207"/>
         <CursorPos X="26" Y="2211"/>
         <UsageCount Value="15"/>
-        <Loaded Value="True"/>
       </Unit186>
       <Unit187>
         <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\ctypes.pp"/>
@@ -1342,9 +1341,10 @@
       </Unit187>
       <Unit188>
         <Filename Value="..\..\..\Lib\UWlibMPV.Render.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="467"/>
+        <CursorPos X="28" Y="486"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit188>
       <Unit189>
         <Filename Value="..\..\..\Lib\UWlibMPV.Render_gl.pas"/>
@@ -1384,10 +1384,10 @@
       </Unit193>
       <Unit194>
         <Filename Value="..\..\..\Lib\UWMediaEngine.inc"/>
-        <EditorIndex Value="8"/>
-        <TopLine Value="13"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4"/>
+        <CursorPos Y="21"/>
         <UsageCount Value="33"/>
-        <Loaded Value="True"/>
       </Unit194>
       <Unit195>
         <Filename Value="C:\lazarus\lcl\comctrls.pp"/>
@@ -1479,119 +1479,111 @@
         <CursorPos X="10" Y="42"/>
         <UsageCount Value="10"/>
       </Unit207>
+      <Unit208>
+        <Filename Value="..\..\..\Components\UW_MPVPlayer\MPVPlayer.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit208>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="186" Column="15" TopLine="171"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="805" Column="14" TopLine="792"/>
       </Position1>
       <Position2>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="238" Column="15" TopLine="224"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="961" Column="32" TopLine="941"/>
       </Position2>
       <Position3>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1041" Column="16" TopLine="1021"/>
       </Position3>
       <Position4>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="185" Column="71" TopLine="170"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1199" Column="62" TopLine="1180"/>
       </Position4>
       <Position5>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="186" Column="15" TopLine="171"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1215" Column="62" TopLine="1196"/>
       </Position5>
       <Position6>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="238" Column="15" TopLine="224"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1520" Column="3" TopLine="1504"/>
       </Position6>
       <Position7>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1518" Column="22" TopLine="1516"/>
       </Position7>
       <Position8>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="185" Column="71" TopLine="170"/>
+        <Filename Value="UMain.pas"/>
       </Position8>
       <Position9>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="186" Column="15" TopLine="171"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="135" Column="18" TopLine="116"/>
       </Position9>
       <Position10>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="238" Column="15" TopLine="224"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="524" Column="28" TopLine="505"/>
       </Position10>
       <Position11>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="801" TopLine="783"/>
       </Position11>
       <Position12>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="185" Column="71" TopLine="170"/>
+        <Filename Value="UMain.pas"/>
       </Position12>
       <Position13>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="186" Column="15" TopLine="183"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="135" Column="18" TopLine="116"/>
       </Position13>
       <Position14>
         <Filename Value="UMain.pas"/>
-        <Caret Line="795" Column="2" TopLine="788"/>
+        <Caret Line="524" Column="28" TopLine="505"/>
       </Position14>
       <Position15>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="76" Column="24" TopLine="69"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="801" Column="18" TopLine="782"/>
       </Position15>
       <Position16>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="185" Column="71" TopLine="170"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="802" Column="14" TopLine="783"/>
       </Position16>
       <Position17>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="186" Column="15" TopLine="171"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="803" Column="14" TopLine="784"/>
       </Position17>
       <Position18>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
-        <Caret Line="192" TopLine="183"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="804" Column="14" TopLine="785"/>
       </Position18>
       <Position19>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="805" Column="14" TopLine="786"/>
       </Position19>
       <Position20>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
-        <Caret Line="69" Column="15" TopLine="54"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="961" Column="32" TopLine="941"/>
       </Position20>
       <Position21>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
-        <Caret Line="130" Column="70" TopLine="117"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1041" Column="16" TopLine="1021"/>
       </Position21>
       <Position22>
         <Filename Value="UMain.pas"/>
-        <Caret Line="794" Column="52" TopLine="788"/>
+        <Caret Line="1199" Column="62" TopLine="1180"/>
       </Position22>
       <Position23>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.pas"/>
-        <Caret Line="130" Column="70" TopLine="123"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1215" Column="62" TopLine="1196"/>
       </Position23>
       <Position24>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="238" Column="15" TopLine="224"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="1518" Column="23" TopLine="1498"/>
       </Position24>
       <Position25>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
+        <Filename Value="UMain.pas"/>
+        <Caret Line="3271" Column="42" TopLine="3256"/>
       </Position25>
-      <Position26>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="185" Column="44" TopLine="170"/>
-      </Position26>
-      <Position27>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="186" Column="71" TopLine="176"/>
-      </Position27>
-      <Position28>
-        <Filename Value="..\..\..\Lib\UWMediaEngine.libMPV.pas"/>
-        <Caret Line="178" TopLine="167"/>
-      </Position28>
-      <Position29>
-        <Filename Value="..\..\..\Lib\UWlibMPV.Render.pas"/>
-        <Caret Line="800" Column="28" TopLine="779"/>
-      </Position29>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

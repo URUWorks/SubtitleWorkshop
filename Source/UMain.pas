@@ -29,8 +29,9 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, LCLIntf, Graphics, Dialogs,
   ComCtrls, ActnList, Menus, StdCtrls, Buttons, ExtCtrls, LCLType, UWControls,
-  VirtualTrees, UUndo, UWSubtitleAPI, UWSubtitleAPI.Formats, UWMediaEngine,
-  UWControls.WaveformDisplay, uPSComponent, uPSCompiler, uPSRuntime, uPSUtils;
+  VirtualTrees, UUndo, UWSubtitleAPI, UWSubtitleAPI.Formats,
+  UWControls.WaveformDisplay, MPVPlayer, uPSComponent, uPSCompiler, uPSRuntime,
+  uPSUtils;
 
 type
 
@@ -277,6 +278,7 @@ type
     MenuItem98: TMenuItem;
     MenuItem99: TMenuItem;
     mnuPopVideoTextPosition: TMenuItem;
+    MPV: TMPVPlayer;
     popPlayRate: TPopupMenu;
     popVSTHeader: TPopupMenu;
     popWAVE: TPopupMenu;
@@ -391,7 +393,6 @@ type
     ToolButton61: TToolButton;
     ToolButton62: TToolButton;
     ttTimes: TUWTickTime;
-    MPV: TUWMediaPlayer;
     lyoNotes: TUWLayout;
     WAVE: TUWWaveformDisplay;
     popMenuInsert: TPopupMenu;
@@ -594,6 +595,7 @@ type
     procedure MPVAudioReconfig(Sender: TObject);
     procedure MPVClick(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
+    procedure MPVPause(Sender: TObject);
     procedure MPVPlay(Sender: TObject);
     procedure MPVStop(Sender: TObject);
     procedure MPVTimeChanged(Sender: TObject; AParam: Integer=0);
@@ -789,15 +791,20 @@ begin
   TMX := TUWTMX.Create('');
 
   // Initialize libMPV
-  if MPV.Engine.ErrorCode = 0 then
+  if MPV.Error = 0 then
   begin
-    MPV.Engine.UseOpenGl := Options.UseOpenGl;
-    MPV.Engine.Initialize;
-    MPV.Engine.SetTextColor(Options.Marquee.Color);
-    MPV.Engine.SetTextPosition(Options.Marquee.Position);
-    MPV.Engine.SetTextSize(Options.Marquee.Size);
+    if Options.UseOpenGl then
+      MPV.RendererMode := rmOpenGL
+    else
+      MPV.RendererMode := rmEmbedding;
 
-    stbStatus.Panels[0].Text := MPV.Engine.GetMediaEngineName;
+    MPV.AutoStartPlayback := False;
+    MPV.StartOptions.Add('osd-color='+Options.Marquee.Color);
+    MPV.StartOptions.Add('osd-align-x=center');
+    MPV.StartOptions.Add('osd-align-y='+Options.Marquee.Position);
+    MPV.StartOptions.Add('osd-font-size='+IntToStr(Options.Marquee.Size));
+
+    stbStatus.Panels[0].Text := MPV.GetVersionString;
 
     //if Assigned(MPV.Engine.glRender) and (MPV.Engine.glRender.ErrorCode <> 0) then
     //  Showmessage(Strings.libMPVglError);
@@ -1405,7 +1412,7 @@ begin
   if WAVE.IsPeakDataLoaded then
     WAVE.SelectSubtitle(VSTFocusedNode, True, True);
 
-  MPV.Engine.Seek(Subtitles.ItemPointer[VSTFocusedNode]^.InitialTime, True);
+  MPV.SetMediaPosInMs(Subtitles.ItemPointer[VSTFocusedNode]^.InitialTime); //, True);
 
   FocusMemo;
 end;
@@ -1501,7 +1508,7 @@ procedure TfrmMain.MPVFileLoaded(Sender: TObject);
 begin
   //stbStatus.Panels[1].Text := '';
   LastSubtitle.ShowIndex := 0;
-  sbrSeek.Max := MPV.Engine.Duration;
+  sbrSeek.Max := MPV.GetMediaLenInMs;
   ttTimes.Duration := MSecsToRefTime(sbrSeek.Max);
   lblMediaTime.Caption := TimeToString(sbrSeek.Max, DefTimeFormat);
   actMediaPlay.ImageIndex := 29;
@@ -1514,7 +1521,7 @@ begin
     MPV.Tag := 0;
 
   if actDockVideoControls.Tag <> -2 then
-    OpenAudio(MediaFileExists(MPV.Engine.FileName, TAudioExts))
+    OpenAudio(MediaFileExists(MPV.FileName, TAudioExts))
   else
     actDockVideoControls.Tag := 0;
 
@@ -1523,9 +1530,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.MPVPlay(Sender: TObject);
+procedure TfrmMain.MPVPause(Sender: TObject);
 begin
   actMediaPlay.ImageIndex := 55;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.MPVPlay(Sender: TObject);
+begin
+  actMediaPlay.ImageIndex := 29;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1546,7 +1560,7 @@ end;
 
 procedure TfrmMain.cboFindChange(Sender: TObject);
 begin
-  if MPV.Engine.IsPlaying and actMediaAutoScroll.Checked then actMediaAutoScroll.Checked := False;
+  if MPV.IsPlaying and actMediaAutoScroll.Checked then actMediaAutoScroll.Checked := False;
   if not VSTFind(cboFind.Text, False, True) then VST.ClearSelection;
 end;
 
@@ -1843,7 +1857,7 @@ begin
   // Actions
   actUndo.Enabled := False;
   actRedo.Enabled := False;
-  actCloseVideo.Enabled := MPV.Engine.Duration > 0;
+  actCloseVideo.Enabled := MPV.GetMediaLenInMs > 0;
   actExtractWaveform.Enabled := actCloseVideo.Enabled;
 
   for i := 0 to aclActions.ActionCount -1 do
@@ -1943,9 +1957,8 @@ end;
 
 procedure TfrmMain.OpenVideo(const FileName: String; const Pos: Int64 = 0);
 begin
-  MPV.Engine.Play(FileName); //VLC.Play(WideString(FileName));
+  MPV.Play(FileName);
   actMediaChangePlayRateExecute(NIL);
-  //actCloseVideo.Enabled := MPV.Engine.Duration > 0; //VLC.CanPlay();
 end;
 
 // -----------------------------------------------------------------------------
@@ -2035,7 +2048,7 @@ procedure TfrmMain.popAudioTrackSet(Sender: TObject);
 begin
   with Sender as TMenuItem do
   begin
-    MPV.Engine.SetTrack(trkAudio, (Sender as TMenuItem).Tag);
+    MPV.SetMediaTrack(ttAudio, (Sender as TMenuItem).Tag);
   end;
 end;
 
@@ -2311,9 +2324,9 @@ procedure TfrmMain.MediaUpdateProgress(const Time: Integer);
 begin
   if not sbrSeek.MouseIsDown then sbrSeek.Position := Time;
 
-  MPV.Engine.ShowText(GetSubtitleTextAtTime(Time));
+  MPV.ShowText(GetSubtitleTextAtTime(Time));
 
-  lblMediaTime.Caption := TimeToString(time, DefTimeFormat) + ' / ' + TimeToString(MPV.Engine.Duration, DefTimeFormat);
+  lblMediaTime.Caption := TimeToString(time, DefTimeFormat) + ' / ' + TimeToString(MPV.GetMediaLenInMs, DefTimeFormat);
 
   // -- WaveDisplay
   if WAVE.IsPeakDataLoaded then
@@ -2322,9 +2335,8 @@ begin
     if (MediaPlayMode = TMediaPlayMode.mpmSelection) and (not WAVE.SelectionIsEmpty)
       and (time >= WAVE.Selection.FinalTime) then
       begin
-        MPV.Engine.Pause; // VLC.Pause();
+        MPV.Pause;
         WAVE.SetPlayCursorMS(WAVE.Selection.FinalTime);
-        //VLC.SetVideoPosInMs(Int64(WAVE.Selection.FinalTime));
       end;
   end;
 end;
@@ -2473,12 +2485,12 @@ var
 begin
   if frmVideo = NIL then
   begin
-    s := MPV.Engine.FileName;
+    s := MPV.FileName;
     if s <> '' then
     begin
-      if MPV.Engine.IsPaused then MPV.Tag := 1;
-      p := MPV.Engine.Position;
-      MPV.Engine.UnInitialize;
+      if MPV.IsPaused then MPV.Tag := 1;
+      p := MPV.GetMediaPosInMs;
+//      MPV.UnInitialize;
       actDockVideoControls.Tag := -2;
     end;
 
@@ -2489,14 +2501,14 @@ begin
     frmVideo.Show;
 
     actDockVideoControls.Checked := False;
-    if (s <> '') and MPV.Engine.Initialize then
+    if (s <> '') then //and MPV.Engine.Initialize then
     begin
-      MPV.Engine.SetTextColor(Options.Marquee.Color);
-      MPV.Engine.SetTextPosition(Options.Marquee.Position);
-      MPV.Engine.SetTextSize(Options.Marquee.Size);
+      MPV.SetTextColor(Options.Marquee.Color);
+      MPV.SetTextVAlign(Options.Marquee.Position);
+      MPV.SetTextSize(Options.Marquee.Size);
       actMediaChangePlayRateExecute(NIL);
 
-      MPV.Engine.Play(s, p);
+      MPV.Play(s, p);
       frmVideo.Caption := ExtractFileName(s);
     end;
   end
@@ -2626,7 +2638,7 @@ end;
 procedure TfrmMain.actSubtitlePosBottomExecute(Sender: TObject);
 begin
   Options.Marquee.Position := 'bottom';
-  MPV.Engine.SetTextPosition(Options.Marquee.Position);
+  MPV.SetTextVAlign(Options.Marquee.Position);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2634,7 +2646,7 @@ end;
 procedure TfrmMain.actSubtitlePosTopExecute(Sender: TObject);
 begin
   Options.Marquee.Position := 'top';
-  MPV.Engine.SetTextPosition(Options.Marquee.Position);
+  MPV.SetTextVAlign(Options.Marquee.Position);
 end;
 
 // -----------------------------------------------------------------------------
@@ -3078,7 +3090,7 @@ end;
 
 procedure TfrmMain.actCloseVideoExecute(Sender: TObject);
 begin
-  MPV.Engine.Play('');
+  MPV.Play('');
 //  MPV.Engine.UnInitialize;
   WAVE.Close;
   actCloseVideo.Enabled := False;
@@ -3142,7 +3154,7 @@ end;
 
 procedure TfrmMain.actMediaPreviousFrameExecute(Sender: TObject);
 begin
-  MPV.Engine.PreviousFrame;
+  MPV.PreviousFrame;
 end;
 
 // -----------------------------------------------------------------------------
@@ -3170,7 +3182,7 @@ end;
 
 procedure TfrmMain.actMediaStopExecute(Sender: TObject);
 begin
-  MPV.Engine.Stop;
+  MPV.Stop;
 end;
 
 // -----------------------------------------------------------------------------
@@ -3219,7 +3231,7 @@ end;
 
 procedure TfrmMain.actMediaNextFrameExecute(Sender: TObject);
 begin
-  MPV.Engine.NextFrame;
+  MPV.NextFrame;
 end;
 
 // -----------------------------------------------------------------------------
@@ -3247,7 +3259,7 @@ end;
 
 procedure TfrmMain.actMediaSetInitialTimeExecute(Sender: TObject);
 begin
-  if not (MPV.Engine.Duration > 0) or (VSTFocusedNode < 0) then Exit;
+  if not (MPV.GetMediaLenInMs > 0) or (VSTFocusedNode < 0) then Exit;
   VSTDoLoop(@ApplySetTimeInitialFromVLC);
 end;
 
@@ -3255,7 +3267,7 @@ end;
 
 procedure TfrmMain.actMediaSetFinalTimeExecute(Sender: TObject);
 begin
-  if not (MPV.Engine.Duration > 0) or (VSTFocusedNode < 0) then Exit;
+  if not (MPV.GetMediaLenInMs > 0) or (VSTFocusedNode < 0) then Exit;
   VSTDoLoop(@ApplySetTimeFinalFromVLC);
 end;
 
@@ -3263,8 +3275,8 @@ end;
 
 procedure TfrmMain.actMediaStartSubtitleExecute(Sender: TObject);
 begin
-  if not (MPV.Engine.Duration > 0) then Exit;
-  LastSubtitle.InitialTime := MPV.Engine.Position;
+  if not (MPV.GetMediaLenInMs > 0) then Exit;
+  LastSubtitle.InitialTime := MPV.GetMediaPosInMs;
 end;
 
 // -----------------------------------------------------------------------------
@@ -3273,14 +3285,14 @@ procedure TfrmMain.actMediaEndSubtitleExecute(Sender: TObject);
 var
   i, l: Integer;
 begin
-  if not (MPV.Engine.Duration > 0) then Exit;
+  if not (MPV.GetMediaLenInMs > 0) then Exit;
 
   if VSTFocusedNode >= 0 then
     i := VSTFocusedNode + 1
   else
     i := -1;
 
- l := MPV.Engine.Duration;
+ l := MPV.GetMediaLenInMs;
  if l >= LastSubtitle.InitialTime then
    InsertSubtitle(i, LastSubtitle.InitialTime, l, '', '');
 end;

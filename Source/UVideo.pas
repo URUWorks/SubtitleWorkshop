@@ -63,12 +63,12 @@ var
   s: String;
   p: Integer;
 begin
-  s := frmMain.MPV.Engine.FileName;
+  s := frmMain.MPV.FileName;
   if s <> '' then
   begin
-    if frmMain.MPV.Engine.IsPaused then frmMain.MPV.Tag := 1;
-    p := frmMain.MPV.Engine.Position;
-    frmMain.MPV.Engine.UnInitialize;
+    if frmMain.MPV.IsPaused then frmMain.MPV.Tag := 1;
+    p := frmMain.MPV.GetMediaPosInMs;
+    //frmMain.MPV.UnInitialize;
     frmMain.actDockVideoControls.Tag := -2;
   end;
 
@@ -77,12 +77,12 @@ begin
   frmMain.sptVideo.Visible := True;
   SetWorkspace(frmMain.actChangeWorkspace.Checked);
 
-  if (s <> '') and frmMain.MPV.Engine.Initialize then
+  if (s <> '') then // and frmMain.MPV.Initialize then
   begin
-    frmMain.MPV.Engine.Play(s, p);
-    frmMain.MPV.Engine.SetTextColor(Options.Marquee.Color);
-    frmMain.MPV.Engine.SetTextPosition(Options.Marquee.Position);
-    frmMain.MPV.Engine.SetTextSize(Options.Marquee.Size);
+    frmMain.MPV.Play(s); //, p);
+    frmMain.MPV.SetTextColor(Options.Marquee.Color);
+    frmMain.MPV.SetTextVAlign(Options.Marquee.Position);
+    frmMain.MPV.SetTextSize(Options.Marquee.Size);
     frmMain.actMediaChangePlayRateExecute(NIL);
   end;
   frmMain.actDockVideoControls.Checked := True;

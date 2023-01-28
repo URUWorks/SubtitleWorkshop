@@ -11,7 +11,7 @@ object frmAudioExtraction: TfrmAudioExtraction
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poMainFormCenter
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.4.0'
   object btnClose: TButton
     Left = 414
     Height = 25

@@ -198,7 +198,7 @@ uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, UWSystem.Encoding
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, UWSubtitles.Utils, RegExpr, Clipbrd,
   UMain, UUndo, UErrors, strUtils, Dialogs, UTexts, UFindAndReplace, USpellCheck,
   UTimings, UInfoAndErrors, UWSystem.Globalization, UStylesAndActors,
-  UAudioExtraction, UGlossary, UWMediaEngine, UTM, jsonscanner;
+  UAudioExtraction, UGlossary, MPVPlayer, UTM, jsonscanner;
 
 // -----------------------------------------------------------------------------
 
@@ -2110,24 +2110,29 @@ procedure FillMenuWithAudioStreams(const AParent: TComponent);
 var
   i, tl: Integer;
   Item: TMenuItem;
+  s: String;
 begin
   if AParent = NIL then Exit;
 
   (AParent as TMenuItem).Clear;
 
-  tl := Length(frmMain.MPV.Engine.TrackList);
+  tl := Length(frmMain.MPV.TrackList);
   if tl > 0 then
   begin
     for i := 0 to tl-1 do
     begin
-      if frmMain.MPV.Engine.TrackList[i].Kind = trkAudio then
+      if frmMain.MPV.TrackList[i].Kind = ttAudio then
       begin
         Item := TMenuItem.Create(AParent);
-        Item.Caption := IntToStr(frmMain.MPV.Engine.TrackList[i].ID) + ': '
-                        + frmMain.MPV.Engine.TrackList[i].Decoder + ', '
-                        + frmMain.MPV.Engine.TrackList[i].Info;
-        Item.Tag := frmMain.MPV.Engine.TrackList[i].ID;
-        Item.Checked := frmMain.MPV.Engine.TrackList[i].Selected;
+
+        s := IntToStr(frmMain.MPV.TrackList[i].ID) + ': ';
+        if frmMain.MPV.TrackList[i].Title <> '' then s := s + frmMain.MPV.TrackList[i].Title + ', ';
+        if frmMain.MPV.TrackList[i].Lang <> '' then s := s + frmMain.MPV.TrackList[i].Lang + ', ';
+        if frmMain.MPV.TrackList[i].Codec <> '' then s := s + '(' + frmMain.MPV.TrackList[i].Codec + ')';
+
+        Item.Caption := s;
+        Item.Tag := frmMain.MPV.TrackList[i].ID;
+        Item.Checked := frmMain.MPV.TrackList[i].Selected;
         Item.OnClick := @frmMain.popAudioTrackSet;
         if AParent is TPopupMenu then
           with AParent as TPopupMenu do
@@ -2179,7 +2184,7 @@ begin
       mpmBeforeSelection : VLCPlayFromSelection(-500);
       mpmAfterSelection  : VLCPlayFromSelection(+500, False);
     else
-      MPV.Engine.Pause;
+      MPV.Pause;
 //      if VLC.IsPause() then
 //        VLC.Resume()
 //      else if VLC.IsPlay() then
@@ -2208,8 +2213,8 @@ var
 begin
   with frmMain do
   begin
-    ct := MPV.Engine.Position; //VLC.GetVideoPosInMs;
-    tt := MPV.Engine.Duration; //VLC.GetVideoLenInMs;
+    ct := MPV.GetMediaPosInMs;
+    tt := MPV.GetMediaLenInMs;
 
     if Forward then
       mt := ct + MSecsToSeek
@@ -2228,15 +2233,11 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure VLCSeekTo(const Value: Integer; const Play: Boolean = False);
-//var
-//  IsPaused: Boolean;
 begin
   with frmMain do
   begin
-    //VLC.Pause(); //IsPaused := VLC.IsPause();
-    MPV.Engine.Seek(Value, True); //VLC.SetVideoPosInMs(Value);
-    //VLC.Resume(); //if not IsPaused then VLC.Resume();
-    if Play then MPV.Engine.Resume;
+    MPV.SetMediaPosInMs(Value); //True);
+    if Play then MPV.Resume;
   end;
 end;
 
@@ -2246,9 +2247,9 @@ procedure VLCAlterPlayRate(const Value: Boolean);
 begin
   with frmMain do
     if Value then
-      MPV.Engine.PlaybackRate(Options.DefChangePlayRate) //VLC.SetPlayRate(Options.DefChangePlayRate)
+      MPV.SetPlaybackRate(Options.DefChangePlayRate)
     else
-      MPV.Engine.PlaybackRate(100); //VLC.SetPlayRate(100);
+      MPV.SetPlaybackRate(100);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2870,14 +2871,14 @@ end;
 
 procedure ApplySetTimeInitialFromVLC(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  SetSubtitleTime(Index, CorrectTime(frmMain.MPV.Engine.Position), frmMain.tedInitial.Tag);
+  SetSubtitleTime(Index, CorrectTime(frmMain.MPV.GetMediaPosInMs), frmMain.tedInitial.Tag);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure ApplySetTimeFinalFromVLC(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  SetSubtitleTime(Index, CorrectTime(frmMain.MPV.Engine.Position), frmMain.tedFinal.Tag);
+  SetSubtitleTime(Index, CorrectTime(frmMain.MPV.GetMediaPosInMs), frmMain.tedFinal.Tag);
 end;
 
 // -----------------------------------------------------------------------------

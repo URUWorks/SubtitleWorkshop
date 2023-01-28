@@ -90,8 +90,9 @@ const
           'Compiler version: ' + {$I %FPCVERSION%} + sLineBreak +
           'Target CPU: ' + {$I %FPCTARGET%};
   cUW   = 'uruworks.net' + sLineBreak +
-          'Copyright © 2001-2022 URUWorks.' + sLineBreak +
-          '© 2022 Bedazzle, CM630.';
+          'Copyright © 2001-2022 URUWorks.' //+ sLineBreak +
+          //'© 2022 Bedazzle, CM630.'
+          ;
 begin
   lblSW.Caption := Format('%s %s %s', [ProgramName,
     Format('%.2f', [ProgramVer / 1000], FormatSettings), BuildNumber]);
