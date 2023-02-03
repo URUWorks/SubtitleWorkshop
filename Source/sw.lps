@@ -3,8 +3,8 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="12"/>
-    <BuildModes Active="Default"/>
-    <Units Count="209">
+    <BuildModes Active="Win64"/>
+    <Units Count="210">
       <Unit0>
         <Filename Value="sw.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -28,16 +28,12 @@
         <Filename Value="UTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="77"/>
-        <CursorPos X="5" Y="88"/>
         <UsageCount Value="200"/>
       </Unit2>
       <Unit3>
         <Filename Value="UCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2119"/>
-        <CursorPos X="10" Y="2124"/>
         <UsageCount Value="200"/>
       </Unit3>
       <Unit4>
@@ -199,7 +195,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
         <CursorPos X="55" Y="18"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="88"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\..\..\Lib\UWSystem.Graphics.pas"/>
@@ -234,7 +230,6 @@
       <Unit25>
         <Filename Value="..\..\..\Lib\UWControls.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2157"/>
         <UsageCount Value="12"/>
       </Unit25>
       <Unit26>
@@ -1484,106 +1479,109 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit208>
+      <Unit209>
+        <Filename Value="..\..\..\Components\UW_MPVPlayer\libMPV.Client.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit209>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="24" HistoryIndex="23">
       <Position1>
         <Filename Value="UMain.pas"/>
-        <Caret Line="805" Column="14" TopLine="792"/>
+        <Caret Line="801" Column="9" TopLine="782"/>
       </Position1>
       <Position2>
         <Filename Value="UMain.pas"/>
-        <Caret Line="961" Column="32" TopLine="941"/>
+        <Caret Line="813" Column="9" TopLine="794"/>
       </Position2>
       <Position3>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1041" Column="16" TopLine="1021"/>
+        <Caret Line="1413" Column="7" TopLine="1392"/>
       </Position3>
       <Position4>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1199" Column="62" TopLine="1180"/>
+        <Caret Line="1509" Column="22" TopLine="1488"/>
       </Position4>
       <Position5>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1215" Column="62" TopLine="1196"/>
+        <Caret Line="1516" Column="40" TopLine="1495"/>
       </Position5>
       <Position6>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1520" Column="3" TopLine="1504"/>
+        <Caret Line="1518" Column="16" TopLine="1497"/>
       </Position6>
       <Position7>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1518" Column="22" TopLine="1516"/>
+        <Caret Line="1522" Column="35" TopLine="1501"/>
       </Position7>
       <Position8>
         <Filename Value="UMain.pas"/>
+        <Caret Line="1561" Column="10" TopLine="1540"/>
       </Position8>
       <Position9>
         <Filename Value="UMain.pas"/>
-        <Caret Line="135" Column="18" TopLine="116"/>
+        <Caret Line="1858" Column="32" TopLine="1838"/>
       </Position9>
       <Position10>
         <Filename Value="UMain.pas"/>
-        <Caret Line="524" Column="28" TopLine="505"/>
+        <Caret Line="1958" Column="7" TopLine="1937"/>
       </Position10>
       <Position11>
         <Filename Value="UMain.pas"/>
-        <Caret Line="801" TopLine="783"/>
+        <Caret Line="1975" Column="14" TopLine="1954"/>
       </Position11>
       <Position12>
         <Filename Value="UMain.pas"/>
+        <Caret Line="2049" Column="9" TopLine="2028"/>
       </Position12>
       <Position13>
         <Filename Value="UMain.pas"/>
-        <Caret Line="135" Column="18" TopLine="116"/>
+        <Caret Line="2325" Column="7" TopLine="2304"/>
       </Position13>
       <Position14>
         <Filename Value="UMain.pas"/>
-        <Caret Line="524" Column="28" TopLine="505"/>
+        <Caret Line="2327" Column="88" TopLine="2306"/>
       </Position14>
       <Position15>
         <Filename Value="UMain.pas"/>
-        <Caret Line="801" Column="18" TopLine="782"/>
+        <Caret Line="2336" Column="13" TopLine="2315"/>
       </Position15>
       <Position16>
         <Filename Value="UMain.pas"/>
-        <Caret Line="802" Column="14" TopLine="783"/>
+        <Caret Line="2486" Column="14" TopLine="2465"/>
       </Position16>
       <Position17>
         <Filename Value="UMain.pas"/>
-        <Caret Line="803" Column="14" TopLine="784"/>
+        <Caret Line="2489" Column="14" TopLine="2468"/>
       </Position17>
       <Position18>
         <Filename Value="UMain.pas"/>
-        <Caret Line="804" Column="14" TopLine="785"/>
+        <Caret Line="2491" Column="13" TopLine="2470"/>
       </Position18>
       <Position19>
         <Filename Value="UMain.pas"/>
-        <Caret Line="805" Column="14" TopLine="786"/>
+        <Caret Line="2502" Column="33" TopLine="2482"/>
       </Position19>
       <Position20>
         <Filename Value="UMain.pas"/>
-        <Caret Line="961" Column="32" TopLine="941"/>
+        <Caret Line="2504" Column="11" TopLine="2484"/>
       </Position20>
       <Position21>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1041" Column="16" TopLine="1021"/>
+        <Caret Line="2506" Column="11" TopLine="2486"/>
       </Position21>
       <Position22>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1199" Column="62" TopLine="1180"/>
+        <Caret Line="2509" Column="11" TopLine="2489"/>
       </Position22>
       <Position23>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1215" Column="62" TopLine="1196"/>
+        <Caret Line="2639" Column="7" TopLine="2618"/>
       </Position23>
       <Position24>
         <Filename Value="UMain.pas"/>
-        <Caret Line="1518" Column="23" TopLine="1498"/>
+        <Caret Line="2646" Column="7" TopLine="2626"/>
       </Position24>
-      <Position25>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="3271" Column="42" TopLine="3256"/>
-      </Position25>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

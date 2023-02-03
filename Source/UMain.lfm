@@ -1599,7 +1599,9 @@ object frmMain: TfrmMain
       OnClick = MPVClick
       AutoStartPlayback = True
       AutoLoadSubtitle = False
+      KeepAspect = True
       RendererMode = rmOpenGL
+      LogLevel = llStatus
       OnFileLoaded = MPVFileLoaded
       OnAudioReconfig = MPVAudioReconfig
       OnPlay = MPVPlay

@@ -790,8 +790,8 @@ begin
   //TMX := TUWTMX.Create('c:\subtitles\tm.tmx');
   TMX := TUWTMX.Create('');
 
-  // Initialize libMPV
-  if MPV.Error = 0 then
+  // libMPV
+  if MPV.IsLibMPVAvailable then
   begin
     if Options.UseOpenGl then
       MPV.RendererMode := rmOpenGL
@@ -805,9 +805,6 @@ begin
     MPV.StartOptions.Add('osd-font-size='+IntToStr(Options.Marquee.Size));
 
     stbStatus.Panels[0].Text := MPV.GetVersionString;
-
-    //if Assigned(MPV.Engine.glRender) and (MPV.Engine.glRender.ErrorCode <> 0) then
-    //  Showmessage(Strings.libMPVglError);
   end
   else
     Showmessage(Strings.libMPVError);
@@ -2048,7 +2045,7 @@ procedure TfrmMain.popAudioTrackSet(Sender: TObject);
 begin
   with Sender as TMenuItem do
   begin
-    MPV.SetMediaTrack(ttAudio, (Sender as TMenuItem).Tag);
+    MPV.SetTrack(ttAudio, (Sender as TMenuItem).Tag);
   end;
 end;
 

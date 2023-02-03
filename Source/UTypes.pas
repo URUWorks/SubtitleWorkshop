@@ -34,7 +34,7 @@ const
 
   ProgramName       = 'Subtitle Workshop';
   ProgramWebsite    = 'https://uruworks.net';
-  ProgramVer        = 07021; // First 4 digits / 1000 = version, last digit: 0 = Final, >0 = Beta
+  ProgramVer        = 07022; // First 4 digits / 1000 = version, last digit: 0 = Final, >0 = Beta
 
   DefTimeFormat     = 'hh:mm:ss.zzz';
   DefDurationFormat = 'mm:ss.zzz';
