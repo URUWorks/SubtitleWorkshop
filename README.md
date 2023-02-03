@@ -24,6 +24,10 @@ The best choice for the beginner, expert or the fansubber.
 ### Linux Mint
 ![lnx](https://uruworks.net/img/sw_linuxmint.png)
 
+# MPV playback engine
+
+Based on a powerful multimedia playback engine.
+
 # Packages required to compile
 
 - Indy 10
