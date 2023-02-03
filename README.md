@@ -22,7 +22,7 @@ The best choice for the beginner, expert or the fansubber.
 ![mac](https://uruworks.net/img/sw_macos2.png)
 
 ### Linux Mint
-![lnx](https://uruworks.net/img/sw_linux1.png)
+![lnx](https://uruworks.net/img/sw_linuxmint.png)
 
 # Packages required to compile
 
