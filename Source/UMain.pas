@@ -804,7 +804,7 @@ begin
     MPV.StartOptions.Add('osd-align-y='+Options.Marquee.Position);
     MPV.StartOptions.Add('osd-font-size='+IntToStr(Options.Marquee.Size));
 
-    stbStatus.Panels[0].Text := MPV.GetVersionString;
+    //stbStatus.Panels[0].Text := MPV.GetVersionString;
   end
   else
     Showmessage(Strings.libMPVError);
