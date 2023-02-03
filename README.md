@@ -30,6 +30,7 @@ The best choice for the beginner, expert or the fansubber.
 - LCLExtensions
 - VirtualTreeView V5
 - UWLazarus
+- UWMPVPlayer
 
 # Is easy to help us
 
