@@ -21,10 +21,10 @@ uses
   UWSubtitleAPI.Formats.EBU.Types, UWSubtitleAPI.Formats, 
   UWSubtitleAPI.Formats.SubRip, UWSubtitleAPI.Formats.TimedText, 
   UWSubtitleAPI, UWSubtitleAPI.Tags, UWSubtitleAPI.TimeCode, 
-  UWSystem.FontUtils, UWTranslateAPI.Microsoft, UWMediaEngine.Thread, 
-  UWMediaEngine, UWMediaEngine.libMPV, UWSubtitleAPI.Formats.Captions32, 
-  UWSubtitleAPI.Formats.CaptionsInc, UWSubtitleAPI.Formats.Cavena890, 
-  UWSubtitleAPI.Formats.Cheetah, UWSubtitleAPI.Formats.CheetahCaption, 
+  UWSystem.FontUtils, UWTranslateAPI.Microsoft, 
+  UWSubtitleAPI.Formats.Captions32, UWSubtitleAPI.Formats.CaptionsInc, 
+  UWSubtitleAPI.Formats.Cavena890, UWSubtitleAPI.Formats.Cheetah, 
+  UWSubtitleAPI.Formats.CheetahCaption, 
   UWSubtitleAPI.Formats.CheetahCaption.Types, UWSubtitleAPI.Formats.CPC600, 
   UWSubtitleAPI.Formats.DKS, UWSubtitleAPI.Formats.DRTIC, 
   UWSubtitleAPI.Formats.DVDJunior, UWSubtitleAPI.Formats.DVDSubtitle, 
@@ -38,8 +38,7 @@ uses
   UWSubtitleAPI.Formats.MicroDVD, UWSubtitleAPI.Formats.MPlayer, 
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.NetflixTimedText, 
   UWSubtitleAPI.Formats.SBV, UWSubtitleAPI.Formats.Sofni, 
-  UWSubtitleAPI.Formats.STL, UWSubtitleAPI.Formats.WebVTT, UWlibMPV.Client, 
-  LazarusPackageIntf;
+  UWSubtitleAPI.Formats.STL, UWSubtitleAPI.Formats.WebVTT, LazarusPackageIntf;
 
 implementation
 
