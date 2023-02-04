@@ -29,9 +29,9 @@ The best choice for the beginner, expert or the fansubber.
 Based on a powerful multimedia playback engine.
 This means that you must have "libmpv" installed on your system:
 
-Windows: Copy "mpv-2.dll" library in the same SW folder.
-macOS: Download the precompiled library from "./Others/mpv-macos-dylibs.zip" and unzip it to "/usr/local/lib".
-Linux: Install "mpv" depending on the distro.
+- Windows: Copy "mpv-2.dll" library in the same SW folder.
+- macOS: Download the precompiled library from "./Others/mpv-macos-dylibs.zip" and unzip it to "/usr/local/lib".
+- Linux: Install "mpv" depending on the distro.
 
 # Packages required to compile
 
