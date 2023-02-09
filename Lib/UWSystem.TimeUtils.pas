@@ -48,6 +48,7 @@ function GetSeconds(const Time: Cardinal): Integer;
 function GetMSecs(const Time: Cardinal): Integer;
 function GetMSecsInFrames(const Time: Cardinal; const FPS: Single): Integer;
 function GetDateAndTime(Format: String = 'hh:mm:ss, dd/mm/yyyy'): String;
+function TimeMSToShortString(const TimeMS: Cardinal; const Precision: Cardinal): String;
 function CalculateOptimalDisplayMS(const Text: String): Cardinal;
 function CalculateOptimalDisplayMSEx(const Text: String; const CPS: Double = 14.7; const MinDisplay: Cardinal = 1000; const MaxDisplay: Cardinal = 8000): Double;
 
@@ -385,6 +386,36 @@ end;
 function GetDateAndTime(Format: String = 'hh:mm:ss, dd/mm/yyyy'): String;
 begin
   DateTimeToString(Result, Format, Now);
+end;
+
+// -----------------------------------------------------------------------------
+
+function TimeMSToShortString(const TimeMS: Cardinal; const Precision: Cardinal): String;
+var
+  hour, min, sec, ms: Cardinal;
+begin
+  ms   := TimeMs div 1000;
+  hour := ms div 3600;
+  min  := (ms div 60) - (hour * 60);
+  sec  := ms mod 60;
+  ms   := (TimeMS - (hour * 3600 * 1000) - (min * 60 * 1000) - (sec * 1000)) div Precision;
+
+  Result := '';
+
+  if (hour > 0) then
+    if (ms > 0) then
+      Result := Format('%d:%.2d:%.2d.%d', [hour, min, sec, ms])
+    else
+      Result := Format('%d:%.2d:%.2d', [hour, min, sec])
+  else if (min > 0) then
+  begin
+    if (ms > 0) then
+      Result := Result + Format('%d:%.2d.%d', [min, sec, ms])
+    else
+      Result := Result + Format('%d:%.2d', [min, sec]);
+  end
+  else
+    Result := Result +  Format('%d.%d', [sec, ms]);
 end;
 
 // -----------------------------------------------------------------------------
