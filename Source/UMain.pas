@@ -1530,14 +1530,14 @@ end;
 
 procedure TfrmMain.MPVPause(Sender: TObject);
 begin
-  actMediaPlay.ImageIndex := 55;
+  actMediaPlay.ImageIndex := 29;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.MPVPlay(Sender: TObject);
 begin
-  actMediaPlay.ImageIndex := 29;
+  actMediaPlay.ImageIndex := 55;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1852,6 +1852,7 @@ begin
     VSTSelectNode(0, True);
     mmoText.SetFocus;
   end;
+  UpdateCPSAndTexts;
   // Actions
   actUndo.Enabled := False;
   actRedo.Enabled := False;
@@ -3267,6 +3268,7 @@ procedure TfrmMain.actMediaSetFinalTimeExecute(Sender: TObject);
 begin
   if not (MPV.GetMediaLenInMs > 0) or (VSTFocusedNode < 0) then Exit;
   VSTDoLoop(@ApplySetTimeFinalFromVLC);
+  SelectSubtitleAndFocusMemo(True, False);
 end;
 
 // -----------------------------------------------------------------------------

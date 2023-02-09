@@ -89,7 +89,7 @@ function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): String;
 
 procedure FocusMemo(const SelectText: Boolean = True);
-procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean);
+procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
 function GetMemoFocused: TMemo;
 function GetComboFocused: TComboBox;
 procedure ComboCopyToClipboard(const Cut: Boolean = False);
@@ -1656,7 +1656,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean);
+procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
 begin
   if NextSibiling then
   begin
@@ -1666,6 +1666,9 @@ begin
   begin
     if (VSTFocusedNode > 0) then VSTSelectNode(VSTFocusedNode-1, True);
   end;
+
+  if WaveToo then
+    frmMain.VSTDblClick(NIL);
 
   FocusMemo;
 end;
