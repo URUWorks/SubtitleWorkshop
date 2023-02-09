@@ -176,6 +176,7 @@ type
     function FindNext: Integer;
     function FindNextPointer: PUWSubtitleItem;
     procedure Sort;
+    function IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
     function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
     function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
     function FillDialogFilter(const AllSupportedText: String = 'All supported files'): String;
@@ -1283,6 +1284,13 @@ end;
 procedure TUWSubtitles.Sort;
 begin
   FList.Sort(@CompareItemsToSort);
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
+begin
+  Result := (I1.InitialTime = I2.InitialTime) and (I1.FinalTime = I2.FinalTime);
 end;
 
 // -----------------------------------------------------------------------------
