@@ -798,6 +798,7 @@ begin
     else
       MPV.RendererMode := rmEmbedding;
 
+    MPV.LogLevel := llNo;
     MPV.AutoStartPlayback := False;
     MPV.StartOptions.Add('osd-color='+Options.Marquee.Color);
     MPV.StartOptions.Add('osd-align-x=center');

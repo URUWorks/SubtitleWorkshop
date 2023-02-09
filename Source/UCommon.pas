@@ -980,7 +980,7 @@ begin
     ShowWelcomeAtStartup := True;
 
     CustomSearch := CustomSearchWordReference;
-    UseOpenGl := {$IFDEF DARWIN}True{$ELSE}False{$ENDIF};
+    UseOpenGl := {$IFDEF WINDOWS}False{$ELSE}True{$ENDIF};
   end;
 
   with LastSubtitle do

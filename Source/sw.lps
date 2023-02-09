@@ -9,7 +9,6 @@
         <Filename Value="sw.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2"/>
         <CursorPos X="124" Y="15"/>
         <UsageCount Value="200"/>
       </Unit0>
@@ -20,6 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
+        <TopLine Value="791"/>
+        <CursorPos X="8" Y="798"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -34,6 +35,8 @@
         <Filename Value="UCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="972"/>
+        <CursorPos Y="983"/>
         <UsageCount Value="200"/>
       </Unit3>
       <Unit4>
@@ -76,8 +79,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="87"/>
-        <CursorPos X="13" Y="89"/>
         <UsageCount Value="200"/>
       </Unit8>
       <Unit9>
@@ -195,7 +196,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
         <CursorPos X="55" Y="18"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="89"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\..\..\Lib\UWSystem.Graphics.pas"/>
@@ -257,7 +258,7 @@
       <Unit29>
         <Filename Value="..\..\..\Lib\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="77"/>
+        <UsageCount Value="78"/>
       </Unit29>
       <Unit30>
         <Filename Value="..\..\..\External\VirtualTreeview4.8.7_LCL-R2\VirtualTrees.pas"/>
@@ -276,8 +277,9 @@
       <Unit32>
         <Filename Value="..\..\..\Lib\UWControls.WaveformDisplay.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="53" Y="3"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="76"/>
+        <CursorPos X="28" Y="1875"/>
+        <UsageCount Value="11"/>
       </Unit32>
       <Unit33>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysstrh.inc"/>
@@ -1477,108 +1479,19 @@
       <Unit208>
         <Filename Value="..\..\..\Components\UW_MPVPlayer\MPVPlayer.pas"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="35"/>
+        <CursorPos X="32" Y="48"/>
         <UsageCount Value="10"/>
       </Unit208>
       <Unit209>
         <Filename Value="..\..\..\Components\UW_MPVPlayer\libMPV.Client.pas"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="2115"/>
+        <CursorPos X="6" Y="2120"/>
         <UsageCount Value="10"/>
       </Unit209>
     </Units>
-    <JumpHistory Count="23" HistoryIndex="22">
-      <Position1>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1509" Column="22" TopLine="1488"/>
-      </Position1>
-      <Position2>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1516" Column="40" TopLine="1495"/>
-      </Position2>
-      <Position3>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1518" Column="16" TopLine="1497"/>
-      </Position3>
-      <Position4>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1522" Column="35" TopLine="1501"/>
-      </Position4>
-      <Position5>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1561" Column="10" TopLine="1540"/>
-      </Position5>
-      <Position6>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1858" Column="32" TopLine="1838"/>
-      </Position6>
-      <Position7>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1958" Column="7" TopLine="1937"/>
-      </Position7>
-      <Position8>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="1975" Column="14" TopLine="1954"/>
-      </Position8>
-      <Position9>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2049" Column="9" TopLine="2028"/>
-      </Position9>
-      <Position10>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2325" Column="7" TopLine="2304"/>
-      </Position10>
-      <Position11>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2327" Column="88" TopLine="2306"/>
-      </Position11>
-      <Position12>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2336" Column="13" TopLine="2315"/>
-      </Position12>
-      <Position13>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2486" Column="14" TopLine="2465"/>
-      </Position13>
-      <Position14>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2489" Column="14" TopLine="2468"/>
-      </Position14>
-      <Position15>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2491" Column="13" TopLine="2470"/>
-      </Position15>
-      <Position16>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2502" Column="33" TopLine="2482"/>
-      </Position16>
-      <Position17>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2504" Column="11" TopLine="2484"/>
-      </Position17>
-      <Position18>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2506" Column="11" TopLine="2486"/>
-      </Position18>
-      <Position19>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2509" Column="11" TopLine="2489"/>
-      </Position19>
-      <Position20>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2639" Column="7" TopLine="2618"/>
-      </Position20>
-      <Position21>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="2646" Column="7" TopLine="2626"/>
-      </Position21>
-      <Position22>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="808" Column="47" TopLine="789"/>
-      </Position22>
-      <Position23>
-        <Filename Value="UMain.pas"/>
-        <Caret Line="807" Column="7" TopLine="789"/>
-      </Position23>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>
