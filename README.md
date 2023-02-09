@@ -18,7 +18,7 @@ The best choice for the beginner, expert or the fansubber.
 ### Windows
 ![win](https://uruworks.net/img/sw_win3.png)
 
-### MacOS
+### macOS
 ![mac](https://uruworks.net/img/sw_macos2.png)
 
 ### Linux Mint
