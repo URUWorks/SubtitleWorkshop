@@ -1,7 +1,7 @@
 # Subtitle Workshop
 **Switch language to English|[简体中文](/README-CN.md)**
 
-The most complete, efficient and convenient open source subtitle editing tool for Windows, MacOS and Linux is officially back!
+The most complete, efficient and convenient open source subtitle editing tool for Windows, macOS and Linux is officially back!
 
 It supports all the subtitle formats you need and has all the features you would want from a subtitle editing program.
 
