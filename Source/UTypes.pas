@@ -221,7 +221,7 @@ const
   {$ENDIF}
   {$IFDEF LINUX}
   VLC_EXE        = 'vlc';
-  VLC_Params     = '%s -I dummy --no-sout-video --sout-audio --audio-track=%d --no-sout-rtp-sap --no-sout-standard-sap --ttl=1 --sout-keep --sout "#transcode{acodec=s16l,channels=1}:std{access=file,mux=wav,dst=%s}" vlc://quit';
+  VLC_Params     = '%s -I dummy --no-sout-video --sout-audio --audio-track=%d --no-sout-rtp-sap --no-sout-standard-sap --ttl=1 --sout-keep --sout #transcode{acodec=s16l,channels=1}:std{access=file,mux=wav,dst=%s} vlc://quit';
   FFMPEG_EXE     = 'ffmpeg';
   FFMPEG_Params  = '-i %s -vn -ac 1 -ar 44100 -map 0:a:%d -acodec pcm_s16le %s';
   MPLAYER_EXE    = 'mplayer';
@@ -229,7 +229,7 @@ const
   {$ENDIF}
   {$IFDEF DARWIN}
   VLC_EXE        = 'VLC'; // '/Applications/VLC.app/Contents/MacOS';
-  VLC_Params     = '%s -I dummy --no-sout-video --sout-audio --audio-track=%d --no-sout-rtp-sap --no-sout-standard-sap --ttl=1 --sout-keep --sout "#transcode{acodec=s16l,channels=1}:std{access=file,mux=wav,dst=%s}" vlc://quit';
+  VLC_Params     = '%s -I dummy --no-sout-video --sout-audio --audio-track=%d --no-sout-rtp-sap --no-sout-standard-sap --ttl=1 --sout-keep --sout #transcode{acodec=s16l,channels=1}:std{access=file,mux=wav,dst=%s} vlc://quit';
   FFMPEG_EXE     = 'ffmpeg';
   FFMPEG_Params  = '-i %s -vn -ac 1 -ar 44100 -map 0:a:%d -acodec pcm_s16le %s';
   MPLAYER_EXE    = 'mplayer';
