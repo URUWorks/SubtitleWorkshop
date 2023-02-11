@@ -2646,7 +2646,7 @@ object frmMain: TfrmMain
       object Separator17: TMenuItem
         Caption = '-'
       end
-      object MenuItem47: TMenuItem
+      object mnuSettings: TMenuItem
         Action = actSettings
       end
     end

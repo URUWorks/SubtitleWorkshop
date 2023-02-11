@@ -197,7 +197,7 @@ type
     MenuItem118: TMenuItem;
     MenuItem119: TMenuItem;
     MenuItem120: TMenuItem;
-    MenuItem47: TMenuItem;
+    mnuSettings: TMenuItem;
     MenuItem48: TMenuItem;
     MenuItem7: TMenuItem;
     mnuVST_Validate: TMenuItem;
@@ -695,7 +695,7 @@ const
 var
   s: String;
   {$IFDEF DARWIN}
-  AppMenu, AboutMenu: TMenuItem;
+  AppMenu, AboutMenu, SettingsMenu, SepMenu: TMenuItem;
   {$ENDIF}
 begin
   Randomize; // used for tips
@@ -831,8 +831,21 @@ begin
   AboutMenu.Action := actAbout;
   AppMenu.Add(AboutMenu); {Add About as item in application menu}
 
-  mnuAbout.Visible := False;
-  mnuExit.Visible  := False;
+  SepMenu := TMenuItem.Create(Self);
+  SepMenu.Caption := '-';
+  AppMenu.Add(SepMenu); {Add - as item in application menu}
+
+  SettingsMenu := TMenuItem.Create(Self);
+  SettingsMenu.Action := actSettings;
+  AppMenu.Add(SettingsMenu); {Add Settings as item in application menu}
+
+  SepMenu := TMenuItem.Create(Self);
+  SepMenu.Caption := '-';
+  AppMenu.Add(SepMenu); {Add - as item in application menu}
+
+  mnuAbout.Visible    := False;
+  mnuSettings.Visible := False;
+  mnuExit.Visible     := False;
   {$ENDIF}
   //tlbMain.Height := cboFind.Height;
   imgFind.Top := 0;

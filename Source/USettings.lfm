@@ -13,7 +13,7 @@ object frmSettings: TfrmSettings
   Position = poMainFormCenter
   ShowHint = True
   ShowInTaskBar = stNever
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.4.0'
   object pagSettings: TPageControl
     Left = 8
     Height = 399
@@ -89,30 +89,30 @@ object frmSettings: TfrmSettings
         ParentColor = False
       end
       object lblMaxLineLength: TLabel
-        Left = 236
+        Left = 208
         Height = 15
         Top = 92
-        Width = 138
+        Width = 166
         Alignment = taRightJustify
         AutoSize = False
         Caption = 'Max. line length (chars)'
         ParentColor = False
       end
       object lblShiftTime: TLabel
-        Left = 236
+        Left = 208
         Height = 15
         Top = 124
-        Width = 138
+        Width = 166
         Alignment = taRightJustify
         AutoSize = False
         Caption = 'Shift time (ms)'
         ParentColor = False
       end
       object lblSubtitlePause: TLabel
-        Left = 236
+        Left = 208
         Height = 15
         Top = 156
-        Width = 138
+        Width = 166
         Alignment = taRightJustify
         AutoSize = False
         Caption = 'Subtitle pause (ms)'
