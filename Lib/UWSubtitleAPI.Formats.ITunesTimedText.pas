@@ -101,12 +101,14 @@ end;
 
 function TUWITunesTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 
-  function GetTime(const S: String): Integer;
+  function GetTime(const S: String; const aFPS: Single): Integer;
   begin
     if AnsiEndsStr('t', S) then // ticks
       Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
+    else if AnsiEndsStr('s', S) then // seconds
+        Result := StringToTime(Copy(S, 0, Length(S)-1))
     else
-      Result := StringToTime(S);
+      Result := StringToTime(S, False, aFPS);
   end;
 
 var
@@ -115,17 +117,22 @@ var
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
+  fr          : Single;
 begin
   Result := False; // TODO: read styles,...
   XmlDoc := NIL;
   ReadXMLFile(XmlDoc, SubtitleFile.FileName);
   if Assigned(XmlDoc) then
     try
+      Node := XMLFindNodeByName(XmlDoc, 'tt');
+      if Assigned(Node) and XMLHasAttribute(Node, 'ttp:frameRate') then
+        fr := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), 25);
+
       Node := XMLFindNodeByName(XmlDoc, 'p');
       if Assigned(Node) then
         repeat
-          InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue);
-          FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue);
+          InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue, fr);
+          FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, fr);
           Text        := ReplaceEnters(Node.TextContent, '<br/>', LineEnding);
           Subtitles.Add(InitialTime, FinalTime, HTMLTagsToSW(Text), '', NIL, False);
 
@@ -155,6 +162,14 @@ begin
       TDOMElement(Root).SetAttribute('xmlns:tts', 'http://www.w3.org/ns/ttml#style');
       TDOMElement(Root).SetAttribute('xml:lang', 'en');
       TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
+      TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte');
+      if FPS > 0 then
+        TDOMElement(Root).SetAttribute('ttp:frameRate', FloatToStr(FPS))
+      else
+        TDOMElement(Root).SetAttribute('ttp:frameRate', '24');
+      TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '999 1000');
+      TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
+
       XmlDoc.Appendchild(Root);
     Root := XmlDoc.DocumentElement;
 
