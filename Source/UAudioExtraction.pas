@@ -79,6 +79,40 @@ uses UTypes, UCommon, UMain, MPVPlayer;
 
 // -----------------------------------------------------------------------------
 
+{$IFDEF UNIX}
+function GetInstallPath(const AFileName: String): String;
+const
+  {$IFDEF LINUX}
+  pathLst : array[0..2] of string = (
+    '/usr/bin',
+    '/bin',
+    '/usr/local/bin'
+  );
+  {$ELSE}
+  pathLst : array[0..1] of string = (
+    '/usr/local/bin',
+    '/opt/local/bin'
+    );
+  {$ENDIF}
+var
+  pathIdx : Integer;
+  pathStr : string;
+begin
+  for pathIdx := Low(pathLst) to High(pathLst) do
+  begin
+    pathStr := pathLst[pathIdx];
+    if not DirectoryExists(pathStr) then continue;
+    // look for bin
+    if FileExists(pathStr + PathDelim + AFileName) then
+    begin
+      Result := pathStr + PathDelim + AFileName;
+      Exit;
+    end;
+  end;
+  Result := '';
+end;
+{$ENDIF}
+
 procedure ProcessCB(const TimeElapsed: Double; var Cancel: Boolean);
 begin
   Cancel := False;
@@ -97,6 +131,10 @@ begin
   if not FileExists(AudioExtraction.FileName) and AudioExtraction.FileName.EndsWith(VLC_EXE) then
   begin
     AudioExtraction.FileName := GetInstallFolderVLC + VLC_EXE;
+  end
+  else if not FileExists(AudioExtraction.FileName) and AudioExtraction.FileName.EndsWith(FFMPEG_EXE) then
+  begin
+    {$IFDEF UNIX}AudioExtraction.FileName := GetInstallPath(FFMPEG_EXE);{$ENDIF}
   end;
 
   edtApp.Text    := AudioExtraction.FileName;
@@ -191,7 +229,7 @@ begin
       if p then frmMain.MPV.Pause;
 
       ExecuteApp(AudioExtraction.FileName,
-        Format(AudioExtraction.Params, [frmMain.MPV.FileName, cboTrack.ItemIndex+1, s]),
+        Format(AudioExtraction.Params, [frmMain.MPV.FileName, cboTrack.ItemIndex, s]),
         True, True, @ProcessCB);
 
       if FileExists(s) then
