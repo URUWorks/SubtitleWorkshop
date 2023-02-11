@@ -109,6 +109,19 @@ begin
       Exit;
     end;
   end;
+
+  {$IFDEF DARWIN}
+  Result := '/Applications/' + AFileName + '.app/Contents/MacOS/' + AFileName;
+  if FileExists(Result) then
+    Exit
+  else
+  begin
+    Result := '~' + Result;
+    if FileExists(Result) then
+      Exit;
+  end;
+  {$ENDIF}
+
   Result := '';
 end;
 {$ENDIF}
@@ -195,7 +208,6 @@ end;
 
 procedure TfrmAudioExtraction.ExtractAudioTrack;
 var
-//  AProcess: TProcess;
   s: String;
   p: Boolean;
 begin
@@ -214,7 +226,6 @@ begin
     try
       if not DirectoryExists(WaveformsFolder) then
       begin
-        //DirectoryIsWritable
         if not ForceDirectories(WaveformsFolder) then
         begin
           ShowMessage(Strings.WriteDenieded);
@@ -229,7 +240,7 @@ begin
       if p then frmMain.MPV.Pause;
 
       ExecuteApp(AudioExtraction.FileName,
-        Format(AudioExtraction.Params, [frmMain.MPV.FileName, cboTrack.ItemIndex, s]),
+        Format(AudioExtraction.Params, [frmMain.MPV.FileName.Replace(' ', '*', [rfReplaceAll]) , cboTrack.ItemIndex, s.Replace(' ', '*', [rfReplaceAll])]),
         True, True, @ProcessCB);
 
       if FileExists(s) then
