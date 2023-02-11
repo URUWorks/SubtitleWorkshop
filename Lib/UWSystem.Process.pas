@@ -52,7 +52,7 @@ begin
     AProcess.Executable := AApp;
     AParamArray := AParams.Split(' ');
     for i := 0 to High(AParamArray) do
-      AProcess.Parameters.Add(AParamArray[i]);
+      AProcess.Parameters.Add(AParamArray[i].Replace('*', ' ', [rfReplaceAll]));
 
     AProcess.Execute;
 
