@@ -136,12 +136,12 @@ type
 
   PWebVTT_ExtraInfo = ^TWebVTT_ExtraInfo;
   TWebVTT_ExtraInfo = record
-//    VerticalText : Integer;    // D:vertical (vertical growing left)
+//    VerticalText : Integer;  // D:vertical (vertical growing left)
                                // D:vertical-lr (vertical growing right)
-//    LinePos      : Integer;    // L:[a number]%, where [a number] is a positive integer.
-                               // L:[a number], where [a number] is a positive or negative integer.
-//    TextPos      : Integer;    // T:[a number]%, where [a number] is a positive integer.
-//    TextSize     : Integer;    // S:[a number]%, where [a number] is a positive integer.
+    LinePos      : Integer;    // line:[a number]%, where [a number] is a positive integer.
+                               // line:[a number], where [a number] is a positive or negative integer.
+//    TextPos      : Integer;  // T:[a number]%, where [a number] is a positive integer.
+//    TextSize     : Integer;  // S:[a number]%, where [a number] is a positive integer.
     TextAlign    : AnsiString; // align:left or align:center or align:right
   end;
 
