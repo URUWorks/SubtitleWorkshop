@@ -43,12 +43,17 @@ var
   AProcess: TProcess;
   ACancel: Boolean;
   ATimeElapsed: Double;
+  AParamArray: TStringArray;
+  i: Integer;
 begin
   try
     AProcess := TProcess.Create(NIL);
     if AHidden then AProcess.ShowWindow := swoHide;
     AProcess.Executable := AApp;
-    AProcess.Parameters.Add(AParams);
+    AParamArray := AParams.Split(' ');
+    for i := 0 to High(AParamArray) do
+      AProcess.Parameters.Add(AParamArray[i]);
+
     AProcess.Execute;
 
     if AWaitOnExit then  // wait for the launched application to finish
