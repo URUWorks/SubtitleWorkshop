@@ -145,7 +145,7 @@ end;
 
 function TUWWebVTT.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
-  i, c, x     : Integer;
+  i, c, x, v  : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text, s     : String;
@@ -192,6 +192,27 @@ begin
         else
           ExtraInfo := NIL;
 
+        v := Pos('line', s);
+        if (v > 0) then
+        begin
+          Delete(s, 1, v+4);
+          if s.EndsWith('%') then
+            Delete(s, s.Length, 1);
+
+          if not Assigned(ExtraInfo) then
+            New(ExtraInfo);
+
+          ExtraInfo^.LinePos := StrToIntDef(s, 0);
+          if (ExtraInfo^.LinePos > 0) and (ExtraInfo^.LinePos < 40) then
+            v := 2
+          else if (ExtraInfo^.LinePos > 40) and (ExtraInfo^.LinePos < 70) then
+            v := 1
+          else
+            v := 0;
+        end
+        else
+          v := 0;
+
         if (InitialTime > -1) and (FinalTime > -1) then
         begin
           Inc(i);
@@ -208,7 +229,8 @@ begin
           Dec(i);
           Text := HTMLTagsToSW(Text);
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
-          Subtitles.ItemPointer[x]^.Align := c;
+          Subtitles.ItemPointer[x]^.Align  := c;
+          Subtitles.ItemPointer[x]^.VAlign := v;
         end;
       end;
       Inc(i);
@@ -239,19 +261,26 @@ begin
 
     for i := FromItem to ToItem do
     begin
+      Align := '';
+
       if Subtitles.ExtraInfo[i] <> NIL then
         with PWebVTT_ExtraInfo(Subtitles.ExtraInfo[i])^ do
         begin
 
-        end
-      else
-        Align := '';
+        end;
 
       if Subtitles[i].Align > 0 then
         case Subtitles[i].Align of
           1: Align := ' align:left';
           2: Align := ' align:center';
           3: Align := ' align:right';
+        end;
+
+      if Subtitles[i].VAlign > 0 then
+        case Subtitles[i].Align of
+          0: Align := Align + '80%';
+          1: Align := Align + '50%';
+          2: Align := Align + '10%';
         end;
 
       SubFile.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
