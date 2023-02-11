@@ -993,8 +993,8 @@ begin
 
   with AudioExtraction do
   begin
-    FileName := VLC_EXE;
-    Params   := VLC_Params;
+    FileName := FFMPEG_EXE;
+    Params   := FFMPEG_Params;
   end;
 
   frmMain.actSingTag.Caption := swt_Sing;
@@ -3274,13 +3274,13 @@ var
 {$IFDEF LINUX}
  const
   pathLst : array[0..6] of string = (
-    '/usr/lib',
+    '/usr/bin',
     '/lib',
-    '/usr/local/lib',
+    '/usr/local/bin',
     '/lib64',
     '/usr/lib64',
     '/usr/lib/x86_64-linux-gnu',
-    '/snap/vlc/current/usr/lib'
+    '/snap/vlc/current/usr/bin'
   );
 var
   pathIdx : Integer;
