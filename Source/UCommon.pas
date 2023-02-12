@@ -1563,6 +1563,7 @@ end;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 var
   Run: PVirtualNode;
+  s: String;
 begin
   Result := '';
 
@@ -1580,14 +1581,42 @@ begin
               TShowSubtitles.ssTranslation : Result := Translation;
             end;
             Result := ReplaceString(Result, sLineBreak, #10) + #10 + ' ';
+            s := '';
             if Subtitles[Run^.Index].Align <> 0 then
             begin
               case Subtitles[Run^.Index].Align of
-                1: Result := '{\an1}' + Result + '{\an0}';
-                2: Result := '{\an2}' + Result + '{\an0}';
-                3: Result := '{\an3}' + Result + '{\an0}';
+                1: case Subtitles[Run^.Index].VAlign of
+                     1 : s := '{\an4}';
+                     2 : s := '{\an7}';
+                   else
+                     s := '{\an1}';
+                   end;
+                2: case Subtitles[Run^.Index].VAlign of
+                     1 : s := '{\an5}';
+                     2 : s := '{\an8}';
+                   else
+                     s := '{\an2}';
+                   end;
+                3: case Subtitles[Run^.Index].VAlign of
+                     1 : s := '{\an6}';
+                     2 : s := '{\an9}';
+                   else
+                     s := '{\an3}';
+                   end;
+              end;
+            end
+            else if Subtitles[Run^.Index].VAlign <> 0 then
+            begin
+              case Subtitles[Run^.Index].VAlign of
+                1 : s := '{\an5}';
+                2 : s := '{\an8}';
+              else
+                s := '{\an2}';
               end;
             end;
+
+            if not s.IsEmpty then
+              Result := s + Result + '{\an0}';
 
             LastSubtitle.ShowIndex := Run^.Index;
             if LastSubtitle.Selected <> LastSubtitle.ShowIndex then
