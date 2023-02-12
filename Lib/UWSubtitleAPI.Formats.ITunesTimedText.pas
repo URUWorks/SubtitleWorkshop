@@ -91,7 +91,7 @@ end;
 function TUWITunesTimedText.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
   if (LowerCase(ExtractFileExt(SubtitleFile.FileName)) = '.itt') and
-    Contains('<tt xmlns', SubtitleFile[Row]) then
+  SubtitleFile[Row].Contains('<tt xml') then
     Result := True
   else
     Result := False;
@@ -134,7 +134,9 @@ begin
           InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue, fr);
           FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, fr);
           Text        := ReplaceEnters(Node.TextContent, '<br/>', LineEnding);
+          writeln(Node.TextContent);
           Subtitles.Add(InitialTime, FinalTime, HTMLTagsToSW(Text), '', NIL, False);
+
 
           Node := Node.NextSibling;
         until (Node = NIL);
@@ -151,6 +153,7 @@ var
   XmlDoc : TXMLDocument;
   Root, Element, Node, SubNode : TDOMNode;
   i : Integer;
+  s : String;
 begin
   Result := False;
   XmlDoc := TXMLDocument.Create;
@@ -163,11 +166,22 @@ begin
       TDOMElement(Root).SetAttribute('xml:lang', 'en');
       TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
       TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte');
-      if FPS > 0 then
-        TDOMElement(Root).SetAttribute('ttp:frameRate', FloatToStr(FPS))
+
+      if FPS <= 24 then
+        s := '24'
+      else if (FPS > 24) and (FPS < 29) then
+        s := '25'
       else
-        TDOMElement(Root).SetAttribute('ttp:frameRate', '24');
-      TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '999 1000');
+        s := '30';
+
+      TDOMElement(Root).SetAttribute('ttp:frameRate', s);
+
+      if (FPS < 24) or ((FPS > 29) and (FPS < 30)) then
+        s := '999 1000'
+      else
+        s := '1 1';
+
+      TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', s);
       TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
 
       XmlDoc.Appendchild(Root);
