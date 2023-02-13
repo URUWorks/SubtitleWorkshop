@@ -59,7 +59,7 @@ function STLTagsToSW(const Text: String): String;
   begin
     Result   := sText;
     StartTag := True;
-    sTag     := '^' + Tag;
+    sTag     := '^' + Tag.ToUpper;
     while Result.Contains(sTag) do
     begin
       if StartTag then
@@ -187,7 +187,6 @@ function TUWSTL.SaveSubtitle(const FileName: String; const FPS: Single; const En
 var
   SubFile : TUWStringList;
   i       : Integer;
-  Text    : String;
 begin
   Result  := False;
   SubFile := TUWStringList.Create;
