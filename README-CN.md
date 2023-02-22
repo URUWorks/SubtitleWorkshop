@@ -24,6 +24,15 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 ### Linux Mint
 ![lnx](https://uruworks.net/img/sw_linux1.png)
 
+# MPV 播放引擎
+
+此软件使用了非常实用的mpv多媒体播组件。
+这意味着您需要安装"libmpv"组件：
+
+- Windows:复制"mpv-2.dll"到该软件主程序文件夹下。
+- macOS: 从"./Others/mpv-macos-dylibs.zip"下载预编译好的文件，然后解压文件到"/usr/local/lib"。
+- Linux: 根据发行版安装"mpv"。
+
 # 编译所需的包
 
 - Indy 10
