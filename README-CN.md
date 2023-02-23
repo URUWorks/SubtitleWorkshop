@@ -11,9 +11,9 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 
 初学者、专家或粉丝的最佳选择。 
 
-**试一试，你会忘记其余的！**
+**试一试，你会乐在其中！**
 
-# 让我们预览一下吧！
+# 让我们看看！
 
 ### Windows
 ![win](https://uruworks.net/img/sw_win3.png)
@@ -30,7 +30,7 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 这意味着您需要安装"libmpv"组件：
 
 - Windows:复制"mpv-2.dll"到该软件主程序文件夹下。
-- macOS: 从"./Others/mpv-macos-dylibs.zip"下载预编译好的文件，然后解压文件到"/usr/local/lib"。
+- macOS: 从此仓库中的"./Others/mpv-macos-dylibs.zip"下载预编译好的文件，然后解压文件到"/usr/local/lib"。
 - Linux: 根据发行版安装"mpv"。
 
 # 编译所需的包
@@ -50,3 +50,9 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 我们会记住您，捐款完全是自愿的，如果您无力捐赠，您将不会得到更少的支持或更少的考虑。
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Subtitle+Workshop&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
+
+# 非常感谢
+
+Marco Caselli,
+Scott Napier
+和所有使用 Subtitle Workshop 的所有人！
