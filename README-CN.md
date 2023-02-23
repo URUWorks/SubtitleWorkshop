@@ -26,7 +26,7 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 
 # MPV 播放引擎
 
-此软件使用了非常实用的mpv多媒体播组件。
+此软件使用了非常实用的mpv多媒体播放组件。
 这意味着您需要安装"libmpv"组件：
 
 - Windows:复制"mpv-2.dll"到该软件主程序文件夹下。
@@ -55,4 +55,4 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 
 Marco Caselli,
 Scott Napier
-和所有使用 Subtitle Workshop 的所有人！
+和使用 Subtitle Workshop 的所有人！
