@@ -5,6 +5,7 @@
 		{"Name" : "TextChars", "Text" : "文本 (%s 字符):"},
 		{"Name" : "Translation", "Text" : "译文"},
 		{"Name" : "TranslationChars", "Text" : "译文 (%s 字符):"},
+		{"Name" : "CPS", "Text" : "每秒字符数: %.2f"},
 		{"Name" : "AllSupportedFiles", "Text" : "所有支持的文件"},
 		{"Name" : "Selection", "Text" : "选择: %s-%s"},
 		{"Name" : "SaveDialog", "Text" : "文件 '%s' 已被更改。%s你想要保存更改吗？"},
@@ -12,7 +13,6 @@
 		{"Name" : "ExtractAudio", "Text" : "无法识别音频波纹，继续提取？"},
 		{"Name" : "ExtractLibError", "Text" : "找不到 %s."},
 		{"Name" : "libMPVError", "Text" : "找不到运行嵌入式mpv播放器所需的库。请下载。"},
-		{"Name" : "libMPVglError", "Text" : "Failed to initialize mpv GL context."},
 		{"Name" : "LoadingVideo", "Text" : "载入视频..."}
 	],
 	"ErrorStrings" :[
@@ -94,7 +94,7 @@
 		{"Name" : "actSelectAll", "Text" : "全选", "Desc" : ""},
 		{"Name" : "actLoadSubtitle", "Text" : "载入字幕...", "Desc" : "载入字幕文件"},
 		{"Name" : "actSaveSubtitleAs", "Text" : "字幕另存为...", "Desc" : "字幕另存为文件"},
-		{"Name" : "actSaveTranslationAs", "Text" : "保存翻译文本为...", "Desc" : "保存翻译文本到文件"},
+		{"Name" : "actSaveTranslationAs", "Text" : "翻译文本另存为...", "Desc" : "将翻译文本保存到文件"},
 		{"Name" : "actNewSubtitle", "Text" : "新建字幕", "Desc" : "开始一个新的字幕工程"},
 		{"Name" : "actCloseSubtitle", "Text" : "关闭字幕", "Desc" : ""},
 		{"Name" : "actOpenVideo", "Text" : "打开...", "Desc" : "打开视频文件"},
@@ -138,7 +138,7 @@
 		{"Name" : "actAlignToCenter", "Text" : "向中间对齐", "Desc" : ""},
 		{"Name" : "actAlignToRight", "Text" : "向右对齐", "Desc" : ""},
 		{"Name" : "actVAlignToBottom", "Text" : "垂直对齐到底部", "Desc" : ""},
-		{"Name" : "actVAlignToMiddle", "Text" : "垂直对齐到中间", "Desc" : ""},
+		{"Name" : "actVAlignToMiddle", "Text" : "垂直对齐到中心", "Desc" : ""},
 		{"Name" : "actVAlignToTop", "Text" : "垂直对齐到顶部", "Desc" : ""},
 		{"Name" : "numLeft", "Text" : "左边距/X1", "Desc" : ""},
 		{"Name" : "numTop", "Text" : "上边距/Y1", "Desc" : ""},
@@ -404,8 +404,7 @@
 		{"Name" : "grpTerm", "Text" : "术语数据库", "Desc" : ""},
 		{"Name" : "lblTermFile", "Text" : "文件（可选）:", "Desc" : ""},
 		{"Name" : "btnNew", "Text" : "新建", "Desc" : ""},
-		{"Name" : "btnClose", "Text" : "关闭", "Desc" : ""},
-		{"Name" : "btnCancel", "Text" : "Cancel", "Desc" : ""}
+		{"Name" : "btnClose", "Text" : "关闭", "Desc" : ""}
 	],
 	"frmAbout" :[
 		{"Name" : "frmAbout", "Text" : "关于", "Desc" : ""},
@@ -423,18 +422,18 @@
 		{"Name" : "frmSettings", "Text" : "设置", "Desc" : ""},
 		{"Name" : "tabGeneral", "Text" : "常规", "Desc" : ""},
 		{"Name" : "lblLanguage", "Text" : "语言", "Desc" : ""},
-		{"Name" : "lblWebReference", "Text" : "网络参考", "Desc" : ""},
-		{"Name" : "lblNewSubtitle", "Text" : "新建字幕 (ms)", "Desc" : ""},
-		{"Name" : "lblMinDuration", "Text" : "最短持续时间 (ms)", "Desc" : ""},
-		{"Name" : "lblMaxDuration", "Text" : "最长持续时间 (ms)", "Desc" : ""},
-		{"Name" : "lblMaxLineLength", "Text" : "最大行长 (chars)", "Desc" : ""},
-		{"Name" : "lblShiftTime", "Text" : "时间移位 (ms)", "Desc" : ""},
-		{"Name" : "lblSubtitlePause", "Text" : "字幕停顿时间 (ms)", "Desc" : ""},
+		{"Name" : "lblWebReference", "Text" : "网络词典", "Desc" : ""},
+		{"Name" : "lblNewSubtitle", "Text" : "新字幕时间(ms)", "Desc" : ""},
+		{"Name" : "lblMinDuration", "Text" : "最小持续时间(ms)", "Desc" : ""},
+		{"Name" : "lblMaxDuration", "Text" : "最大持续时间(ms)", "Desc" : ""},
+		{"Name" : "lblMaxLineLength", "Text" : "最大行长(字符)", "Desc" : ""},
+		{"Name" : "lblShiftTime", "Text" : "平移时间(ms)", "Desc" : ""},
+		{"Name" : "lblSubtitlePause", "Text" : "字幕停留时长(ms)", "Desc" : ""},
 		{"Name" : "ledProhibitedChars", "Text" : "禁止使用的字符", "Desc" : ""},
-		{"Name" : "ledRepeatableChars", "Text" : "可重复的字符", "Desc" : ""},
-		{"Name" : "chkShowSplashWindow", "Text" : "每次启动都显示欢迎窗口", "Desc" : ""},
-		{"Name" : "chkDrawTags", "Text" : "在列表中绘制标签", "Desc" : ""},
-		{"Name" : "chkDotsOnSplit", "Text" : "在已分离的字幕中添加 “...”", "Desc" : ""},
+		{"Name" : "ledRepeatableChars", "Text" : "替换的字符", "Desc" : ""},
+		{"Name" : "chkShowSplashWindow", "Text" : "显示欢迎窗口", "Desc" : ""},
+		{"Name" : "chkDrawTags", "Text" : "在列表显示标签", "Desc" : ""},
+		{"Name" : "chkDotsOnSplit", "Text" : "在分离的字幕中添加'...'", "Desc" : ""},
 		{"Name" : "btnClose", "Text" : "关闭", "Desc" : ""}
 	]
 }
