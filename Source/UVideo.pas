@@ -68,7 +68,7 @@ begin
   begin
     if frmMain.MPV.IsPaused then frmMain.MPV.Tag := 1;
     p := frmMain.MPV.GetMediaPosInMs;
-    //frmMain.MPV.UnInitialize;
+    frmMain.MPV.Close;
     frmMain.actDockVideoControls.Tag := -2;
   end;
 
@@ -77,7 +77,7 @@ begin
   frmMain.sptVideo.Visible := True;
   SetWorkspace(frmMain.actChangeWorkspace.Checked);
 
-  if (s <> '') then // and frmMain.MPV.Initialize then
+  if (s <> '') then
   begin
     frmMain.MPV.Play(s); //, p);
     frmMain.MPV.SetTextColor(Options.Marquee.Color);
