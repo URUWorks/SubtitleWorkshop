@@ -1204,10 +1204,7 @@ begin
     4: begin
          // Text
          if Options.DrawTags then
-           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Text,
-           Application.BidiMode <> bdLeftToRight)
-//           DrawHTMLTextEx(TargetCanvas, R, Subtitles[Node^.Index].Text,
-//           Application.BidiMode <> bdLeftToRight, swt_StartTag, swt_EndTag)
+           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Text, TS.RightToLeft)
          else
          begin
            TS.Alignment := taLeftJustify;
@@ -1220,10 +1217,7 @@ begin
          // Translation
          R.Right := (R.Right - 16);
          if Options.DrawTags then
-           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Translation,
-           Application.BidiMode <> bdLeftToRight)
-//           DrawHTMLTextEx(TargetCanvas, R, Subtitles[Node^.Index].Translation,
-//           Application.BidiMode <> bdLeftToRight, swt_StartTag, swt_EndTag)
+           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Translation, TS.RightToLeft)
          else
          begin
            TS.Alignment := taLeftJustify;
@@ -2502,7 +2496,7 @@ begin
     begin
       if MPV.IsPaused then MPV.Tag := 1;
       p := MPV.GetMediaPosInMs;
-//      MPV.UnInitialize;
+      MPV.Close;
       actDockVideoControls.Tag := -2;
     end;
 
@@ -2513,14 +2507,15 @@ begin
     frmVideo.Show;
 
     actDockVideoControls.Checked := False;
-    if (s <> '') then //and MPV.Engine.Initialize then
+    if (s <> '') then
     begin
+      MPV.Play(s, p);
       MPV.SetTextColor(Options.Marquee.Color);
       MPV.SetTextVAlign(Options.Marquee.Position);
       MPV.SetTextSize(Options.Marquee.Size);
       actMediaChangePlayRateExecute(NIL);
 
-      MPV.Play(s, p);
+
       frmVideo.Caption := ExtractFileName(s);
     end;
   end
@@ -3103,7 +3098,7 @@ end;
 procedure TfrmMain.actCloseVideoExecute(Sender: TObject);
 begin
   MPV.Play('');
-//  MPV.Engine.UnInitialize;
+  MPV.Close;
   WAVE.Close;
   actCloseVideo.Enabled := False;
   actExtractWaveform.Enabled := False;
