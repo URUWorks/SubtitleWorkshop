@@ -350,6 +350,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetStringCount(const ASourceString: String; const AWords: array of String): Integer;
+begin
+  Result := StringCountRE('\b(' + String.Join('|', AWords) + ')\b', ASourceString);
+end;
+
+// -----------------------------------------------------------------------------
+
 function DetectAnsiEncoding(const Buffer: TBytes): TEncoding;
 const
   _Russian: Array of String = ('что', 'быть', 'весь', 'этот', 'один', 'такой');
@@ -358,10 +365,11 @@ const
   _Greek: Array of String = ('μου', '[Εε]ίναι', 'αυτό', 'Τόμπυ', 'καλά', 'Ενταξει', 'πρεπει', 'Λοιπον', 'τιποτα', 'ξερεις');
   _CroatianAndSerbian: Array of String = ('sam', 'ali', 'nije', 'Nije', 'samo', 'ovo', 'kako', 'dobro', 'Dobro', 'sve', 'tako', 'će', 'mogu', 'ću', 'zašto', 'nešto', 'za', 'misliš', 'možeš', 'možemo', 'ništa', 'znaš', 'ćemo', 'znam');
   _CzechAndSlovak: Array of String = ('[Oo]n[ao]?', '[Jj]?si', '[Aa]le', '[Tt]en(to)?', '[Rr]ok', '[Tt]ak', '[Aa]by', '[Tt]am', '[Jj]ed(en|na|no)', '[Nn]ež', '[Aa]ni', '[Bb]ez', '[Dd]obr[ýáé]', '[Vv]šak', '[Cc]el[ýáé]', '[Nn]ov[ýáé]', '[Dd]ruh[ýáé]', 'jsem', 'poøádku', 'Pojïme', 'háje', 'není', 'Jdeme', 'všecko', 'jsme', 'Prosím', 'Vezmi', 'když', 'Takže', 'Dìkuji', 'prechádzku', 'všetko', 'Poïme', 'potom', 'Takže', 'Neviem', 'budúcnosti', 'trochu');
+  _Czech: Array of String = ('.*[Řř].*', '.*[ůě].*', '[Bb]ýt', '[Jj]sem', '[Jj]si', '[Jj]á', '[Mm]ít', '[Aa]no', '[Nn]e',  '[Nn]ic', '[Dd]en', '[Jj]en', '[Cc]o', '[Jj]ak[o]?', '[Nn]ebo',  '[Pp]ři', '[Pp]ro', '[Pp]řed.*', '[Jj](ít|du|de|deme|dou)', '[Mm]ezi',  '[Jj]eště', '[Čč]lověk', '[Pp]odle', '[Dd]alší');
   _Hungarian: Array of String = ('hogy', 'lesz', 'tudom', 'vagy', 'mondtam', 'még', 'vagyok', 'csak', 'Hát', 'felesége', 'Csak', 'utána', 'jött', 'Miért', 'Akkor', 'magát', 'holnap', 'Tudja', 'Köszönöm', 'élet', 'Örvendek', 'vissza', 'hogy', 'tudom', 'Rendben', 'Istenem', 'Gyerünk', 'értem', 'vagyok', 'hiszem', 'történt', 'rendben', 'olyan', 'őket', 'vannak', 'mindig', 'Kérlek', 'Gyere', 'kicsim', 'vagyunk');
+  _Latvian: Array of String = ('Paldies', 'neesmu ', 'nezinu', 'viòð', 'viņš', 'viņu', 'kungs', 'esmu', 'Viņš', 'Velns', 'viņa', 'dievs', 'Pagaidi', 'varonis', 'agrāk', 'varbūt');
   _Arabic: Array of String = ('من', 'هل', 'لا', 'في', 'لقد', 'ما', 'ماذا', 'يا', 'هذا', 'إلى', 'على', 'أنا', 'أنت', 'حسناً', 'أيها', 'كان', 'كيف', 'يكون', 'هذه', 'هذان', 'الذي', 'التي', 'الذين', 'هناك', 'هنالك');
   _Hebrew: Array of String = ('אתה', 'אולי', 'הוא', 'בסדר', 'יודע', 'טוב');
-  //_Farsi: Array of String = ('این', 'برای', 'اون', 'سیب', 'کال', 'رو', 'خيلي', 'آره', 'بود', 'اون', 'نيست', 'اينجا', 'باشه', 'سلام', 'ميکني', 'داري', 'چيزي', 'چرا', 'خوبه');
 
 var
   Encoding, Enc : TEncoding;
@@ -374,9 +382,9 @@ begin
   WordMinCount := Length(Buffer) div 300;
   Encoding := TEncoding.GetEncoding(1251);
   Text := Encoding.GetString(Buffer);
-  if (StringCounts(Text, _Russian) > 5) or
-     (StringCounts(Text, _Bulgarian) > 5) or
-     (StringCounts(Text, _SerbianCyrillic) > WordMinCount) then
+  if (GetStringCount(Text, _Russian) > 5) or
+     (GetStringCount(Text, _Bulgarian) > 5) or
+     (GetStringCount(Text, _SerbianCyrillic) > WordMinCount) then
   begin
     Result := Encoding;
     Exit;
@@ -385,18 +393,28 @@ begin
   // Greek
   Encoding := TEncoding.GetEncoding(1253);
   Text := Encoding.GetString(Buffer);
-  if (StringCounts(Text, _Greek) > 5) then
+  if (GetStringCount(Text, _Greek) > 5) then
   begin
     Result := Encoding;
     Exit;
   end;
 
-  // Central European/Eastern European: Polish, Czech, Slovak, Hungarian, Slovene, Bosnian, Croatian, Serbian (Latin script), Romanian (before 1993 spelling reform) and Albanian
+  // Central European/Eastern European
   Encoding := TEncoding.GetEncoding(1250);
   Text := Encoding.GetString(Buffer);
-  if (StringCounts(Text, _CroatianAndSerbian) > WordMinCount) or
-     (StringCounts(Text, _CzechAndSlovak) > WordMinCount) or
-     (StringCounts(Text, _Hungarian) > WordMinCount) then
+  if (GetStringCount(Text, _CroatianAndSerbian) > WordMinCount) or
+     (GetStringCount(Text, _CzechAndSlovak) > WordMinCount) or
+     (GetStringCount(Text, _Czech) > WordMinCount) or
+     (GetStringCount(Text, _Hungarian) > WordMinCount) then
+  begin
+    Result := Encoding;
+    Exit;
+  end;
+
+  // Latvian
+  Encoding := TEncoding.GetEncoding(1257);
+  Text := Encoding.GetString(Buffer);
+  if (GetStringCount(Text, _Latvian) > 5) then
   begin
     Result := Encoding;
     Exit;
@@ -406,10 +424,10 @@ begin
   Encoding := TEncoding.GetEncoding(1256);
   Enc := TEncoding.GetEncoding(1255); // Hebrew
   Text := Encoding.GetString(Buffer);
-  if (StringCounts(Text, _Arabic) > 5) then
+  if (GetStringCount(Text, _Arabic) > 5) then
   begin
     // Hebrew
-    if (StringCounts(Enc.GetString(Buffer), _Hebrew) > 10) then
+    if (GetStringCount(Enc.GetString(Buffer), _Hebrew) > 10) then
     begin
       Result := Enc;
       Exit;
@@ -418,12 +436,11 @@ begin
     Exit;
   end;
   // Hebrew
-  if (StringCounts(Enc.GetString(Buffer), _Hebrew) > 5) then
+  if (GetStringCount(Enc.GetString(Buffer), _Hebrew) > 5) then
   begin
     Result := Enc;
     Exit;
   end;
-
 end;
 
 // -----------------------------------------------------------------------------
