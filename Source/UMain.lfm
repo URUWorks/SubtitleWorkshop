@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 218
+  Left = -917
   Height = 600
-  Top = 113
+  Top = 124
   Width = 900
   Caption = 'Subtitle Workshop'
   ClientHeight = 580
