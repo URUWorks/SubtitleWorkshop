@@ -1,7 +1,7 @@
 object frmTimings: TfrmTimings
-  Left = 327
+  Left = -1126
   Height = 324
-  Top = 188
+  Top = 156
   Width = 453
   BorderIcons = []
   BorderStyle = bsSingle
@@ -13,7 +13,7 @@ object frmTimings: TfrmTimings
   Position = poMainFormCenter
   ShowHint = True
   ShowInTaskBar = stNever
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.4.0'
   object pagTimings: TPageControl
     Left = 8
     Height = 310
