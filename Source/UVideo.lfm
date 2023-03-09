@@ -7,5 +7,5 @@ object frmVideo: TfrmVideo
   Constraints.MinWidth = 450
   FormStyle = fsStayOnTop
   OnClose = FormClose
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.4.0'
 end
