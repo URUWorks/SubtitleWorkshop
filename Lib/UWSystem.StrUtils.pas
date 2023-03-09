@@ -49,6 +49,7 @@ function PreserveCase(const Text, NewText: String): String;
 function SentenceCase(const Text: String): String;
 function InvertCase(const Text: String): String;
 function TitleCase(const Text: String): String;
+function StringCountRE(const ARExpr, ASource: String): Integer;
 function PosRE(const ARExpr, ASource: String): Integer;
 function PosCS(const SubStr, Str: String): Integer;
 function LastPos(const SubStr, S: String): Integer;
@@ -315,6 +316,24 @@ begin
       up := False;
     end;
     Inc(i);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function StringCountRE(const ARExpr, ASource: String): Integer;
+begin
+  Result := 0;
+  with TRegExpr.Create do
+  try
+    ModifierG  := False;
+    Expression := ARExpr;
+    if Exec(ASource) then
+      repeat
+        Result += 1;
+      until not ExecNext;
+  finally
+    Free;
   end;
 end;
 
