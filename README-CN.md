@@ -22,7 +22,7 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 ![mac](https://uruworks.net/img/sw_macos2.png)
 
 ### Linux Mint
-![lnx](https://uruworks.net/img/sw_linux1.png)
+![lnx](https://uruworks.net/img/sw_linuxmint.png)
 
 # MPV 播放引擎
 
@@ -37,9 +37,9 @@ Subtitle Workshop让字幕创建/编辑/转换任务几乎成为一种乐趣； 
 
 - Indy 10
 - LCLExtensions
-- pl_OpenGL
 - VirtualTreeView V5
 - UWLazarus
+- UWMPVPlayer
 
 # 帮助我们很容易
 
