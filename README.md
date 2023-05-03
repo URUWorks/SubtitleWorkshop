@@ -43,7 +43,7 @@ This means that you must have "libmpv" installed on your system:
 
 # It's easy to help us
 
-During the 20 years or so of development on URUWorks programs, we haven't received any economic help. Nowadays, the development of these programs takes us time, internet and software costs. We firmly believe in free software, and that all software for personal use must be free. It is for this reason that ViPlay and Subtitle Workshop will never be shareware programs, and they will always made available to every person who likes or finds them useful.
+During the 20 years or so of development on URUWorks programs, we haven't received any economic help. Nowadays, the development of these programs takes us time, internet and software costs. We firmly believe in free software, and that all software for personal use must be free. It is for this reason that ViPlay and Subtitle Workshop will never be shareware programs, and they will always be made available to every person who likes or finds them useful.
 
 We ask you to download our software and test it. If you like it and think we deserve your help to keep improving these programs, we would really appreciate it if you donated.
 
